@@ -1,0 +1,645 @@
+import { useState, useEffect, useRef } from "react";
+
+// ─────────────────────────────────────────────────────────────
+// FOOTBALL AI — Match Analysis Dossier (Football / Soccer ONLY)
+// Implements the strict 6-step pre-prediction process:
+// 1. Last completed match for each team (never upcoming fixtures)
+// 2. Performance analysis + /10 ratings
+// 3. Last-opponent strength rating
+// 4. Recent Match Edge comparison
+// 5. Tactical projection of the upcoming matchup
+// 6. Final Matchup Verdict + probability-based score ranges
+// Data: live web search (FotMob, SofaScore, FBref, Understat,
+// official league sites, reliable news). Missing data is stated,
+// never guessed. Facts separated from opinion.
+// ─────────────────────────────────────────────────────────────
+
+const C = {
+  board: "#0D1F16",      // tactics-board green-black
+  panel: "#132B1E",      // raised panel
+  panel2: "#0F241A",     // sunken panel
+  line: "#2A4A38",       // chalk line, faded
+  chalk: "#EAF4EC",      // chalk white
+  chalkDim: "#9FB8A8",   // muted chalk
+  amber: "#F5B841",      // verdict / edge accent
+  amberDeep: "#B87F1A",
+  green: "#57D98A",      // win
+  red: "#E5604F",        // loss
+  grey: "#8FA69A",       // draw
+};
+
+const STRENGTH_COLORS = {
+  Elite: "#F5B841",
+  Strong: "#57D98A",
+  Average: "#8FA69A",
+  Weak: "#E09A5B",
+  "Poor form": "#E5604F",
+};
+
+const RESULT_COLORS = { win: C.green, draw: C.grey, loss: C.red, Win: C.green, Draw: C.grey, Loss: C.red };
+
+const LOADING_STAGES = [
+  "Searching each team's latest completed match…",
+  "Pulling final scores, xG and key match stats…",
+  "Checking injuries, red cards and squad news…",
+  "Rating attack, midfield and defensive displays…",
+  "Judging the strength of each last opponent…",
+  "Weighing the Recent Match Edge…",
+  "Projecting the tactical battle…",
+  "Writing the final matchup verdict…",
+];
+
+const TEAM_PROMPT = `You are FootballAI, an association-football-only analyst. You ONLY cover real association football (soccer): club leagues, domestic and continental cups, international tournaments, and youth/women's football with reliable data. No other sport exists on this platform. If the given team is not an association football club or national side, return {"error":"This platform analyzes association football (soccer) only."} and nothing else. Ambiguous names default to the association football team.
+
+TASK — use web search to research ONE team's MOST RECENT COMPLETED match (never an upcoming fixture; verify dates for recency):
+STEP 1 — Find: date, competition, home/away, opponent, final score, result (win/draw/loss), key stats when available (possession, shots, shots on target, xG, big chances, corners, passing accuracy, tackles, saves, cards), important events (red cards, injuries, late goals, penalties, rotation, refereeing controversies).
+STEP 2 — Explain HOW they played: possession vs counter, chance quality, defensive solidity, pressing/deep block/wing play/midfield dominance/set pieces, whether the scoreline reflected the performance, and whether they look improving, declining, lucky or unlucky. Rate attack, midfield control, defense, overall — each /10.
+STEP 3 — Rate the LAST OPPONENT: Elite / Strong / Average / Weak / Poor form, using league position, recent form, squad quality, injuries, home advantage, competition level. A 1-0 win away at a strong side can beat a 4-0 home win over a weak one.
+
+DATA RULES: Prioritize FotMob, SofaScore, official league websites, FBref, Understat, and reliable news for injuries/squad updates. Always include the DATE of the latest completed match. If a data point is missing say "not available" — never guess. Separate facts from opinion.
+
+OUTPUT: ONLY one valid JSON object. No fences, no preamble, no trailing text, no raw line breaks inside string values, every string ONE line and concise (max 2 sentences). Schema:
+{"error":null,"name":"","last":{"date":"","competition":"","venue":"Home|Away|Neutral","opponent":"","score":"","result":"win|draw|loss","opponentStrength":"Elite|Strong|Average|Weak|Poor form","opponentStrengthWhy":"","stats":"","events":""},"how":"","style":"","scorelineFair":"","trend":"","ratings":{"attack":0,"midfield":0,"defense":0,"overall":0},"dataNotes":"","sources":["short source names with dates"]}`;
+
+const SYNTH_PROMPT = `You are FootballAI, an association-football-only analyst completing steps 4-6 of a matchup dossier. You receive verified last-match reports (already researched) for Team A and Team B. Do NOT invent new match facts — reason only from the reports plus sound football logic. If something is missing, write "not available". Predictions are probability-based, never guaranteed.
+
+STEP 4 — Compare the two latest performances: who played better, who faced the harder opponent, whose result was more impressive, who looked more confident, who has attacking momentum, who looked more reliable defensively. Recent Match Edge: "Team A", "Team B" or "Even" with a 2-4 sentence reason.
+STEP 5 — Project the upcoming game: possession battle, midfield control, who presses high, who sits deep and counters, the key tactical battle, stronger wing play, set-piece danger, more vulnerable defense, and how injuries, fatigue, travel, rotation or home advantage could shape it.
+STEP 6 — Verdict: last-match form winner, stronger last opponent faced, better recent attacking display, better recent defensive display, likely match pattern (one sentence), 2-3 plausible scorelines, confidence Low/Medium/High.
+
+OUTPUT: ONLY one valid JSON object. No fences, no raw line breaks inside strings, every string ONE line and concise (max 2 sentences). Schema:
+{"fixture":{"competition":"","context":""},"comparison":{"betterPerformance":"Team A|Team B|Even","harderOpponent":"Team A|Team B|Even","moreImpressive":"Team A|Team B|Even","moreConfident":"Team A|Team B|Even","attackMomentum":"Team A|Team B|Even","defenseReliable":"Team A|Team B|Even","edge":"Team A|Team B|Even","edgeReason":""},"projection":{"possession":"","midfield":"","press":"","counter":"","keyBattle":"","wings":"","setPieces":"","vulnerableDefense":"","context":""},"verdict":{"formWinner":"Team A|Team B|Even","strongerOpponentFaced":"Team A|Team B|Even","betterAttack":"Team A|Team B","betterDefense":"Team A|Team B","pattern":"","scorelines":"","confidence":"Low|Medium|High"},"dataNotes":""}`;
+
+const GUARD_PROMPT = `You are a strict gatekeeper for an association-football-only analysis platform. Given two team names, decide if each is an association football (soccer) club or national side — men's, women's, or youth. Teams from any other sport (American football, basketball, baseball, hockey, cricket, rugby, tennis, MMA, motorsport, esports, etc.) must be rejected. If a name is ambiguous across sports, treat it as the association football team. Respond with ONLY this JSON, nothing else: {"aIsFootball":true|false,"bIsFootball":true|false,"reason":"one short sentence, only if either is false"}`;
+
+// ── tolerant JSON recovery ───────────────────────────────────
+
+// Escape raw control characters that appear inside JSON string values
+function escapeControlCharsInStrings(s) {
+  let out = "";
+  let inStr = false;
+  let esc = false;
+  for (const ch of s) {
+    if (inStr) {
+      if (esc) { out += ch; esc = false; continue; }
+      if (ch === "\\") { out += ch; esc = true; continue; }
+      if (ch === '"') { out += ch; inStr = false; continue; }
+      if (ch === "\n") { out += "\\n"; continue; }
+      if (ch === "\r") { out += "\\r"; continue; }
+      if (ch === "\t") { out += "\\t"; continue; }
+      out += ch;
+    } else {
+      if (ch === '"') inStr = true;
+      out += ch;
+    }
+  }
+  return out;
+}
+
+// Close any unterminated string/brackets in truncated JSON
+function closeTruncatedJson(s) {
+  let inStr = false, esc = false;
+  const stack = [];
+  for (const ch of s) {
+    if (inStr) {
+      if (esc) { esc = false; continue; }
+      if (ch === "\\") { esc = true; continue; }
+      if (ch === '"') inStr = false;
+      continue;
+    }
+    if (ch === '"') inStr = true;
+    else if (ch === "{") stack.push("}");
+    else if (ch === "[") stack.push("]");
+    else if (ch === "}" || ch === "]") stack.pop();
+  }
+  let fixed = s;
+  if (inStr) fixed += '"';
+  fixed = fixed.replace(/,\s*$/, "");
+  while (stack.length) fixed += stack.pop();
+  return fixed;
+}
+
+function tryParseReport(text) {
+  if (!text) return null;
+  const clean = text.replace(/```json|```/g, "").trim();
+  const start = clean.indexOf("{");
+  const end = clean.lastIndexOf("}");
+  if (start === -1) return null;
+  const slice = end > start ? clean.slice(start, end + 1) : clean.slice(start);
+
+  const attempts = [
+    slice,
+    escapeControlCharsInStrings(slice),
+    escapeControlCharsInStrings(slice).replace(/,\s*([}\]])/g, "$1"), // trailing commas
+    closeTruncatedJson(escapeControlCharsInStrings(clean.slice(start)).replace(/,\s*([}\]])/g, "$1")), // truncated output
+  ];
+  for (const a of attempts) {
+    try {
+      const p = JSON.parse(a);
+      if (p && typeof p === "object") return p;
+    } catch { /* try next repair */ }
+  }
+  return null;
+}
+
+// ── small building blocks ────────────────────────────────────
+
+function Eyebrow({ n, children }) {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
+      <span style={{
+        fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 13,
+        letterSpacing: "0.18em", color: C.amber, border: `1px solid ${C.amberDeep}`,
+        padding: "2px 8px", borderRadius: 3,
+      }}>STEP {n}</span>
+      <span style={{
+        fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 600, fontSize: 15,
+        letterSpacing: "0.14em", textTransform: "uppercase", color: C.chalkDim,
+      }}>{children}</span>
+      <span style={{ flex: 1, height: 1, background: C.line }} />
+    </div>
+  );
+}
+
+function RatingBar({ label, value }) {
+  const v = Math.max(0, Math.min(10, Number(value) || 0));
+  return (
+    <div style={{ marginBottom: 8 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
+        <span style={{ fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: C.chalkDim }}>{label}</span>
+        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: C.chalk }}>{v}/10</span>
+      </div>
+      <div style={{ display: "flex", gap: 3 }}>
+        {Array.from({ length: 10 }).map((_, i) => (
+          <div key={i} style={{
+            flex: 1, height: 6, borderRadius: 1,
+            background: i < v ? (v >= 7 ? C.green : v >= 5 ? C.amber : C.red) : C.line,
+            opacity: i < v ? 1 : 0.5,
+          }} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Pill({ text, color }) {
+  return (
+    <span style={{
+      display: "inline-block", padding: "2px 10px", borderRadius: 999,
+      border: `1px solid ${color}`, color, fontSize: 12, fontWeight: 600,
+      letterSpacing: "0.06em", textTransform: "uppercase",
+    }}>{text}</span>
+  );
+}
+
+function Fact({ k, v }) {
+  if (!v) return null;
+  return (
+    <div style={{ display: "flex", gap: 8, fontSize: 13, lineHeight: 1.45, marginBottom: 4 }}>
+      <span style={{ color: C.chalkDim, minWidth: 92, flexShrink: 0, fontSize: 11, letterSpacing: "0.06em", textTransform: "uppercase", paddingTop: 1 }}>{k}</span>
+      <span style={{ color: C.chalk }}>{v}</span>
+    </div>
+  );
+}
+
+function VsRow({ label, value, teamAName, teamBName }) {
+  if (!value) return null;
+  const side = /team a/i.test(value) ? "A" : /team b/i.test(value) ? "B" : "even";
+  const display = side === "A" ? teamAName : side === "B" ? teamBName : value;
+  return (
+    <div style={{
+      display: "flex", justifyContent: "space-between", alignItems: "center",
+      padding: "8px 0", borderBottom: `1px dashed ${C.line}`,
+    }}>
+      <span style={{ fontSize: 12, letterSpacing: "0.05em", textTransform: "uppercase", color: C.chalkDim }}>{label}</span>
+      <span style={{
+        fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 16,
+        color: side === "even" ? C.grey : C.amber, textAlign: "right",
+      }}>{display}</span>
+    </div>
+  );
+}
+
+// ── team dossier card (steps 1–3) ────────────────────────────
+
+function TeamCard({ team }) {
+  if (!team) return null;
+  const last = team.last || {};
+  const resColor = RESULT_COLORS[last.result] || C.grey;
+  const strColor = STRENGTH_COLORS[last.opponentStrength] || C.grey;
+  return (
+    <div style={{ background: C.panel, border: `1px solid ${C.line}`, borderRadius: 8, padding: 16, flex: 1, minWidth: 0 }}>
+      <div style={{
+        fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 24,
+        letterSpacing: "0.02em", color: C.chalk, marginBottom: 10, textTransform: "uppercase",
+      }}>{team.name}</div>
+
+      {/* last match strip */}
+      <div style={{ background: C.panel2, border: `1px solid ${C.line}`, borderRadius: 6, padding: 12, marginBottom: 12 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 8, flexWrap: "wrap", gap: 6 }}>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: C.chalkDim }}>
+            {last.date || "date not available"}
+          </span>
+          <Pill text={last.result || "?"} color={resColor} />
+        </div>
+        <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 20, fontWeight: 600, color: C.chalk, marginBottom: 8 }}>
+          {last.score || "—"} <span style={{ color: C.chalkDim, fontSize: 15 }}>vs {last.opponent || "?"} ({last.venue || "?"})</span>
+        </div>
+        <Fact k="Competition" v={last.competition} />
+        <Fact k="Key stats" v={last.stats} />
+        <Fact k="Events" v={last.events} />
+        <div style={{ marginTop: 8, display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+          <span style={{ fontSize: 11, letterSpacing: "0.06em", textTransform: "uppercase", color: C.chalkDim }}>Opponent strength</span>
+          <Pill text={last.opponentStrength || "?"} color={strColor} />
+        </div>
+        {last.opponentStrengthWhy && (
+          <div style={{ fontSize: 12.5, color: C.chalkDim, marginTop: 6, lineHeight: 1.5 }}>{last.opponentStrengthWhy}</div>
+        )}
+      </div>
+
+      {/* how they played */}
+      <div style={{ fontSize: 13.5, color: C.chalk, lineHeight: 1.6, marginBottom: 6 }}>{team.how}</div>
+      <Fact k="Style" v={team.style} />
+      <Fact k="Score fair?" v={team.scorelineFair} />
+      <Fact k="Trend" v={team.trend} />
+
+      {/* ratings */}
+      <div style={{ marginTop: 12 }}>
+        <RatingBar label="Attack" value={team.ratings?.attack} />
+        <RatingBar label="Midfield control" value={team.ratings?.midfield} />
+        <RatingBar label="Defense" value={team.ratings?.defense} />
+        <RatingBar label="Overall" value={team.ratings?.overall} />
+      </div>
+    </div>
+  );
+}
+
+// ── main app ─────────────────────────────────────────────────
+
+export default function FootballAI() {
+  const [teamA, setTeamA] = useState("");
+  const [teamB, setTeamB] = useState("");
+  const [comp, setComp] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [stage, setStage] = useState(0);
+  const [report, setReport] = useState(null);
+  const [rawFallback, setRawFallback] = useState(null);
+  const [error, setError] = useState(null);
+  const stageTimer = useRef(null);
+
+  useEffect(() => {
+    if (loading) {
+      stageTimer.current = setInterval(() => {
+        setStage((s) => (s + 1) % LOADING_STAGES.length);
+      }, 9000);
+    }
+    return () => clearInterval(stageTimer.current);
+  }, [loading]);
+
+  const analyze = async () => {
+    if (!teamA.trim() || !teamB.trim() || loading) return;
+    setLoading(true); setStage(0); setReport(null); setError(null); setRawFallback(null);
+    try {
+      // pre-flight gate: block anything that isn't association football
+      const guardRes = await fetch("/api/claude", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-6",
+          max_tokens: 2500,
+          system: GUARD_PROMPT,
+          messages: [{ role: "user", content: `Team A: ${teamA.trim()}\nTeam B: ${teamB.trim()}` }],
+        }),
+      });
+      const guardData = await guardRes.json();
+      if (!guardData.error) {
+        const gText = (guardData.content || []).filter((b) => b.type === "text").map((b) => b.text).join("");
+        try {
+          const g = JSON.parse(gText.replace(/```json|```/g, "").trim());
+          if (g && (g.aIsFootball === false || g.bIsFootball === false)) {
+            const bad = [g.aIsFootball === false ? teamA.trim() : null, g.bIsFootball === false ? teamB.trim() : null].filter(Boolean).join(" and ");
+            setError(`This platform analyzes association football (soccer) only. "${bad}" doesn't look like a football club or national side.${g.reason ? " " + g.reason : ""}`);
+            setLoading(false);
+            return;
+          }
+        } catch { /* if the guard reply is unparseable, fall through — the main prompt also enforces football-only */ }
+      }
+
+      // shared caller: POST -> text -> tolerant parse -> validate, with one retry
+      const callForJson = async (body, validate) => {
+        let lastText = "";
+        for (let attempt = 0; attempt < 2; attempt++) {
+          const res = await fetch("/api/claude", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          });
+          const data = await res.json();
+          if (data.error) throw new Error(data.error.message || "API error");
+          lastText = (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n");
+          const parsed = tryParseReport(lastText);
+          if (parsed && (parsed.error || !validate || validate(parsed))) return parsed;
+        }
+        if (lastText.trim()) setRawFallback(lastText.replace(/```json|```/g, "").trim());
+        throw new Error("parse");
+      };
+
+      const ctx = comp.trim();
+      const teamBody = (name) => ({
+        model: "claude-sonnet-4-6",
+        max_tokens: 2500,
+        system: TEAM_PROMPT,
+        messages: [{
+          role: "user",
+          content: `Team: ${name}${ctx ? `\nUpcoming fixture context: ${ctx}` : ""}\nToday's date matters — find this team's most recent COMPLETED match and return ONLY the JSON.`,
+        }],
+        tools: [{ type: "web_search_20250305", name: "web_search", max_uses: 4 }],
+      });
+      const teamValid = (p) => !!(p.name && p.last && p.last.opponent && p.ratings);
+
+      // steps 1–3: research both teams in parallel (small outputs, no truncation)
+      const [ta, tb] = await Promise.all([
+        callForJson(teamBody(teamA.trim()), teamValid),
+        callForJson(teamBody(teamB.trim()), teamValid),
+      ]);
+      if (ta.error || tb.error) {
+        setError(ta.error || tb.error);
+        return;
+      }
+
+      // steps 4–6: synthesis from the two verified reports (no web search needed)
+      setStage(5);
+      const synth = await callForJson({
+        model: "claude-sonnet-4-6",
+        max_tokens: 2500,
+        system: SYNTH_PROMPT,
+        messages: [{
+          role: "user",
+          content: `Upcoming fixture: Team A = ${ta.name || teamA.trim()}, Team B = ${tb.name || teamB.trim()}.${ctx ? ` Competition/context: ${ctx}.` : ""}\n\nTeam A last-match report:\n${JSON.stringify(ta)}\n\nTeam B last-match report:\n${JSON.stringify(tb)}\n\nReturn ONLY the steps 4-6 JSON.`,
+        }],
+      }, (p) => !!(p.comparison && p.comparison.edge && p.projection && p.verdict && p.verdict.confidence));
+
+      const dedupe = (arr) => [...new Set(arr.filter(Boolean))];
+      setReport({
+        fixture: synth.fixture || { competition: ctx, context: "" },
+        teamA: ta,
+        teamB: tb,
+        comparison: synth.comparison || {},
+        projection: synth.projection || {},
+        verdict: synth.verdict || {},
+        dataNotes: dedupe([ta.dataNotes, tb.dataNotes, synth.dataNotes]).join(" "),
+        sources: dedupe([...(ta.sources || []), ...(tb.sources || [])]),
+      });
+    } catch (e) {
+      if (e.message === "parse") {
+        setError("Part of the report couldn't be structured after two attempts — the raw analysis is shown below. Re-run to get the full formatted dossier.");
+      } else {
+        setError(`Analysis failed: ${e.message}. Try again in a moment.`);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const r = report;
+  const aName = r?.teamA?.name || teamA || "Team A";
+  const bName = r?.teamB?.name || teamB || "Team B";
+
+  const inputStyle = {
+    width: "100%", boxSizing: "border-box", background: C.panel2, color: C.chalk,
+    border: `1px solid ${C.line}`, borderRadius: 6, padding: "12px 14px",
+    fontSize: 15, outline: "none", fontFamily: "inherit",
+  };
+
+  return (
+    <div style={{ minHeight: "100vh", background: C.board, color: C.chalk, fontFamily: "'Inter', system-ui, sans-serif" }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
+        input::placeholder { color: ${C.chalkDim}; opacity: 0.6; }
+        input:focus { border-color: ${C.amber} !important; }
+        @keyframes pulseDot { 0%,100%{opacity:.25} 50%{opacity:1} }
+        button:focus-visible, input:focus-visible { outline: 2px solid ${C.amber}; outline-offset: 2px; }
+      `}</style>
+
+      {/* pitch halfway-line backdrop */}
+      <div style={{ maxWidth: 900, margin: "0 auto", padding: "28px 16px 64px" }}>
+
+        {/* header */}
+        <header style={{ marginBottom: 24, borderBottom: `2px solid ${C.line}`, paddingBottom: 16 }}>
+          <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
+            <h1 style={{
+              margin: 0, fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700,
+              fontSize: 42, letterSpacing: "0.03em", textTransform: "uppercase", color: C.chalk,
+            }}>Football<span style={{ color: C.amber }}>AI</span></h1>
+            <span style={{ fontSize: 12, letterSpacing: "0.14em", textTransform: "uppercase", color: C.chalkDim }}>
+              Match analysis dossier · football / soccer only
+            </span>
+          </div>
+          <p style={{ margin: "8px 0 0", fontSize: 13, color: C.chalkDim, lineHeight: 1.5, maxWidth: 640 }}>
+            Live-researched last-match analysis, opponent-strength weighting, tactical projection and a
+            probability-based verdict. Leagues, cups, internationals, youth and women's football — nothing else.
+          </p>
+        </header>
+
+        {/* fixture input */}
+        <div style={{ background: C.panel, border: `1px solid ${C.line}`, borderRadius: 8, padding: 16, marginBottom: 24 }}>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+            <div style={{ flex: "1 1 200px" }}>
+              <input value={teamA} onChange={(e) => setTeamA(e.target.value)} placeholder="Team A (e.g. Canada)" style={inputStyle} />
+            </div>
+            <span style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, color: C.amber, fontSize: 18 }}>VS</span>
+            <div style={{ flex: "1 1 200px" }}>
+              <input value={teamB} onChange={(e) => setTeamB(e.target.value)} placeholder="Team B (e.g. Morocco)" style={inputStyle} />
+            </div>
+          </div>
+          <div style={{ display: "flex", gap: 10, marginTop: 10, flexWrap: "wrap" }}>
+            <div style={{ flex: "1 1 260px" }}>
+              <input value={comp} onChange={(e) => setComp(e.target.value)} placeholder="Competition / context (optional — e.g. World Cup 2026 Round of 16)" style={inputStyle} />
+            </div>
+            <button
+              onClick={analyze}
+              disabled={loading || !teamA.trim() || !teamB.trim()}
+              style={{
+                flex: "0 0 auto", padding: "12px 26px", borderRadius: 6, border: "none",
+                background: loading || !teamA.trim() || !teamB.trim() ? C.line : C.amber,
+                color: loading || !teamA.trim() || !teamB.trim() ? C.chalkDim : "#141414",
+                fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 17,
+                letterSpacing: "0.1em", textTransform: "uppercase",
+                cursor: loading ? "wait" : "pointer",
+              }}
+            >{loading ? "Analyzing…" : "Run analysis"}</button>
+          </div>
+        </div>
+
+        {/* loading */}
+        {loading && (
+          <div style={{
+            background: C.panel, border: `1px solid ${C.line}`, borderRadius: 8,
+            padding: 20, display: "flex", alignItems: "center", gap: 14, marginBottom: 24,
+          }}>
+            <div style={{ display: "flex", gap: 5 }}>
+              {[0, 1, 2].map((i) => (
+                <span key={i} style={{
+                  width: 8, height: 8, borderRadius: 999, background: C.amber,
+                  animation: `pulseDot 1.2s ${i * 0.2}s infinite`,
+                }} />
+              ))}
+            </div>
+            <div>
+              <div style={{ fontSize: 14, color: C.chalk }}>{LOADING_STAGES[stage]}</div>
+              <div style={{ fontSize: 12, color: C.chalkDim, marginTop: 2 }}>
+                Live web research can take a minute or two.
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* error */}
+        {error && (
+          <div style={{
+            background: "#2A1714", border: `1px solid ${C.red}`, borderRadius: 8,
+            padding: 14, marginBottom: 24, fontSize: 14, color: "#F2C7C0", lineHeight: 1.5,
+          }}>{error}</div>
+        )}
+
+        {/* raw fallback */}
+        {rawFallback && (
+          <pre style={{
+            background: C.panel2, border: `1px solid ${C.line}`, borderRadius: 8, padding: 16,
+            whiteSpace: "pre-wrap", fontSize: 13, color: C.chalk, lineHeight: 1.55, marginBottom: 24,
+            fontFamily: "'JetBrains Mono', monospace",
+          }}>{rawFallback}</pre>
+        )}
+
+        {/* ── report ── */}
+        {r && (
+          <div>
+            {r.fixture?.competition && (
+              <div style={{ textAlign: "center", marginBottom: 20 }}>
+                <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 22, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                  {aName} <span style={{ color: C.amber }}>vs</span> {bName}
+                </div>
+                <div style={{ fontSize: 12, color: C.chalkDim, letterSpacing: "0.1em", textTransform: "uppercase", marginTop: 2 }}>
+                  {r.fixture.competition}
+                </div>
+                {r.fixture.context && <div style={{ fontSize: 13, color: C.chalkDim, marginTop: 6, maxWidth: 620, marginLeft: "auto", marginRight: "auto", lineHeight: 1.5 }}>{r.fixture.context}</div>}
+              </div>
+            )}
+
+            {/* steps 1–3 side by side */}
+            <section style={{ marginBottom: 28 }}>
+              <Eyebrow n="1–3">Last completed match · performance · opponent strength</Eyebrow>
+              <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+                <TeamCard team={r.teamA} />
+                <TeamCard team={r.teamB} />
+              </div>
+            </section>
+
+            {/* step 4 — recent match edge */}
+            <section style={{ marginBottom: 28 }}>
+              <Eyebrow n="4">Who played better recently</Eyebrow>
+              <div style={{ background: C.panel, border: `1px solid ${C.line}`, borderRadius: 8, padding: 16 }}>
+                {/* signature scoreboard strip */}
+                <div style={{
+                  display: "flex", alignItems: "center", justifyContent: "center", gap: 16,
+                  background: "#0A1710", border: `1px solid ${C.amberDeep}`, borderRadius: 6,
+                  padding: "14px 16px", marginBottom: 14, flexWrap: "wrap",
+                }}>
+                  <span style={{ fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: C.chalkDim }}>Recent match edge</span>
+                  <span style={{
+                    fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 30,
+                    textTransform: "uppercase", letterSpacing: "0.04em",
+                    color: /even/i.test(r.comparison?.edge || "") ? C.grey : C.amber,
+                  }}>
+                    {/team a/i.test(r.comparison?.edge || "") ? aName : /team b/i.test(r.comparison?.edge || "") ? bName : "Even"}
+                  </span>
+                </div>
+                {r.comparison?.edgeReason && (
+                  <p style={{ margin: "0 0 12px", fontSize: 14, lineHeight: 1.6, color: C.chalk }}>{r.comparison.edgeReason}</p>
+                )}
+                <VsRow label="Better latest performance" value={r.comparison?.betterPerformance} teamAName={aName} teamBName={bName} />
+                <VsRow label="Faced harder opponent" value={r.comparison?.harderOpponent} teamAName={aName} teamBName={bName} />
+                <VsRow label="More impressive result" value={r.comparison?.moreImpressive} teamAName={aName} teamBName={bName} />
+                <VsRow label="Looked more confident" value={r.comparison?.moreConfident} teamAName={aName} teamBName={bName} />
+                <VsRow label="Attacking momentum" value={r.comparison?.attackMomentum} teamAName={aName} teamBName={bName} />
+                <VsRow label="Defensive reliability" value={r.comparison?.defenseReliable} teamAName={aName} teamBName={bName} />
+              </div>
+            </section>
+
+            {/* step 5 — projection */}
+            <section style={{ marginBottom: 28 }}>
+              <Eyebrow n="5">How the matchup should play</Eyebrow>
+              <div style={{ background: C.panel, border: `1px solid ${C.line}`, borderRadius: 8, padding: 16 }}>
+                <Fact k="Possession" v={r.projection?.possession} />
+                <Fact k="Midfield" v={r.projection?.midfield} />
+                <Fact k="High press" v={r.projection?.press} />
+                <Fact k="Deep + counter" v={r.projection?.counter} />
+                <Fact k="Key battle" v={r.projection?.keyBattle} />
+                <Fact k="Wing play" v={r.projection?.wings} />
+                <Fact k="Set pieces" v={r.projection?.setPieces} />
+                <Fact k="Weaker defense" v={r.projection?.vulnerableDefense} />
+                <Fact k="Context" v={r.projection?.context} />
+              </div>
+            </section>
+
+            {/* step 6 — verdict */}
+            <section style={{ marginBottom: 28 }}>
+              <Eyebrow n="6">Final matchup verdict</Eyebrow>
+              <div style={{
+                background: C.panel, border: `1px solid ${C.amberDeep}`, borderRadius: 8, padding: 16,
+              }}>
+                <VsRow label="Last-match form winner" value={r.verdict?.formWinner} teamAName={aName} teamBName={bName} />
+                <VsRow label="Stronger last opponent faced" value={r.verdict?.strongerOpponentFaced} teamAName={aName} teamBName={bName} />
+                <VsRow label="Better recent attacking display" value={r.verdict?.betterAttack} teamAName={aName} teamBName={bName} />
+                <VsRow label="Better recent defensive display" value={r.verdict?.betterDefense} teamAName={aName} teamBName={bName} />
+                {r.verdict?.pattern && (
+                  <div style={{ padding: "12px 0 4px", fontSize: 14.5, lineHeight: 1.6, color: C.chalk }}>
+                    <span style={{ color: C.chalkDim, fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", display: "block", marginBottom: 4 }}>Likely match pattern</span>
+                    {r.verdict.pattern}
+                  </div>
+                )}
+                <div style={{ display: "flex", gap: 12, marginTop: 12, flexWrap: "wrap", alignItems: "center" }}>
+                  <div style={{
+                    background: "#0A1710", border: `1px solid ${C.line}`, borderRadius: 6,
+                    padding: "10px 16px", flex: "1 1 240px",
+                  }}>
+                    <div style={{ fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: C.chalkDim, marginBottom: 4 }}>Predicted result range</div>
+                    <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 16, color: C.amber }}>{r.verdict?.scorelines || "—"}</div>
+                  </div>
+                  <Pill
+                    text={`Confidence: ${r.verdict?.confidence || "?"}`}
+                    color={/high/i.test(r.verdict?.confidence || "") ? C.green : /medium/i.test(r.verdict?.confidence || "") ? C.amber : C.grey}
+                  />
+                </div>
+              </div>
+            </section>
+
+            {/* data notes + sources */}
+            <section style={{ fontSize: 12.5, color: C.chalkDim, lineHeight: 1.6 }}>
+              {r.dataNotes && (
+                <p style={{ margin: "0 0 8px" }}><strong style={{ color: C.chalk }}>Data notes:</strong> {r.dataNotes}</p>
+              )}
+              {Array.isArray(r.sources) && r.sources.length > 0 && (
+                <p style={{ margin: "0 0 8px" }}><strong style={{ color: C.chalk }}>Sources:</strong> {r.sources.join(" · ")}</p>
+              )}
+              <p style={{ margin: 0, borderTop: `1px dashed ${C.line}`, paddingTop: 10 }}>
+                Predictions are probability-based, never guaranteed. Not betting advice.
+              </p>
+            </section>
+          </div>
+        )}
+
+        {/* empty state */}
+        {!r && !loading && !error && !rawFallback && (
+          <div style={{
+            border: `1px dashed ${C.line}`, borderRadius: 8, padding: "36px 20px",
+            textAlign: "center", color: C.chalkDim, fontSize: 14, lineHeight: 1.6,
+          }}>
+            Enter two football teams to open a matchup dossier.<br />
+            The report always starts from each side's <em>most recent completed match</em> — never an upcoming fixture.
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
