@@ -1,0 +1,772 @@
+<title>Business Admin Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+  :root{
+    --bg:#E9EDF0;
+    --surface:#FFFFFF;
+    --surface-sunk:#F1F4F6;
+    --ink:#18242E;
+    --ink-soft:#4C5E6C;
+    --muted:#6B7C89;
+    --line:#D2DAE0;
+    --line-strong:#A9B8C3;
+    --accent:#1F5A7A;
+    --accent-soft:#DCE9F0;
+    --good:#1F6B4A;
+    --good-soft:#DBEEE3;
+    --bad:#9E3524;
+    --bad-soft:#F6E1DC;
+    --warn:#8A6410;
+    --shadow:0 1px 2px rgba(24,36,46,.06), 0 8px 24px rgba(24,36,46,.07);
+    --measure:66ch;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0E161C;
+      --surface:#16212A;
+      --surface-sunk:#121C24;
+      --ink:#E4EBF0;
+      --ink-soft:#B6C4CE;
+      --muted:#8C9DA9;
+      --line:#25333E;
+      --line-strong:#3C4D5A;
+      --accent:#7FB5D3;
+      --accent-soft:#1A2E3B;
+      --good:#6CC095;
+      --good-soft:#152C22;
+      --bad:#E3907E;
+      --bad-soft:#2E1B18;
+      --warn:#D2A650;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E161C;
+    --surface:#16212A;
+    --surface-sunk:#121C24;
+    --ink:#E4EBF0;
+    --ink-soft:#B6C4CE;
+    --muted:#8C9DA9;
+    --line:#25333E;
+    --line-strong:#3C4D5A;
+    --accent:#7FB5D3;
+    --accent-soft:#1A2E3B;
+    --good:#6CC095;
+    --good-soft:#152C22;
+    --bad:#E3907E;
+    --bad-soft:#2E1B18;
+    --warn:#D2A650;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding-inline:20px;padding-block:0 64px}
+
+  /* ── top bar ───────────────────────────── */
+  .bar{
+    position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;
+    background:color-mix(in srgb, var(--bg) 96%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .bar-in{
+    max-width:760px;margin:0 auto;padding-inline:20px;
+    padding-block:10px;
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  }
+  .bar-id{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .bar-id b{color:var(--ink);font-weight:600}
+  .clock{margin-left:auto;display:flex;align-items:center;gap:8px}
+  .time{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-variant-numeric:tabular-nums;
+    font-size:19px;font-weight:600;letter-spacing:.02em;color:var(--ink);
+  }
+  .time.over{color:var(--bad)}
+  .tbtn{
+    font-family:"Archivo",system-ui,sans-serif;font-size:11px;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;
+    background:var(--surface);color:var(--ink-soft);
+    border:1px solid var(--line-strong);border-radius:999px;
+    padding:5px 11px;cursor:pointer;
+  }
+  .tbtn:hover{border-color:var(--accent);color:var(--accent)}
+  .track{height:3px;background:var(--line);}
+  .track > i{display:block;height:100%;width:0;background:var(--accent);transition:width .35s ease}
+
+  /* ── masthead ──────────────────────────── */
+  header.top{padding-block:40px 8px}
+  .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);
+    margin:0 0 14px;
+  }
+  h1{
+    font-family:"Archivo",system-ui,sans-serif;
+    font-size:clamp(30px,6vw,42px);line-height:1.1;font-weight:700;
+    letter-spacing:-.02em;margin:0 0 14px;text-wrap:balance;
+  }
+  .standfirst{font-size:18.5px;color:var(--ink-soft);margin:0;max-width:var(--measure)}
+  .plan{
+    display:flex;gap:0;flex-wrap:wrap;margin:26px 0 0;
+    border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden;
+  }
+  .plan div{flex:1 1 150px;padding:12px 16px;border-right:1px solid var(--line)}
+  .plan div:last-child{border-right:0}
+  .plan dt{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);margin:0 0 3px;
+  }
+  .plan dd{margin:0;font-family:"Archivo",system-ui,sans-serif;font-size:15px;font-weight:600}
+
+  /* ── study sections ────────────────────── */
+  section.unit{margin-top:44px}
+  .unit-head{display:flex;align-items:baseline;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:18px}
+  .unit-no{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;font-weight:600;
+    color:var(--accent);font-variant-numeric:tabular-nums;
+  }
+  h2{font-family:"Archivo",system-ui,sans-serif;font-size:21px;font-weight:700;letter-spacing:-.01em;margin:0;flex:1}
+  .mins{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;color:var(--muted);white-space:nowrap}
+  .unit p{max-width:var(--measure);margin:0 0 14px}
+  .unit p:last-child{margin-bottom:0}
+  h3{font-family:"Archivo",system-ui,sans-serif;font-size:16px;font-weight:600;margin:24px 0 8px}
+  strong{font-weight:600;color:var(--ink)}
+  .term{
+    font-family:"Archivo",system-ui,sans-serif;font-weight:600;
+    color:var(--accent);
+  }
+  ol.blocks{counter-reset:blk;list-style:none;margin:0;padding:0;display:grid;gap:12px;max-width:var(--measure)}
+  ol.blocks li{
+    counter-increment:blk;position:relative;padding:14px 16px 14px 46px;
+    background:var(--surface);border:1px solid var(--line);border-radius:5px;font-size:16px;line-height:1.55;
+  }
+  ol.blocks li::before{
+    content:counter(blk);position:absolute;left:14px;top:14px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;font-weight:600;
+    color:var(--muted);
+  }
+  ul.plain{margin:0 0 14px;padding-left:20px;max-width:var(--measure)}
+  ul.plain li{margin-bottom:6px}
+  .note{
+    border-left:3px solid var(--accent);background:var(--surface-sunk);
+    padding:12px 16px;margin:18px 0;max-width:var(--measure);font-size:16px;
+  }
+  .note span{
+    display:block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;
+  }
+  .tablewrap{overflow-x:auto;margin:16px 0;max-width:100%}
+  table{border-collapse:collapse;width:100%;min-width:480px;font-size:15.5px;background:var(--surface)}
+  th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{
+    font-family:"Archivo",system-ui,sans-serif;font-size:12px;font-weight:600;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line-strong);
+  }
+  tbody th{font-family:"Archivo",system-ui,sans-serif;font-size:15px;font-weight:600;white-space:nowrap}
+  figure{margin:20px 0;max-width:var(--measure)}
+  .charts{display:flex;gap:18px;flex-wrap:wrap}
+  .charts > div{flex:1 1 240px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px}
+  .charts svg{width:100%;height:auto;max-width:100%;display:block}
+  figcaption{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;color:var(--muted);
+    margin-top:10px;line-height:1.5;
+  }
+  .cap{
+    font-family:"Archivo",system-ui,sans-serif;font-size:12.5px;font-weight:600;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 8px;
+  }
+  .glossary{display:grid;gap:0;max-width:var(--measure);border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface)}
+  .glossary div{display:flex;gap:14px;padding:10px 16px;border-bottom:1px solid var(--line);font-size:15.5px}
+  .glossary div:last-child{border-bottom:0}
+  .glossary dt{flex:0 0 190px;font-family:"Archivo",system-ui,sans-serif;font-weight:600;font-size:14.5px;margin:0}
+  .glossary dd{margin:0;color:var(--ink-soft)}
+  @media (max-width:520px){
+    .glossary div{flex-direction:column;gap:2px}
+    .glossary dt{flex:none}
+  }
+
+  /* ── quiz ──────────────────────────────── */
+  .quiz{margin-top:56px;scroll-margin-top:90px}
+  .quiz-head{
+    background:var(--ink);color:var(--bg);border-radius:6px 6px 0 0;
+    padding:16px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  }
+  :root[data-theme="dark"] .quiz-head, :root:not([data-theme="light"]) .quiz-head{}
+  .quiz-head h2{color:inherit;font-size:19px}
+  .quiz-head .mins{color:inherit;opacity:.72}
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-top:0;
+    border-radius:0 0 6px 6px;box-shadow:var(--shadow);padding:22px 20px 24px;
+  }
+  .dots{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:20px}
+  .dots i{width:11px;height:11px;border-radius:2px;background:var(--line);display:block}
+  .dots i.now{background:var(--accent)}
+  .dots i.ok{background:var(--good)}
+  .dots i.no{background:var(--bad)}
+  .qmeta{
+    display:flex;align-items:center;gap:10px;margin-bottom:10px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  }
+  .tag{background:var(--accent-soft);color:var(--accent);padding:3px 8px;border-radius:3px;letter-spacing:.08em}
+  .qtext{font-size:19px;line-height:1.5;margin:0 0 18px;max-width:var(--measure)}
+  .opts{display:grid;gap:8px;margin-bottom:16px}
+  .opt{
+    display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;
+    font-family:inherit;font-size:16.5px;line-height:1.45;color:var(--ink);
+    background:var(--surface-sunk);border:1px solid var(--line);border-radius:5px;
+    padding:12px 14px;cursor:pointer;transition:border-color .15s, background .15s;
+  }
+  .opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+  .opt:disabled{cursor:default}
+  .opt .key{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;font-weight:600;
+    color:var(--muted);border:1px solid var(--line-strong);border-radius:3px;
+    width:22px;height:22px;flex:0 0 22px;display:grid;place-items:center;margin-top:1px;
+  }
+  .opt.right{border-color:var(--good);background:var(--good-soft)}
+  .opt.right .key{border-color:var(--good);color:var(--good)}
+  .opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+  .opt.wrong .key{border-color:var(--bad);color:var(--bad)}
+  .verdict{border-radius:5px;padding:14px 16px;margin-bottom:16px;font-size:16px;max-width:var(--measure)}
+  .verdict.right{background:var(--good-soft);border:1px solid var(--good)}
+  .verdict.wrong{background:var(--bad-soft);border:1px solid var(--bad)}
+  .verdict b{
+    display:block;font-family:"Archivo",system-ui,sans-serif;font-size:12px;font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;
+  }
+  .verdict.right b{color:var(--good)}
+  .verdict.wrong b{color:var(--bad)}
+  .row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .go{
+    font-family:"Archivo",system-ui,sans-serif;font-size:14px;font-weight:600;letter-spacing:.03em;
+    background:var(--accent);color:var(--surface);border:1px solid var(--accent);
+    border-radius:5px;padding:11px 22px;cursor:pointer;
+  }
+  :root[data-theme="dark"] .go, :root:not([data-theme="light"]) .go{color:#0E161C}
+  .go:hover{filter:brightness(1.08)}
+  .go.ghost{background:transparent;color:var(--accent)}
+  .hint{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;color:var(--muted)}
+
+  /* ── results ───────────────────────────── */
+  .score{display:flex;align-items:flex-end;gap:16px;margin-bottom:6px}
+  .score b{
+    font-family:"Archivo",system-ui,sans-serif;font-size:56px;font-weight:700;line-height:.9;
+    font-variant-numeric:tabular-nums;letter-spacing:-.03em;
+  }
+  .score span{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;color:var(--muted);padding-bottom:6px}
+  .band{font-size:17px;color:var(--ink-soft);margin:0 0 22px;max-width:var(--measure)}
+  .bars{display:grid;gap:10px;margin-bottom:24px;max-width:var(--measure)}
+  .bars .b{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center}
+  .bars .b span{font-family:"Archivo",system-ui,sans-serif;font-size:13.5px;font-weight:600}
+  .bars .b em{font-family:"IBM Plex Mono",ui-monospace,monospace;font-style:normal;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .bars .b i{grid-column:1/-1;height:6px;background:var(--line);border-radius:3px;display:block;overflow:hidden}
+  .bars .b i u{display:block;height:100%;background:var(--accent);border-radius:3px}
+  .missed{display:grid;gap:12px;margin-bottom:24px}
+  .missed article{border-left:3px solid var(--bad);background:var(--surface-sunk);padding:12px 16px;font-size:15.5px}
+  .missed h4{font-family:"Archivo",system-ui,sans-serif;font-size:15px;font-weight:600;margin:0 0 6px}
+  .missed p{margin:0 0 4px;color:var(--ink-soft)}
+  .missed p.fix{color:var(--ink)}
+  footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;color:var(--muted);line-height:1.7}
+  a{color:var(--accent)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="bar-id">Business Administration · <b>Lesson 4</b></div>
+    <div class="clock">
+      <div class="time" id="clock">20:00</div>
+      <button class="tbtn" id="clockbtn" type="button">Pause</button>
+    </div>
+  </div>
+  <div class="track"><i id="trackfill"></i></div>
+</div>
+
+<div class="wrap">
+
+  <header class="top">
+    <p class="eyebrow">Unit 4 · The organizing function</p>
+    <h1>Organizing and Organizational Structure</h1>
+    <p class="standfirst">Once a plan exists, somebody has to decide who does what, who answers to whom, and where decisions get made. That is organizing — the second function of management, and the one that quietly determines whether a good plan ever gets executed.</p>
+    <dl class="plan">
+      <div><dt>Session</dt><dd>20 minutes</dd></div>
+      <div><dt>Study</dt><dd>Parts 4.1 – 4.6 · 12 min</dd></div>
+      <div><dt>Assessment</dt><dd>20 questions · 8 min</dd></div>
+    </dl>
+  </header>
+
+  <section class="unit">
+    <div class="unit-head"><span class="unit-no">4.1</span><h2>What organizing actually means</h2><span class="mins">2 min</span></div>
+    <p><span class="term">Organizing</span> is the process of arranging and structuring work so that an organization's goals can be achieved. It sits second in the classical sequence of management functions — <strong>planning, organizing, leading, controlling</strong> — because you cannot allocate work until you know what the work is for.</p>
+    <p>Organizing produces three visible outputs:</p>
+    <ul class="plain">
+      <li><strong>Organizational structure</strong> — the formal arrangement of jobs, reporting lines and groupings.</li>
+      <li><strong>The organizational chart</strong> — the diagram of that structure. Note that the chart is a picture <em>of</em> the structure, not the structure itself.</li>
+      <li><strong>Job design</strong> — the specific duties, authority and relationships attached to each position.</li>
+    </ul>
+    <p>The whole exercise is often summed up as <span class="term">organizational design</span>: making deliberate decisions about six building blocks, which are the subject of the next part.</p>
+  </section>
+
+  <section class="unit">
+    <div class="unit-head"><span class="unit-no">4.2</span><h2>The six building blocks of structure</h2><span class="mins">4 min</span></div>
+    <ol class="blocks">
+      <li><strong>Work specialization (division of labour).</strong> Dividing activities into separate jobs so each worker performs one part. Adam Smith's pin factory showed the productivity gain; modern practice recognises the limit, where boredom, fatigue and absenteeism cancel out the efficiency.</li>
+      <li><strong>Departmentalization.</strong> Grouping the specialized jobs back together. Five common bases: <strong>functional</strong> (marketing, finance, production), <strong>product</strong>, <strong>geographic</strong>, <strong>process</strong> (stages of a workflow) and <strong>customer</strong> (retail, wholesale, government accounts). Cross-functional teams cut across these groupings.</li>
+      <li><strong>Chain of command.</strong> The unbroken line of authority from the top of the organization to the lowest level, clarifying who reports to whom. It carries three ideas: <strong>authority</strong> (the right to give orders), <strong>responsibility</strong> (the obligation to perform) and <strong>unity of command</strong> — Fayol's rule that each employee should report to one and only one superior.</li>
+      <li><strong>Span of control.</strong> The number of employees a manager can effectively supervise. Wide spans → fewer levels → a <strong>flat</strong> structure, cheaper but demanding of the manager. Narrow spans → many levels → a <strong>tall</strong> structure, with tighter supervision but higher administrative cost and slower vertical communication.</li>
+      <li><strong>Centralization / decentralization.</strong> How far decision-making authority sits at the top. <strong>Centralized</strong>: top managers decide with little input from below. <strong>Decentralized</strong>: lower-level managers who are closer to the action decide. Employee empowerment is decentralization pushed to the individual job.</li>
+      <li><strong>Formalization.</strong> The degree to which jobs are standardized by written rules, procedures and job descriptions. High formalization means little discretion; low formalization means employees exercise judgement.</li>
+    </ol>
+
+    <figure>
+      <p class="cap">Span of control decides the shape</p>
+      <div class="charts">
+        <div>
+          <svg viewBox="0 0 300 150" role="img" aria-label="A tall structure: one chief executive, two managers, four supervisors across three levels.">
+            <g stroke="var(--line-strong)" stroke-width="1.5" fill="none">
+              <path d="M150 30 V44 M68 44 H232 M90 44 V58 M210 44 V58"/>
+              <path d="M90 80 V94 M55 94 H125 M55 94 V108 M125 94 V108"/>
+              <path d="M210 80 V94 M175 94 H245 M175 94 V108 M245 94 V108"/>
+            </g>
+            <g fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5">
+              <rect x="128" y="10" width="44" height="20" rx="3"/>
+            </g>
+            <g fill="var(--surface-sunk)" stroke="var(--line-strong)" stroke-width="1.5">
+              <rect x="68" y="58" width="44" height="22" rx="3"/>
+              <rect x="188" y="58" width="44" height="22" rx="3"/>
+              <rect x="38" y="108" width="34" height="22" rx="3"/>
+              <rect x="108" y="108" width="34" height="22" rx="3"/>
+              <rect x="158" y="108" width="34" height="22" rx="3"/>
+              <rect x="228" y="108" width="34" height="22" rx="3"/>
+            </g>
+            <g font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--ink-soft)" text-anchor="middle">
+              <text x="150" y="24" fill="var(--accent)">CEO</text>
+              <text x="90" y="73">Mgr</text><text x="210" y="73">Mgr</text>
+              <text x="55" y="123">Sup</text><text x="125" y="123">Sup</text>
+              <text x="175" y="123">Sup</text><text x="245" y="123">Sup</text>
+            </g>
+          </svg>
+          <figcaption>TALL — span of 2, three levels. Close supervision, more managers to pay, a longer path for information.</figcaption>
+        </div>
+        <div>
+          <svg viewBox="0 0 300 114" role="img" aria-label="A flat structure: one chief executive supervising six staff directly across two levels.">
+            <g stroke="var(--line-strong)" stroke-width="1.5" fill="none">
+              <path d="M150 40 V62 M30 62 H270 M30 62 V80 M78 62 V80 M126 62 V80 M174 62 V80 M222 62 V80 M270 62 V80"/>
+            </g>
+            <g fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5">
+              <rect x="128" y="18" width="44" height="22" rx="3"/>
+            </g>
+            <g fill="var(--surface-sunk)" stroke="var(--line-strong)" stroke-width="1.5">
+              <rect x="12" y="80" width="36" height="22" rx="3"/>
+              <rect x="60" y="80" width="36" height="22" rx="3"/>
+              <rect x="108" y="80" width="36" height="22" rx="3"/>
+              <rect x="156" y="80" width="36" height="22" rx="3"/>
+              <rect x="204" y="80" width="36" height="22" rx="3"/>
+              <rect x="252" y="80" width="36" height="22" rx="3"/>
+            </g>
+            <g font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--ink-soft)" text-anchor="middle">
+              <text x="150" y="33" fill="var(--accent)">CEO</text>
+              <text x="30" y="95">A</text><text x="78" y="95">B</text><text x="126" y="95">C</text>
+              <text x="174" y="95">D</text><text x="222" y="95">E</text><text x="270" y="95">F</text>
+            </g>
+          </svg>
+          <figcaption>FLAT — span of 6, two levels. Fewer managers, faster communication, more autonomy expected of staff.</figcaption>
+        </div>
+      </div>
+    </figure>
+    <div class="note">
+      <span>Exam point</span>
+      Both diagrams contain seven positions. Only the span of control differs — and that single decision changes the number of levels, the wage bill, the speed of communication and how much discretion each worker gets.
+    </div>
+  </section>
+
+  <section class="unit">
+    <div class="unit-head"><span class="unit-no">4.3</span><h2>Authority, responsibility and delegation</h2><span class="mins">2 min</span></div>
+    <p>Authority attaches to the <em>position</em>, not the person — it is the right inherent in a managerial post to give orders and expect them to be obeyed. Three types appear in most structures:</p>
+    <ul class="plain">
+      <li><span class="term">Line authority</span> — a manager's right to direct the work of subordinates in the chain of command (production manager over machine operators).</li>
+      <li><span class="term">Staff authority</span> — advisory and supportive. Human resources, legal and quality specialists assist and advise line managers but do not command them.</li>
+      <li><span class="term">Functional authority</span> — a limited right for a specialist to direct others outside their own chain on a specific matter, such as the finance department enforcing expenditure procedures across all units.</li>
+    </ul>
+    <p><span class="term">Delegation</span> is the downward assignment of authority to another person to carry out specific duties. It normally moves in three steps: assign the <strong>task</strong>, grant the <strong>authority</strong> needed to do it, and create <strong>obligation (responsibility)</strong> for its completion.</p>
+    <div class="note">
+      <span>The rule that is always tested</span>
+      A manager can delegate authority, but never <strong>accountability</strong>. The delegating manager remains answerable to their own superior for the result. Equally, authority should match responsibility — giving someone a duty without the authority to discharge it is the classic delegation failure.
+    </div>
+  </section>
+
+  <section class="unit">
+    <div class="unit-head"><span class="unit-no">4.4</span><h2>Common organizational designs</h2><span class="mins">2 min</span></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Design</th><th>Defining feature</th><th>Strength / weakness</th></tr></thead>
+        <tbody>
+          <tr><th>Simple</th><td>Low departmentalization, wide spans, authority centralized in one person, little formalization.</td><td>Fast and cheap; risky as the business grows and one owner becomes the bottleneck.</td></tr>
+          <tr><th>Functional</th><td>Similar specialities grouped together — all marketing in one unit, all production in another.</td><td>Economies of scale and deep expertise; narrow functional silos that lose sight of the whole.</td></tr>
+          <tr><th>Divisional</th><td>Separate, largely autonomous units by product, market or region; division heads run their own operations.</td><td>Focus on results and accountability; duplication of activities and resources across divisions.</td></tr>
+          <tr><th>Matrix</th><td>Specialists from functional departments assigned to projects, reporting to a functional manager <em>and</em> a project manager.</td><td>Flexible use of expertise; dual reporting breaks unity of command and breeds conflict over priorities.</td></tr>
+          <tr><th>Team-based</th><td>The entire organization is made of work teams with little hierarchy.</td><td>Empowerment and speed; needs mature, trained members and clear accountability.</td></tr>
+          <tr><th>Network / virtual</th><td>A small core of staff outsources major business functions to outside suppliers.</td><td>Very low overheads and high flexibility; reduced control over work performed by others.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="unit">
+    <div class="unit-head"><span class="unit-no">4.5</span><h2>Choosing a structure: mechanistic or organic</h2><span class="mins">1 min</span></div>
+    <p>There is no universally best structure. Two extremes anchor the choice. A <span class="term">mechanistic</span> organization is rigid and tightly controlled — high specialization, rigid departmentalization, narrow spans, high formalization, centralized decisions. An <span class="term">organic</span> organization is highly adaptive and loose — cross-functional teams, wide spans, low formalization, decentralized decisions and free-flowing information.</p>
+    <p>Which one fits is a <span class="term">contingency</span> question, decided by four factors:</p>
+    <ul class="plain">
+      <li><strong>Strategy</strong> — structure follows strategy (Chandler). An innovation strategy needs organic flexibility; a cost-minimization strategy favours mechanistic tightness.</li>
+      <li><strong>Size</strong> — large organizations drift towards specialization, rules and mechanistic form.</li>
+      <li><strong>Technology</strong> — routine, mass-production technology suits mechanistic design; non-routine, unit or custom work suits organic design (Woodward).</li>
+      <li><strong>Environmental uncertainty</strong> — stable and simple environments tolerate mechanistic structures; dynamic, uncertain environments demand organic ones (Burns and Stalker).</li>
+    </ul>
+  </section>
+
+  <section class="unit">
+    <div class="unit-head"><span class="unit-no">4.6</span><h2>Formal and informal organization</h2><span class="mins">1 min</span></div>
+    <p>The <span class="term">formal organization</span> is the deliberate structure shown on the chart: official positions, prescribed relationships, sanctioned communication channels. The <span class="term">informal organization</span> is the natural network of social relationships that arises spontaneously as people work together — friendship groups, opinion leaders with no title, and the <strong>grapevine</strong> along which information travels faster than any memo.</p>
+    <p>A competent administrator does not try to abolish the informal organization; it is inevitable, it satisfies social needs, and it often gets urgent work done across the gaps a chart leaves open. The task is to keep it aligned with formal objectives rather than working against them.</p>
+
+    <h3>Key terms to carry into the questions</h3>
+    <dl class="glossary">
+      <div><dt>Work specialization</dt><dd>Dividing activities into separate jobs, each done by a different person.</dd></div>
+      <div><dt>Unity of command</dt><dd>Each employee reports to one superior only.</dd></div>
+      <div><dt>Span of control</dt><dd>Number of subordinates a manager can effectively supervise.</dd></div>
+      <div><dt>Formalization</dt><dd>Extent to which jobs are standardized by rules and procedures.</dd></div>
+      <div><dt>Line vs staff authority</dt><dd>Right to command subordinates vs right to advise and support.</dd></div>
+      <div><dt>Accountability</dt><dd>Answerability for results — delegated duties never remove it from the manager.</dd></div>
+      <div><dt>Mechanistic / organic</dt><dd>Rigid, controlled structure vs adaptive, loosely structured one.</dd></div>
+      <div><dt>Grapevine</dt><dd>The informal communication network of the organization.</dd></div>
+    </dl>
+  </section>
+
+  <section class="quiz" id="quiz">
+    <div class="quiz-head">
+      <h2>Assessment — 20 questions</h2>
+      <span class="mins">≈ 8 min · instant feedback</span>
+    </div>
+    <div class="card" id="card"></div>
+  </section>
+
+  <footer>
+    Business Administration · Lesson 4 of the series · Organizing and organizational structure<br>
+    Study 12 min + assessment 8 min = 20-minute session. Next lesson: staffing and human resource management.
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ── 20-minute session clock ─────────────────────────────── */
+  var TOTAL = 20 * 60;
+  var left = TOTAL, running = true, tick = null;
+  var clockEl = document.getElementById("clock");
+  var clockBtn = document.getElementById("clockbtn");
+
+  function paintClock(){
+    var over = left <= 0;
+    var s = Math.abs(left);
+    var m = Math.floor(s / 60), sec = s % 60;
+    clockEl.textContent = (over && s > 0 ? "+" : "") + m + ":" + (sec < 10 ? "0" : "") + sec;
+    clockEl.classList.toggle("over", over);
+  }
+  function start(){
+    if (tick) clearInterval(tick);
+    tick = setInterval(function(){ left--; paintClock(); }, 1000);
+    running = true; clockBtn.textContent = "Pause";
+  }
+  clockBtn.addEventListener("click", function(){
+    if (running){ clearInterval(tick); tick = null; running = false; clockBtn.textContent = "Resume"; }
+    else start();
+  });
+  paintClock(); start();
+
+  /* ── question bank ───────────────────────────────────────── */
+  var TOPICS = ["Foundations","Building blocks","Authority & delegation","Designs","Fit & informal organization"];
+  var Q = [
+    { t:0, q:"Organizing, as a function of management, is best defined as:",
+      o:["Arranging and structuring work so that the organization's goals are accomplished",
+         "Defining goals and deciding on the actions needed to reach them",
+         "Motivating and directing employees so they perform willingly",
+         "Measuring performance and correcting deviations from the plan"],
+      a:0, why:"Planning defines goals, leading motivates, controlling measures and corrects. Organizing is the arranging and structuring of work — it answers who does what, and under whom." },
+
+    { t:1, q:"Dividing work activities into separate jobs, each performed by a different person, is called:",
+      o:["Departmentalization","Work specialization","Formalization","Delegation"],
+      a:1, why:"Work specialization, also called division of labour, breaks a whole activity into narrow repeated tasks. Departmentalization is the later step of grouping those jobs back together." },
+
+    { t:1, q:"Adam Smith's account of the pin factory is used in business administration to illustrate:",
+      o:["The dangers of over-centralized authority",
+         "The economic gains obtainable from division of labour",
+         "The need for a wide span of control",
+         "The superiority of organic structures"],
+      a:1, why:"Smith showed that ten workers each performing one specialized step produced vastly more pins than ten working alone — the classic case for work specialization, later qualified by its human costs." },
+
+    { t:1, q:"A company groups its staff into Production, Marketing, Finance and Human Resources departments. This basis of departmentalization is:",
+      o:["Functional","Product","Customer","Process"],
+      a:0, why:"Grouping by the function performed is functional departmentalization — the most common basis, giving economies of scale and specialist depth within each unit." },
+
+    { t:1, q:"A supermarket chain creates separate units for its Northern, Eastern and Western operations, each headed by a regional manager. This is:",
+      o:["Process departmentalization","Product departmentalization","Geographic departmentalization","Matrix departmentalization"],
+      a:2, why:"Grouping jobs on the basis of territory or region is geographic (territorial) departmentalization, used where customer needs or conditions differ by location." },
+
+    { t:1, q:"Fayol's principle of unity of command states that:",
+      o:["Authority should always equal responsibility",
+         "An employee should receive orders from, and report to, only one superior",
+         "All activities with the same objective should have one plan and one head",
+         "The interests of the organization outrank the interests of any individual"],
+      a:1, why:"Unity of command requires a single boss per employee, to avoid conflicting instructions. The third option describes unity of direction — a different principle, and a common distractor." },
+
+    { t:1, q:"The chain of command in an organization refers to:",
+      o:["The number of subordinates reporting to one manager",
+         "The continuous line of authority extending from upper to lower levels, clarifying who reports to whom",
+         "The sequence in which a product passes through production stages",
+         "The set of written rules governing how work is performed"],
+      a:1, why:"The chain of command is the unbroken line of authority running down the organization. Option one defines span of control; option four defines formalization." },
+
+    { t:1, q:"A manager who directly supervises fourteen subordinates has a wide span of control. All other things being equal, the organization will tend to have:",
+      o:["More hierarchical levels and higher administrative costs",
+         "Fewer hierarchical levels and a flatter structure",
+         "Greater formalization of every job",
+         "A stronger tendency towards centralization"],
+      a:1, why:"Wide spans mean each manager covers more people, so fewer managers and fewer levels are needed — a flatter, cheaper structure with faster vertical communication." },
+
+    { t:1, q:"Which of the following is a recognised disadvantage of a tall organizational structure?",
+      o:["Managers are overloaded because each supervises too many people",
+         "Communication from top to bottom is slowed and administrative costs rise",
+         "Employees receive too little supervision and direction",
+         "Jobs cannot be standardized through rules and procedures"],
+      a:1, why:"Tall structures come from narrow spans: many managers and many levels. Information must pass through more layers, distorting and delaying it, while the extra managerial salaries raise costs." },
+
+    { t:1, q:"An organization is described as highly centralized. This means that:",
+      o:["Most of its operations are located at one site",
+         "Decision-making authority is concentrated at the upper levels of management",
+         "All departments report to a single functional head",
+         "Its rules and job descriptions are written in one manual"],
+      a:1, why:"Centralization is about where decisions are made, not where buildings are. In a centralized firm top managers decide with minimal input from lower levels." },
+
+    { t:1, q:"Which situation most strongly favours decentralization of decision-making?",
+      o:["A stable environment in which lower-level managers are inexperienced",
+         "A dynamic, uncertain environment in which capable lower-level managers are close to the problems",
+         "A company facing a crisis that threatens its survival",
+         "A firm whose strategy depends on absolutely uniform practice at every branch"],
+      a:1, why:"Decentralization suits uncertainty, geographic spread, capable subordinates who want a voice, and decisions that are significant but not company-threatening. Crises and demands for uniformity push authority back up." },
+
+    { t:1, q:"Formalization refers to the degree to which:",
+      o:["Jobs within the organization are standardized by rules and procedures",
+         "Employees are addressed by title rather than by first name",
+         "The organization chart has been officially approved",
+         "Authority has been delegated down the chain of command"],
+      a:0, why:"High formalization means explicit job descriptions, rules and procedures, leaving little discretion; low formalization leaves employees free to exercise judgement." },
+
+    { t:2, q:"Delegation is best described as:",
+      o:["Dividing a department into smaller specialized units",
+         "The assignment of authority to another person to carry out specific duties",
+         "The removal of a manager's responsibility for a task",
+         "Permitting employees to choose their own working hours"],
+      a:1, why:"Delegation assigns tasks and the authority to perform them, creating an obligation to deliver. It transfers authority downward — it does not transfer the delegating manager's answerability." },
+
+    { t:2, q:"A departmental head delegates a project to a subordinate, who performs it badly. Who remains accountable to top management for the outcome?",
+      o:["The subordinate alone, since the work was assigned to them",
+         "The departmental head, because accountability cannot be delegated",
+         "Neither, since responsibility ended with the delegation",
+         "The human resources department, as adviser on staffing"],
+      a:1, why:"Authority can be passed down; ultimate accountability stays with the delegating manager. This is why effective managers delegate with clear instructions, adequate authority and follow-up controls." },
+
+    { t:2, q:"The human resources manager advises the production manager on disciplinary procedure but cannot order production staff to change their work. The HR manager is exercising:",
+      o:["Line authority","Staff authority","Functional authority","Delegated command"],
+      a:1, why:"Staff authority is advisory and supportive: it assists, counsels and recommends to line managers, who retain the right to direct the work of their own subordinates." },
+
+    { t:3, q:"In a matrix structure, an employee typically reports to both a functional manager and a project manager. The principle this arrangement breaks is:",
+      o:["Span of control","Unity of command","Division of labour","Formalization"],
+      a:1, why:"Dual reporting is the defining feature — and the defining weakness — of the matrix: it violates unity of command and can create conflicting demands and power struggles between the two managers." },
+
+    { t:3, q:"A major disadvantage of the divisional structure is that:",
+      o:["Division managers cannot be held accountable for results",
+         "Activities and resources are duplicated across divisions, raising costs",
+         "The organization becomes too small to achieve any specialization",
+         "Employees must report to two superiors at once"],
+      a:1, why:"Each division needs its own marketing, finance and production capacity, so functions are duplicated. The trade-off is that division heads carry clear responsibility for their own products or markets." },
+
+    { t:3, q:"A new business with one owner-manager, few rules, wide spans of control and decisions taken by the owner alone has which design?",
+      o:["Simple structure","Functional structure","Matrix structure","Network structure"],
+      a:0, why:"The simple structure has low departmentalization, wide spans, authority centralized in a single person and little formalization. Its weakness appears as the firm grows and one person becomes the bottleneck." },
+
+    { t:4, q:"Which set of characteristics describes an organic organization?",
+      o:["Rigid hierarchy, narrow spans, high formalization, centralized decisions",
+         "Cross-functional teams, wide spans, low formalization, decentralized decisions",
+         "High work specialization, clear chain of command, extensive written rules",
+         "Many levels of management, standardized outputs, limited information sharing"],
+      a:1, why:"Organic structures are adaptive and loose, suiting dynamic environments, innovation strategies and non-routine technology. The other options describe the mechanistic form." },
+
+    { t:4, q:"The network of social relationships and the grapevine that arise spontaneously among employees make up the:",
+      o:["Formal organization","Informal organization","Functional organization","Virtual organization"],
+      a:1, why:"The informal organization is unplanned and social; the formal organization is the deliberate structure shown on the chart. Managers cannot abolish the informal network, only keep it aligned with organizational goals." }
+  ];
+
+  /* ── quiz engine ─────────────────────────────────────────── */
+  var KEYS = ["A","B","C","D"];
+  var card = document.getElementById("card");
+  var fill = document.getElementById("trackfill");
+  var idx = 0, answers = new Array(Q.length).fill(null), locked = false;
+
+  function progress(){
+    var done = answers.filter(function(x){ return x !== null; }).length;
+    fill.style.width = (done / Q.length * 100) + "%";
+  }
+  function dots(){
+    var h = '<div class="dots" aria-hidden="true">';
+    for (var i = 0; i < Q.length; i++){
+      var c = answers[i] === null ? (i === idx ? "now" : "") : (answers[i] === Q[i].a ? "ok" : "no");
+      h += '<i class="' + c + '"></i>';
+    }
+    return h + "</div>";
+  }
+  function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  function renderQuestion(){
+    locked = answers[idx] !== null;
+    var q = Q[idx];
+    var h = dots();
+    h += '<div class="qmeta"><span>Question ' + (idx + 1) + ' of ' + Q.length + '</span><span class="tag">' + TOPICS[q.t] + '</span></div>';
+    h += '<p class="qtext">' + esc(q.q) + '</p><div class="opts" id="opts">';
+    for (var i = 0; i < q.o.length; i++){
+      h += '<button class="opt" type="button" data-i="' + i + '"><span class="key">' + KEYS[i] + '</span><span>' + esc(q.o[i]) + '</span></button>';
+    }
+    h += '</div><div id="after"></div>';
+    card.innerHTML = h;
+    if (locked) reveal(answers[idx], true);
+    else {
+      card.querySelector("#after").innerHTML =
+        '<p class="hint">Choose one answer — press A–D or 1–4 on a keyboard.</p>';
+    }
+    progress();
+  }
+
+  function reveal(choice, silent){
+    var q = Q[idx], right = choice === q.a;
+    var btns = card.querySelectorAll(".opt");
+    for (var i = 0; i < btns.length; i++){
+      btns[i].disabled = true;
+      if (i === q.a) btns[i].classList.add("right");
+      else if (i === choice) btns[i].classList.add("wrong");
+    }
+    var last = idx === Q.length - 1;
+    var after = card.querySelector("#after");
+    after.innerHTML =
+      '<div class="verdict ' + (right ? "right" : "wrong") + '">' +
+        '<b>' + (right ? "Correct" : "Not quite — the answer is " + KEYS[q.a]) + '</b>' +
+        esc(q.why) +
+      '</div>' +
+      '<div class="row">' +
+        '<button class="go" id="next" type="button">' + (last ? "See my score" : "Next question") + '</button>' +
+        (idx > 0 ? '<button class="go ghost" id="back" type="button">Previous</button>' : '') +
+        '<span class="hint">' + (last ? "20 of 20 answered" : "Press Enter to continue") + '</span>' +
+      '</div>';
+    var nx = card.querySelector("#next");
+    nx.addEventListener("click", function(){
+      if (idx === Q.length - 1 && answers.every(function(x){ return x !== null; })) results();
+      else { idx = Math.min(idx + 1, Q.length - 1); renderQuestion(); focusTop(); }
+    });
+    var bk = card.querySelector("#back");
+    if (bk) bk.addEventListener("click", function(){ idx = Math.max(idx - 1, 0); renderQuestion(); focusTop(); });
+    if (!silent) nx.focus();
+    progress();
+  }
+
+  function focusTop(){
+    var top = document.getElementById("quiz").getBoundingClientRect().top;
+    if (top < 0 || top > window.innerHeight * 0.6) document.getElementById("quiz").scrollIntoView({ behavior:"smooth", block:"start" });
+  }
+
+  function results(){
+    var score = 0, byTopic = TOPICS.map(function(){ return { ok:0, n:0 }; });
+    for (var i = 0; i < Q.length; i++){
+      byTopic[Q[i].t].n++;
+      if (answers[i] === Q[i].a){ score++; byTopic[Q[i].t].ok++; }
+    }
+    var pct = Math.round(score / Q.length * 100);
+    var band = score >= 17
+      ? "Strong command of the unit. You can move on to Lesson 5 (staffing and human resource management)."
+      : score >= 13
+        ? "A solid pass. Re-read the parts flagged below before the next lesson — the gaps are usually in terminology rather than understanding."
+        : "Below the working standard for this unit. Re-study parts 4.2 and 4.3, where most marks are lost, then retake the assessment.";
+
+    var used = TOTAL - left;
+    var mm = Math.floor(Math.abs(used) / 60), ss = Math.abs(used) % 60;
+
+    var h = '<div class="qmeta"><span>Result · Lesson 4</span><span class="tag">' + (used > TOTAL ? "over time" : "within time") + '</span></div>';
+    h += '<div class="score"><b>' + score + '/20</b><span>' + pct + '% · ' + mm + ' min ' + ss + ' sec elapsed</span></div>';
+    h += '<p class="band">' + band + '</p>';
+    h += '<p class="cap">Marks by topic</p><div class="bars">';
+    for (var t = 0; t < TOPICS.length; t++){
+      var b = byTopic[t], w = b.n ? (b.ok / b.n * 100) : 0;
+      h += '<div class="b"><span>' + TOPICS[t] + '</span><em>' + b.ok + '/' + b.n + '</em><i><u style="width:' + w + '%"></u></i></div>';
+    }
+    h += '</div>';
+
+    var missed = [];
+    for (var j = 0; j < Q.length; j++) if (answers[j] !== Q[j].a) missed.push(j);
+    if (missed.length){
+      h += '<p class="cap">Questions to review (' + missed.length + ')</p><div class="missed">';
+      missed.forEach(function(j){
+        h += '<article><h4>Q' + (j + 1) + '. ' + esc(Q[j].q) + '</h4>' +
+             '<p>You chose ' + KEYS[answers[j]] + ' — ' + esc(Q[j].o[answers[j]]) + '</p>' +
+             '<p class="fix"><strong>' + KEYS[Q[j].a] + ' — ' + esc(Q[j].o[Q[j].a]) + '</strong></p>' +
+             '<p>' + esc(Q[j].why) + '</p></article>';
+      });
+      h += '</div>';
+    } else {
+      h += '<p class="cap">Questions to review</p><p class="band">Nothing missed — all twenty correct.</p>';
+    }
+    h += '<div class="row"><button class="go" id="again" type="button">Retake the 20 questions</button>' +
+         '<button class="go ghost" id="reread" type="button">Back to the study notes</button></div>';
+    card.innerHTML = h;
+    card.querySelector("#again").addEventListener("click", function(){
+      answers = new Array(Q.length).fill(null); idx = 0; renderQuestion(); focusTop();
+    });
+    card.querySelector("#reread").addEventListener("click", function(){
+      document.querySelector("header.top").scrollIntoView({ behavior:"smooth", block:"start" });
+    });
+    fill.style.width = "100%";
+  }
+
+  card.addEventListener("click", function(e){
+    var btn = e.target.closest ? e.target.closest(".opt") : null;
+    if (!btn || btn.disabled) return;
+    var choice = parseInt(btn.getAttribute("data-i"), 10);
+    answers[idx] = choice;
+    reveal(choice, false);
+  });
+
+  document.addEventListener("keydown", function(e){
+    if (e.target && /^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+    var map = { a:0, b:1, c:2, d:3, 1:0, 2:1, 3:2, 4:3 };
+    var k = e.key.toLowerCase();
+    if (k in map && answers[idx] === null && card.querySelector(".opt")){
+      var b = card.querySelector('.opt[data-i="' + map[k] + '"]');
+      if (b){ b.click(); e.preventDefault(); }
+    }
+  });
+
+  renderQuestion();
+})();
+</script>
