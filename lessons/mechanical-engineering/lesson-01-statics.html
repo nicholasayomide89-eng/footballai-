@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mechanical Engineering Lesson 1</title>
+<meta name="description" content="Engineering mechanics lesson 1: forces, moments, free-body diagrams and static equilibrium, with a 20-question assessment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+  :root{
+    --bg:#E9EDF0;
+    --surface:#FFFFFF;
+    --surface-sunk:#F1F4F6;
+    --ink:#18242E;
+    --ink-soft:#4C5E6C;
+    --muted:#6B7C89;
+    --line:#D2DAE0;
+    --line-strong:#A9B8C3;
+    --accent:#1F5A7A;
+    --accent-soft:#DCE9F0;
+    --good:#1F6B4A;
+    --good-soft:#DBEEE3;
+    --bad:#9E3524;
+    --bad-soft:#F6E1DC;
+    --warn:#8A6410;
+    --shadow:0 1px 2px rgba(24,36,46,.06), 0 8px 24px rgba(24,36,46,.07);
+    --measure:66ch;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0E161C;
+      --surface:#16212A;
+      --surface-sunk:#121C24;
+      --ink:#E4EBF0;
+      --ink-soft:#B6C4CE;
+      --muted:#8C9DA9;
+      --line:#25333E;
+      --line-strong:#3C4D5A;
+      --accent:#7FB5D3;
+      --accent-soft:#1A2E3B;
+      --good:#6CC095;
+      --good-soft:#152C22;
+      --bad:#E3907E;
+      --bad-soft:#2E1B18;
+      --warn:#D2A650;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E161C;
+    --surface:#16212A;
+    --surface-sunk:#121C24;
+    --ink:#E4EBF0;
+    --ink-soft:#B6C4CE;
+    --muted:#8C9DA9;
+    --line:#25333E;
+    --line-strong:#3C4D5A;
+    --accent:#7FB5D3;
+    --accent-soft:#1A2E3B;
+    --good:#6CC095;
+    --good-soft:#152C22;
+    --bad:#E3907E;
+    --bad-soft:#2E1B18;
+    --warn:#D2A650;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding-inline:20px;padding-block:0 64px}
+
+  /* ── top bar ───────────────────────────── */
+  .bar{
+    position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;
+    background:color-mix(in srgb, var(--bg) 96%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .bar-in{
+    max-width:760px;margin:0 auto;padding-inline:20px;
+    padding-block:10px;
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  }
+  .bar-id{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .bar-id b{color:var(--ink);font-weight:600}
+  .clock{margin-left:auto;display:flex;align-items:center;gap:8px}
+  .time{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-variant-numeric:tabular-nums;
+    font-size:19px;font-weight:600;letter-spacing:.02em;color:var(--ink);
+  }
+  .time.over{color:var(--bad)}
+  .tbtn{
+    font-family:"Archivo",system-ui,sans-serif;font-size:11px;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;
+    background:var(--surface);color:var(--ink-soft);
+    border:1px solid var(--line-strong);border-radius:999px;
+    padding:5px 11px;cursor:pointer;
+  }
+  .tbtn:hover{border-color:var(--accent);color:var(--accent)}
+  .track{height:3px;background:var(--line);}
+  .track > i{display:block;height:100%;width:0;background:var(--accent);transition:width .35s ease}
+
+  /* ── masthead ──────────────────────────── */
+  header.top{padding-block:40px 8px}
+  .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);
+    margin:0 0 14px;
+  }
+  h1{
+    font-family:"Archivo",system-ui,sans-serif;
+    font-size:clamp(30px,6vw,42px);line-height:1.1;font-weight:700;
+    letter-spacing:-.02em;margin:0 0 14px;text-wrap:balance;
+  }
+  .standfirst{font-size:18.5px;color:var(--ink-soft);margin:0;max-width:var(--measure)}
+  .plan{
+    display:flex;gap:0;flex-wrap:wrap;margin:26px 0 0;
+    border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden;
+  }
+  .plan div{flex:1 1 150px;padding:12px 16px;border-right:1px solid var(--line)}
+  .plan div:last-child{border-right:0}
+  .plan dt{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);margin:0 0 3px;
+  }
+  .plan dd{margin:0;font-family:"Archivo",system-ui,sans-serif;font-size:15px;font-weight:600}
+
+  /* ── study sections ────────────────────── */
+  section.unit{margin-top:44px}
+  .unit-head{display:flex;align-items:baseline;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:18px}
+  .unit-no{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;font-weight:600;
+    color:var(--accent);font-variant-numeric:tabular-nums;
+  }
+  h2{font-family:"Archivo",system-ui,sans-serif;font-size:21px;font-weight:700;letter-spacing:-.01em;margin:0;flex:1}
+  .mins{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;color:var(--muted);white-space:nowrap}
+  .unit p{max-width:var(--measure);margin:0 0 14px}
+  .unit p:last-child{margin-bottom:0}
+  h3{font-family:"Archivo",system-ui,sans-serif;font-size:16px;font-weight:600;margin:24px 0 8px}
+  strong{font-weight:600;color:var(--ink)}
+  .term{
+    font-family:"Archivo",system-ui,sans-serif;font-weight:600;
+    color:var(--accent);
+  }
+  ol.blocks{counter-reset:blk;list-style:none;margin:0;padding:0;display:grid;gap:12px;max-width:var(--measure)}
+  ol.blocks li{
+    counter-increment:blk;position:relative;padding:14px 16px 14px 46px;
+    background:var(--surface);border:1px solid var(--line);border-radius:5px;font-size:16px;line-height:1.55;
+  }
+  ol.blocks li::before{
+    content:counter(blk);position:absolute;left:14px;top:14px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;font-weight:600;
+    color:var(--muted);
+  }
+  ul.plain{margin:0 0 14px;padding-left:20px;max-width:var(--measure)}
+  ul.plain li{margin-bottom:6px}
+  .note{
+    border-left:3px solid var(--accent);background:var(--surface-sunk);
+    padding:12px 16px;margin:18px 0;max-width:var(--measure);font-size:16px;
+  }
+  .note span{
+    display:block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;
+  }
+  /* equation panel */
+  .eq{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:14.5px;line-height:1.95;
+    background:var(--surface-sunk);border:1px solid var(--line);border-radius:5px;
+    padding:12px 16px;margin:18px 0;max-width:var(--measure);overflow-x:auto;
+  }
+  .eq b{
+    display:block;font-family:"Archivo",system-ui,sans-serif;font-size:11px;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;
+  }
+  .eq em{font-style:normal;color:var(--muted)}
+  .tablewrap{overflow-x:auto;margin:16px 0;max-width:100%}
+  table{border-collapse:collapse;width:100%;min-width:480px;font-size:15.5px;background:var(--surface)}
+  th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{
+    font-family:"Archivo",system-ui,sans-serif;font-size:12px;font-weight:600;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line-strong);
+  }
+  tbody th{font-family:"Archivo",system-ui,sans-serif;font-size:15px;font-weight:600;white-space:nowrap}
+  figure{margin:20px 0;max-width:var(--measure)}
+  .charts{display:flex;gap:18px;flex-wrap:wrap}
+  .charts > div{flex:1 1 240px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px}
+  .charts svg{width:100%;height:auto;max-width:100%;display:block}
+  figcaption{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;color:var(--muted);
+    margin-top:10px;line-height:1.5;
+  }
+  .cap{
+    font-family:"Archivo",system-ui,sans-serif;font-size:12.5px;font-weight:600;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 8px;
+  }
+  .glossary{display:grid;gap:0;max-width:var(--measure);border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface)}
+  .glossary div{display:flex;gap:14px;padding:10px 16px;border-bottom:1px solid var(--line);font-size:15.5px}
+  .glossary div:last-child{border-bottom:0}
+  .glossary dt{flex:0 0 190px;font-family:"Archivo",system-ui,sans-serif;font-weight:600;font-size:14.5px;margin:0}
+  .glossary dd{margin:0;color:var(--ink-soft)}
+  @media (max-width:520px){
+    .glossary div{flex-direction:column;gap:2px}
+    .glossary dt{flex:none}
+  }
+
+  /* ── quiz ──────────────────────────────── */
+  .quiz{margin-top:56px;scroll-margin-top:90px}
+  .quiz-head{
+    background:var(--ink);color:var(--bg);border-radius:6px 6px 0 0;
+    padding:16px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  }
+  .quiz-head h2{color:inherit;font-size:19px}
+  .quiz-head .mins{color:inherit;opacity:.72}
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-top:0;
+    border-radius:0 0 6px 6px;box-shadow:var(--shadow);padding:22px 20px 24px;
+  }
+  .dots{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:20px}
+  .dots i{width:11px;height:11px;border-radius:2px;background:var(--line);display:block}
+  .dots i.now{background:var(--accent)}
+  .dots i.ok{background:var(--good)}
+  .dots i.no{background:var(--bad)}
+  .qmeta{
+    display:flex;align-items:center;gap:10px;margin-bottom:10px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  }
+  .tag{background:var(--accent-soft);color:var(--accent);padding:3px 8px;border-radius:3px;letter-spacing:.08em}
+  .qtext{font-size:19px;line-height:1.5;margin:0 0 18px;max-width:var(--measure)}
+  .opts{display:grid;gap:8px;margin-bottom:16px}
+  .opt{
+    display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;
+    font-family:inherit;font-size:16.5px;line-height:1.45;color:var(--ink);
+    background:var(--surface-sunk);border:1px solid var(--line);border-radius:5px;
+    padding:12px 14px;cursor:pointer;transition:border-color .15s, background .15s;
+  }
+  .opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+  .opt:disabled{cursor:default}
+  .opt .key{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;font-weight:600;
+    color:var(--muted);border:1px solid var(--line-strong);border-radius:3px;
+    width:22px;height:22px;flex:0 0 22px;display:grid;place-items:center;margin-top:1px;
+  }
+  .opt.right{border-color:var(--good);background:var(--good-soft)}
+  .opt.right .key{border-color:var(--good);color:var(--good)}
+  .opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+  .opt.wrong .key{border-color:var(--bad);color:var(--bad)}
+  .verdict{border-radius:5px;padding:14px 16px;margin-bottom:16px;font-size:16px;max-width:var(--measure)}
+  .verdict.right{background:var(--good-soft);border:1px solid var(--good)}
+  .verdict.wrong{background:var(--bad-soft);border:1px solid var(--bad)}
+  .verdict b{
+    display:block;font-family:"Archivo",system-ui,sans-serif;font-size:12px;font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;
+  }
+  .verdict.right b{color:var(--good)}
+  .verdict.wrong b{color:var(--bad)}
+  .row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .go{
+    font-family:"Archivo",system-ui,sans-serif;font-size:14px;font-weight:600;letter-spacing:.03em;
+    background:var(--accent);color:var(--surface);border:1px solid var(--accent);
+    border-radius:5px;padding:11px 22px;cursor:pointer;
+  }
+  :root[data-theme="dark"] .go, :root:not([data-theme="light"]) .go{color:#0E161C}
+  .go:hover{filter:brightness(1.08)}
+  .go.ghost{background:transparent;color:var(--accent)}
+  .hint{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;color:var(--muted)}
+
+  /* ── results ───────────────────────────── */
+  .score{display:flex;align-items:flex-end;gap:16px;margin-bottom:6px}
+  .score b{
+    font-family:"Archivo",system-ui,sans-serif;font-size:56px;font-weight:700;line-height:.9;
+    font-variant-numeric:tabular-nums;letter-spacing:-.03em;
+  }
+  .score span{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;color:var(--muted);padding-bottom:6px}
+  .band{font-size:17px;color:var(--ink-soft);margin:0 0 22px;max-width:var(--measure)}
+  .bars{display:grid;gap:10px;margin-bottom:24px;max-width:var(--measure)}
+  .bars .b{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center}
+  .bars .b span{font-family:"Archivo",system-ui,sans-serif;font-size:13.5px;font-weight:600}
+  .bars .b em{font-family:"IBM Plex Mono",ui-monospace,monospace;font-style:normal;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .bars .b i{grid-column:1/-1;height:6px;background:var(--line);border-radius:3px;display:block;overflow:hidden}
+  .bars .b i u{display:block;height:100%;background:var(--accent);border-radius:3px}
+  .missed{display:grid;gap:12px;margin-bottom:24px}
+  .missed article{border-left:3px solid var(--bad);background:var(--surface-sunk);padding:12px 16px;font-size:15.5px}
+  .missed h4{font-family:"Archivo",system-ui,sans-serif;font-size:15px;font-weight:600;margin:0 0 6px}
+  .missed p{margin:0 0 4px;color:var(--ink-soft)}
+  .missed p.fix{color:var(--ink)}
+  footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;color:var(--muted);line-height:1.7}
+  a{color:var(--accent)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="bar-id">Mechanical Engineering · <b>Lesson 1</b></div>
+    <div class="clock">
+      <div class="time" id="clock">20:00</div>
+      <button class="tbtn" id="clockbtn" type="button">Pause</button>
+    </div>
+  </div>
+  <div class="track"><i id="trackfill"></i></div>
+</div>
+
+<div class="wrap">
+
+  <header class="top">
+    <p class="eyebrow">Unit 1 · Engineering mechanics — statics</p>
+    <h1>Forces, Moments and Static Equilibrium</h1>
+    <p class="standfirst">Every machine part, bracket and beam a mechanical engineer designs must first be shown not to move. Statics is the arithmetic of things that stay still — and it is the gateway to stress analysis, machine design and everything that follows.</p>
+    <dl class="plan">
+      <div><dt>Session</dt><dd>20 minutes</dd></div>
+      <div><dt>Study</dt><dd>Parts 1.1 – 1.6 · 12 min</dd></div>
+      <div><dt>Assessment</dt><dd>20 questions · 8 min</dd></div>
+    </dl>
+  </header>
+
+  <section class="unit">
+    <div class="unit-head"><span class="unit-no">1.1</span><h2>The language: quantities, units, idealizations</h2><span class="mins">2 min</span></div>
+    <p><span class="term">Engineering mechanics</span> is the study of what forces do to bodies. It splits in two: <strong>statics</strong>, where the body is at rest or moving at constant velocity so the forces cancel, and <strong>dynamics</strong>, where they do not and the body accelerates. This lesson is entirely statics.</p>
+    <p>Two kinds of quantity appear throughout:</p>
+    <ul class="plain">
+      <li><strong>Scalars</strong> have magnitude only — mass, time, speed, temperature, energy, work.</li>
+      <li><strong>Vectors</strong> have magnitude <em>and</em> direction, and must be added geometrically — force, moment, velocity, acceleration, displacement.</li>
+    </ul>
+    <p>Confusing the two is the most expensive beginner's error in mechanics: two 5 kN forces do not necessarily make 10 kN.</p>
+
+    <h3>SI units you are expected to use without thinking</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Quantity</th><th>Unit</th><th>In base units</th></tr></thead>
+        <tbody>
+          <tr><th>Force</th><td>newton, N</td><td>kg·m/s² — the force giving 1 kg an acceleration of 1 m/s²</td></tr>
+          <tr><th>Moment / torque</th><td>newton metre, N·m</td><td>kg·m²/s²</td></tr>
+          <tr><th>Stress / pressure</th><td>pascal, Pa = N/m²</td><td>kg/(m·s²)</td></tr>
+          <tr><th>Work / energy</th><td>joule, J = N·m</td><td>kg·m²/s² — a scalar, despite sharing units with moment</td></tr>
+          <tr><th>Weight</th><td>newton, N</td><td>W = mg, with g ≈ 9.81 m/s²</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>The idealizations that make the arithmetic possible</h3>
+    <ol class="blocks">
+      <li><strong>Particle.</strong> A body whose size is ignored, so all forces acting on it pass through one point and no rotation is possible.</li>
+      <li><strong>Rigid body.</strong> A body whose deformation under load is small enough to be neglected while the <em>external</em> forces are found. Deflection and stress come later, in mechanics of materials — but the reactions are found on the rigid model first.</li>
+      <li><strong>Concentrated force.</strong> A load assumed to act at a single point, even though real contact is always spread over an area.</li>
+      <li><strong>Principle of transmissibility.</strong> A force may be slid along its own line of action without changing its external effect on a rigid body. Its internal effect — whether the member is pulled or pushed — does change, which is why the principle applies to rigid-body equilibrium only.</li>
+    </ol>
+  </section>
+
+  <section class="unit">
+    <div class="unit-head"><span class="unit-no">1.2</span><h2>Forces, components and resultants</h2><span class="mins">3 min</span></div>
+    <p>A <span class="term">force</span> is the action of one body on another, fully described by four things: magnitude, direction, sense, and point of application. Forces that all lie in one plane are <strong>coplanar</strong>; forces whose lines of action meet at a single point are <strong>concurrent</strong>.</p>
+    <p>Because force is a vector, two forces combine by the <span class="term">parallelogram law</span> — draw them from a common point, complete the parallelogram, and the diagonal is the <strong>resultant</strong>, the single force with the same effect as the set. The reverse operation, <span class="term">resolution</span>, splits one force into components along chosen axes, and is what makes numerical work possible.</p>
+
+    <figure>
+      <p class="cap">Resolving a force into rectangular components</p>
+      <div class="charts">
+        <div>
+          <svg viewBox="0 0 300 170" role="img" aria-label="A force vector F drawn at an angle theta to the horizontal axis, forming a right triangle with its horizontal component F cosine theta along the x-axis and its vertical component F sine theta rising to the tip of the vector.">
+            <g stroke="var(--line-strong)" stroke-width="1.5" fill="none">
+              <path d="M40 130 H268 M40 130 V26"/>
+            </g>
+            <g stroke="var(--line)" stroke-width="1" stroke-dasharray="4 4" fill="none">
+              <path d="M196 50 H40"/>
+            </g>
+            <g stroke="var(--ink-soft)" stroke-width="1.8" fill="none">
+              <path d="M40 130 H191"/>
+              <path d="M200 130 V58"/>
+            </g>
+            <polygon points="200,130 191,126 191,134" fill="var(--ink-soft)"/>
+            <polygon points="200,50 196,59 204,59" fill="var(--ink-soft)"/>
+            <g stroke="var(--accent)" stroke-width="2.4" fill="none">
+              <path d="M40 130 L196 52"/>
+            </g>
+            <polygon points="200,50 192.9,58.1 189.3,50.9" fill="var(--accent)"/>
+            <path d="M74 130 A 34 34 0 0 0 70.4 114.8" stroke="var(--accent)" stroke-width="1.4" fill="none"/>
+            <g font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--ink-soft)">
+              <text x="126" y="68" fill="var(--accent)">F</text>
+              <text x="80" y="124">θ</text>
+              <text x="96" y="147">Fx = F cos θ</text>
+              <text x="208" y="96">Fy = F sin θ</text>
+              <text x="250" y="146">x</text>
+              <text x="48" y="24">y</text>
+            </g>
+          </svg>
+          <figcaption>Components are the sides of a right triangle whose hypotenuse is F — laid tip to tail, Fx then Fy reach the same point as F itself. Watch the reference axis: an angle measured from the vertical swaps the sine and the cosine.</figcaption>
+        </div>
+      </div>
+    </figure>
+
+    <div class="eq">
+      <b>Rectangular components, two dimensions</b>
+      Fx = F cos θ &nbsp;&nbsp; Fy = F sin θ &nbsp;&nbsp; <em>(θ measured from the x-axis)</em><br>
+      F = √(Fx² + Fy²) &nbsp;&nbsp; θ = tan⁻¹(Fy / Fx)<br>
+      Rx = ΣFx &nbsp;&nbsp; Ry = ΣFy &nbsp;&nbsp; R = √(Rx² + Ry²)
+    </div>
+
+    <p>To find the resultant of several coplanar forces, resolve every one of them into x and y components, add the components algebraically with a consistent sign convention (right and up positive), and recombine. This <strong>method of components</strong> replaces the drawn parallelogram with arithmetic, and it scales to any number of forces.</p>
+
+    <div class="note">
+      <span>Worth remembering</span>
+      A force of 3 kN east and one of 4 kN north give a resultant of exactly 5 kN, at 53.1° north of east. Perpendicular forces are the one case where the Pythagorean shortcut applies directly — for any other angle use the components, or the cosine rule.
+    </div>
+  </section>
+
+  <section class="unit">
+    <div class="unit-head"><span class="unit-no">1.3</span><h2>Moment of a force, and the couple</h2><span class="mins">2 min</span></div>
+    <p>A force that does not pass through a point tends to rotate the body about it. That turning effect is the <span class="term">moment</span>, and its magnitude is the force multiplied by the <strong>perpendicular distance</strong> from the point to the line of action of the force:</p>
+
+    <div class="eq">
+      <b>Moment about a point O</b>
+      M<sub>O</sub> = F × d &nbsp;&nbsp; <em>(d is the perpendicular distance — the moment arm)</em><br>
+      Units: N·m &nbsp; · &nbsp; Sign convention: choose one, usually anticlockwise positive
+    </div>
+
+    <p>The word <em>perpendicular</em> carries all the weight. If a force of 60 N acts on a 0.3 m spanner at 45° to the handle, the moment is not 18 N·m but 60 × 0.3 × sin 45° = 12.7 N·m, because only the component perpendicular to the handle turns the nut. <span class="term">Varignon's theorem</span> states this formally: the moment of a force about a point equals the sum of the moments of its components about that same point — which is usually the easier calculation.</p>
+
+    <figure>
+      <p class="cap">Two turning effects that behave differently</p>
+      <div class="charts">
+        <div>
+          <svg viewBox="0 0 300 150" role="img" aria-label="A rigid arm pivoted at point O with a force F applied downward at perpendicular distance d, producing a clockwise moment.">
+            <g stroke="var(--line-strong)" stroke-width="3" fill="none"><path d="M60 110 H235"/></g>
+            <circle cx="60" cy="110" r="4.5" fill="var(--accent)"/>
+            <g stroke="var(--accent)" stroke-width="2.2" fill="none"><path d="M200 50 V100"/></g>
+            <polygon points="200,108 194,96 206,96" fill="var(--accent)"/>
+            <path d="M60 86 A 24 24 0 0 1 84 110" stroke="var(--ink-soft)" stroke-width="1.5" fill="none"/>
+            <polygon points="84,116 78,105 90,105" fill="var(--ink-soft)"/>
+            <g stroke="var(--line-strong)" stroke-width="1" fill="none">
+              <path d="M60 122 V134 M200 122 V134 M60 128 H200"/>
+            </g>
+            <g font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--ink-soft)">
+              <text x="46" y="104" fill="var(--accent)">O</text>
+              <text x="210" y="70" fill="var(--accent)">F</text>
+              <text x="126" y="145">d</text>
+              <text x="92" y="92">M</text>
+            </g>
+          </svg>
+          <figcaption>MOMENT — M = F·d about O. Change the point you take moments about and the value changes, because d changes.</figcaption>
+        </div>
+        <div>
+          <svg viewBox="0 0 300 150" role="img" aria-label="A couple: two equal and opposite parallel forces separated by a distance d, one pointing right and one pointing left.">
+            <g stroke="var(--accent)" stroke-width="2.2" fill="none">
+              <path d="M70 55 H214"/>
+              <path d="M230 105 H86"/>
+            </g>
+            <polygon points="222,55 210,49 210,61" fill="var(--accent)"/>
+            <polygon points="78,105 90,99 90,111" fill="var(--accent)"/>
+            <g stroke="var(--line-strong)" stroke-width="1" stroke-dasharray="4 4" fill="none"><path d="M150 55 V105"/></g>
+            <g stroke="var(--line-strong)" stroke-width="1" fill="none"><path d="M144 55 H156 M144 105 H156"/></g>
+            <g font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--ink-soft)">
+              <text x="234" y="59" fill="var(--accent)">F</text>
+              <text x="58" y="109" fill="var(--accent)">F</text>
+              <text x="158" y="84">d</text>
+              <text x="70" y="34">M = F·d everywhere</text>
+            </g>
+          </svg>
+          <figcaption>COUPLE — two equal, opposite, parallel, non-collinear forces. Resultant force zero, so it cannot translate the body; the moment is F·d about every point.</figcaption>
+        </div>
+      </div>
+    </figure>
+
+    <div class="note">
+      <span>Exam point</span>
+      A couple has no resultant force, yet it has a moment — and that moment is the same about <em>any</em> point in the plane. This is exactly why a body can satisfy ΣF = 0 and still spin: force equilibrium alone is not equilibrium.
+    </div>
+  </section>
+
+  <section class="unit">
+    <div class="unit-head"><span class="unit-no">1.4</span><h2>Supports, reactions and the free-body diagram</h2><span class="mins">2 min</span></div>
+    <p>The <span class="term">free-body diagram</span> (FBD) is the single most important habit in this subject. You isolate the body from everything touching it, then draw <strong>every external force acting on it</strong>: applied loads, its own weight through the centre of gravity, and a reaction at each point where a support was removed. Internal forces between parts of the isolated body never appear — they occur in equal and opposite pairs and cancel.</p>
+    <p>What each support contributes is fixed by what motion it prevents. A support that prevents translation in a direction supplies a force in that direction; a support that prevents rotation supplies a moment.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Support (2-D)</th><th>Motion prevented</th><th>Unknowns</th></tr></thead>
+        <tbody>
+          <tr><th>Roller / smooth surface</th><td>Translation normal to the surface only</td><td>1 — a force perpendicular to the surface</td></tr>
+          <tr><th>Cable / link</th><td>Translation along the cable (tension only)</td><td>1 — a force along the cable</td></tr>
+          <tr><th>Smooth pin / hinge</th><td>Translation in both directions; rotation is free</td><td>2 — force components in x and y</td></tr>
+          <tr><th>Fixed (built-in) end</th><td>Translation in both directions <em>and</em> rotation</td><td>3 — two force components and a couple moment</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>One special case saves a great deal of work. A <span class="term">two-force member</span> is a body loaded at only two points and carrying no other load or weight. For it to be in equilibrium, the two forces must be equal in magnitude, opposite in sense, and act along the straight line joining the two points — so the member is in pure tension or pure compression. Every link in a pin-jointed truss is a two-force member.</p>
+  </section>
+
+  <section class="unit">
+    <div class="unit-head"><span class="unit-no">1.5</span><h2>The conditions of equilibrium</h2><span class="mins">1 min</span></div>
+    <p>A rigid body is in <span class="term">equilibrium</span> when the force system acting on it has no resultant force <em>and</em> no resultant moment. In three dimensions that is six scalar equations; for the coplanar systems in this lesson it reduces to three:</p>
+
+    <div class="eq">
+      <b>Coplanar equilibrium — three independent equations</b>
+      ΣFx = 0 &nbsp; <em>no net push left or right</em><br>
+      ΣFy = 0 &nbsp; <em>no net push up or down</em><br>
+      ΣM<sub>A</sub> = 0 &nbsp; <em>no net turning effect, about any point A</em>
+    </div>
+
+    <p>Three equations solve at most three unknowns. Compare the number of unknown reaction components with the number of available equations:</p>
+    <ul class="plain">
+      <li><strong>Statically determinate</strong> — unknowns equal the equations, so statics alone gives the answer.</li>
+      <li><strong>Statically indeterminate</strong> — more unknowns than equations (a beam on three supports, or built in at both ends). The extra equations must come from the deformation of the body, which is the business of mechanics of materials.</li>
+      <li><strong>Partially constrained</strong> — fewer unknowns than equations; the body cannot be held and will move.</li>
+    </ul>
+    <p>Two useful consequences: a body under <strong>two</strong> forces is in equilibrium only if they are equal, opposite and collinear; a body under <strong>three</strong> non-parallel coplanar forces is in equilibrium only if their lines of action are <strong>concurrent</strong> — they meet at one point.</p>
+  </section>
+
+  <section class="unit">
+    <div class="unit-head"><span class="unit-no">1.6</span><h2>Worked example: reactions on a simply supported beam</h2><span class="mins">2 min</span></div>
+    <p>A beam AB spans 6 m. It is pinned at A and rests on a roller at B. It carries a point load of 12 kN at 2 m from A and a uniformly distributed load of 3 kN/m over its whole length. Find the reactions.</p>
+
+    <figure>
+      <p class="cap">Free-body diagram of the beam</p>
+      <div class="charts">
+        <div>
+          <svg viewBox="0 0 320 156" role="img" aria-label="Free-body diagram: a horizontal beam with a 12 kilonewton point load 2 metres from the left end, a 3 kilonewton per metre distributed load over the full span, and upward reactions at both ends.">
+            <g stroke="var(--line-strong)" stroke-width="1.4" fill="none">
+              <path d="M40 38 H280"/>
+              <path d="M40 38 V58 M80 38 V58 M120 38 V58 M160 38 V58 M200 38 V58 M240 38 V58 M280 38 V58"/>
+            </g>
+            <g fill="var(--line-strong)">
+              <polygon points="40,63 36,54 44,54"/><polygon points="80,63 76,54 84,54"/>
+              <polygon points="120,63 116,54 124,54"/><polygon points="160,63 156,54 164,54"/>
+              <polygon points="200,63 196,54 204,54"/><polygon points="240,63 236,54 244,54"/>
+              <polygon points="280,63 276,54 284,54"/>
+            </g>
+            <rect x="40" y="66" width="240" height="8" rx="1.5" fill="var(--surface-sunk)" stroke="var(--line-strong)" stroke-width="1.5"/>
+            <g stroke="var(--accent)" stroke-width="2.4" fill="none"><path d="M120 12 V56"/></g>
+            <polygon points="120,64 114,52 126,52" fill="var(--accent)"/>
+            <g stroke="var(--ink-soft)" stroke-width="2.2" fill="none">
+              <path d="M40 106 V84"/><path d="M280 106 V84"/>
+            </g>
+            <polygon points="40,76 34,88 46,88" fill="var(--ink-soft)"/>
+            <polygon points="280,76 274,88 286,88" fill="var(--ink-soft)"/>
+            <g stroke="var(--line)" stroke-width="1" fill="none">
+              <path d="M40 118 V134 M120 118 V134 M280 118 V134 M40 126 H120 M120 126 H280"/>
+            </g>
+            <g font-family="IBM Plex Mono, monospace" font-size="9.5" fill="var(--ink-soft)">
+              <text x="130" y="22" fill="var(--accent)">12 kN</text>
+              <text x="196" y="32">3 kN/m</text>
+              <text x="16" y="120">Ay = 17 kN</text>
+              <text x="240" y="120">By = 13 kN</text>
+              <text x="74" y="145">2 m</text>
+              <text x="192" y="145">4 m</text>
+              <text x="32" y="86" font-size="10">A</text>
+              <text x="286" y="86" font-size="10">B</text>
+            </g>
+          </svg>
+          <figcaption>The pin at A and the roller at B are removed and replaced by their reactions. The pin could also carry a horizontal component Ax, but no horizontal load acts, so ΣFx = 0 gives Ax = 0 immediately.</figcaption>
+        </div>
+      </div>
+    </figure>
+
+    <ol class="blocks">
+      <li><strong>Replace the distributed load.</strong> A UDL of 3 kN/m over 6 m has a resultant of 3 × 6 = <strong>18 kN</strong>, acting through the centroid of the load diagram — at mid-span, 3 m from A.</li>
+      <li><strong>Take moments about A</strong> (anticlockwise positive), which eliminates both components at A: <br>By(6) − 12(2) − 18(3) = 0 → 6·By = 24 + 54 = 78 → <strong>By = 13 kN ↑</strong></li>
+      <li><strong>Apply ΣFy = 0:</strong> Ay + 13 − 12 − 18 = 0 → <strong>Ay = 17 kN ↑</strong></li>
+      <li><strong>Check with a second moment equation</strong> about B, which must also vanish: <br>Ay(6) − 12(4) − 18(3) = 102 − 48 − 54 = 0 ✓</li>
+    </ol>
+
+    <div class="note">
+      <span>Method, in four moves</span>
+      Isolate the body → draw the FBD with every external force → choose a moment centre that kills the most unknowns → solve, then verify with an equation you did not use. The choice of moment centre is the whole skill: taking moments about a support with two unknown components removes both at a stroke.
+    </div>
+
+    <h3>Key terms to carry into the questions</h3>
+    <dl class="glossary">
+      <div><dt>Scalar / vector</dt><dd>Magnitude only, versus magnitude and direction added geometrically.</dd></div>
+      <div><dt>Resultant</dt><dd>The single force with the same external effect as a whole force system.</dd></div>
+      <div><dt>Transmissibility</dt><dd>A force may slide along its line of action on a rigid body without changing external effect.</dd></div>
+      <div><dt>Moment (M = F·d)</dt><dd>Turning effect; d is the perpendicular distance to the line of action.</dd></div>
+      <div><dt>Couple</dt><dd>Equal, opposite, parallel, non-collinear forces — zero resultant, constant moment F·d.</dd></div>
+      <div><dt>Free-body diagram</dt><dd>The body isolated, showing every external force and support reaction.</dd></div>
+      <div><dt>Two-force member</dt><dd>Loaded at two points only; forces are collinear, so it is in pure tension or compression.</dd></div>
+      <div><dt>Statically determinate</dt><dd>Unknown reactions can be found from the equilibrium equations alone.</dd></div>
+    </dl>
+  </section>
+
+  <section class="quiz" id="quiz">
+    <div class="quiz-head">
+      <h2>Assessment — 20 questions</h2>
+      <span class="mins">≈ 8 min · instant feedback</span>
+    </div>
+    <div class="card" id="card"></div>
+  </section>
+
+  <footer>
+    Mechanical Engineering · Lesson 1 of the series · Forces, moments and static equilibrium<br>
+    Study 12 min + assessment 8 min = 20-minute session. Next lesson: analysis of pin-jointed trusses and frames.
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ── 20-minute session clock ─────────────────────────────── */
+  var TOTAL = 20 * 60;
+  var left = TOTAL, running = true, tick = null;
+  var clockEl = document.getElementById("clock");
+  var clockBtn = document.getElementById("clockbtn");
+
+  function paintClock(){
+    var over = left <= 0;
+    var s = Math.abs(left);
+    var m = Math.floor(s / 60), sec = s % 60;
+    clockEl.textContent = (over && s > 0 ? "+" : "") + m + ":" + (sec < 10 ? "0" : "") + sec;
+    clockEl.classList.toggle("over", over);
+  }
+  function start(){
+    if (tick) clearInterval(tick);
+    tick = setInterval(function(){ left--; paintClock(); }, 1000);
+    running = true; clockBtn.textContent = "Pause";
+  }
+  clockBtn.addEventListener("click", function(){
+    if (running){ clearInterval(tick); tick = null; running = false; clockBtn.textContent = "Resume"; }
+    else start();
+  });
+  paintClock(); start();
+
+  /* ── question bank ───────────────────────────────────────── */
+  var TOPICS = ["Fundamentals","Forces & resultants","Moments & couples","Free-body diagrams","Equilibrium & analysis"];
+  var Q = [
+    { t:0, q:"Which of the following is a vector quantity?",
+      o:["Mass","Speed","Moment of a force","Kinetic energy"],
+      a:2, why:"A moment has both a magnitude and a sense of rotation, so it is a vector. Mass, speed and energy are scalars — note that speed is the scalar counterpart of the vector velocity." },
+
+    { t:0, q:"Expressed in SI base units, one newton is equal to:",
+      o:["kg·m/s²","kg·m²/s²","kg/(m·s²)","kg·m²/s³"],
+      a:0, why:"From F = ma, one newton accelerates one kilogram at one metre per second squared, so N = kg·m/s². Of the distractors, kg·m²/s² is the joule (and the newton metre), kg/(m·s²) is the pascal, and kg·m²/s³ is the watt." },
+
+    { t:0, q:"In statics a component is treated as a rigid body. This idealization means that:",
+      o:["The material is assumed to be infinitely strong",
+         "The body is assumed to have no weight",
+         "All forces are assumed to act at a single point",
+         "Deformations under load are small enough to be neglected when finding the external forces"],
+      a:3, why:"Real parts do deform, but the change in geometry is negligible for the purpose of writing equilibrium equations. Stress and deflection are then calculated separately in mechanics of materials. Assuming all forces act at one point defines a particle, not a rigid body." },
+
+    { t:1, q:"A 100 N force acts at 30° above the horizontal. Its horizontal component is approximately:",
+      o:["50.0 N","57.7 N","86.6 N","100 N"],
+      a:2, why:"Fx = F cos θ = 100 × cos 30° = 100 × 0.866 = 86.6 N. The vertical component is F sin 30° = 50 N. Always check which axis the angle is measured from before choosing sine or cosine." },
+
+    { t:1, q:"Two forces of 3 kN and 4 kN act at the same point at right angles to each other. Their resultant is:",
+      o:["1 kN","5 kN","7 kN","12 kN"],
+      a:1, why:"For perpendicular forces R = √(3² + 4²) = 5 kN, acting at tan⁻¹(4/3) = 53.1° from the 3 kN force. Adding magnitudes arithmetically to get 7 kN is only valid when the forces are collinear and in the same sense." },
+
+    { t:1, q:"The principle of transmissibility states that a force acting on a rigid body may be:",
+      o:["Replaced by two components along any two chosen axes",
+         "Moved to any parallel position without altering its effect",
+         "Ignored if it passes through the centre of gravity",
+         "Slid along its own line of action without altering its external effect"],
+      a:3, why:"Sliding a force along its line of action leaves both the resultant force and the moment about every point unchanged. Moving it to a parallel line does change the moment, and would require adding a compensating couple." },
+
+    { t:1, q:"A system of forces whose lines of action all meet at a single point is described as:",
+      o:["Concurrent","Coplanar","Collinear","Parallel"],
+      a:0, why:"Concurrent forces intersect at one point, so they produce no moment about that point and force equilibrium alone is sufficient. Coplanar means lying in one plane; collinear means sharing one line of action." },
+
+    { t:2, q:"A force of 250 N acts on a body with a perpendicular distance of 0.4 m from point O. The moment about O is:",
+      o:["62.5 N·m","100 N·m","625 N·m","1000 N·m"],
+      a:1, why:"M = F × d = 250 × 0.4 = 100 N·m. The distance must be the perpendicular distance from the point to the line of action of the force, not the distance to the point of application." },
+
+    { t:2, q:"A 60 N force is applied at the end of a 0.3 m spanner, at 45° to the handle. The moment about the nut is approximately:",
+      o:["9.0 N·m","12.7 N·m","18.0 N·m","25.5 N·m"],
+      a:1, why:"Only the component perpendicular to the handle turns the nut: M = F·L·sin 45° = 60 × 0.3 × 0.707 = 12.7 N·m. The value 18 N·m assumes the force is perpendicular to the handle, which is the maximum obtainable." },
+
+    { t:2, q:"Which statement about a couple is correct?",
+      o:["It has a resultant force but no moment",
+         "It has no resultant force, and its moment is the same about every point in the plane",
+         "Its moment depends on which point is chosen as the centre of moments",
+         "It consists of two equal forces acting along the same line of action"],
+      a:1, why:"The two equal and opposite forces cancel, so a couple cannot translate a body, but their moments add to F·d — a value independent of the moment centre. Two equal forces on the same line would simply cancel entirely." },
+
+    { t:2, q:"Varignon's theorem states that the moment of a force about a point is equal to:",
+      o:["The product of the force and its distance from the point of application",
+         "Zero whenever the force passes through the centroid",
+         "The product of the force and the sine of the angle between two forces",
+         "The sum of the moments of its components about the same point"],
+      a:3, why:"Resolving an awkward force into rectangular components and summing their moments is almost always easier than measuring a perpendicular distance geometrically. This is the standard technique for angled loads." },
+
+    { t:3, q:"A free-body diagram of a component should show:",
+      o:["All external forces and support reactions acting on the isolated body",
+         "Only the forces the component exerts on its supports",
+         "Both the external forces and the internal forces between the body's own parts",
+         "The deformed shape of the body under load"],
+      a:0, why:"You isolate the body, then draw every external load, its weight, and a reaction wherever a support was removed. Internal forces occur in equal and opposite pairs within the isolated body and cancel, so they are never drawn." },
+
+    { t:3, q:"In a two-dimensional problem, a roller support introduces how many unknown reaction components?",
+      o:["None","One","Two","Three"],
+      a:1, why:"A roller prevents motion perpendicular to its surface only, so it supplies a single force normal to that surface. A pin supplies two components; a fixed end supplies three." },
+
+    { t:3, q:"A beam is built in (fully fixed) at one end and free at the other. The number of unknown reaction components at the fixed end is:",
+      o:["One","Two","Three","Four"],
+      a:2, why:"A fixed end prevents horizontal translation, vertical translation and rotation, so it supplies two force components and a couple moment — three unknowns, which is exactly what the three equilibrium equations can solve for a cantilever." },
+
+    { t:3, q:"A rigid member is subjected to forces at two points only, and carries no other load. Those two forces must be:",
+      o:["Equal, opposite and directed along the line joining the two points",
+         "Perpendicular to the member",
+         "Equal and acting in the same direction",
+         "Unequal, with the difference resisted by a couple"],
+      a:0, why:"This is the two-force member rule: force equilibrium makes them equal and opposite, and moment equilibrium makes them collinear along the line joining the points. The member is therefore in pure tension or pure compression — the basis of truss analysis." },
+
+    { t:4, q:"For a rigid body under a general coplanar force system, the number of independent equilibrium equations available is:",
+      o:["Two","Three","Four","Six"],
+      a:1, why:"ΣFx = 0, ΣFy = 0 and ΣM = 0 about any one point. A three-dimensional system has six. Writing a second moment equation about a different point is a valid check, but it is not independent — it cannot add a fourth solvable unknown." },
+
+    { t:4, q:"A beam AB of span 8 m is simply supported at A and B and carries a single vertical point load of 20 kN at 3 m from A. The reaction at A is:",
+      o:["7.5 kN","10.0 kN","12.5 kN","20.0 kN"],
+      a:2, why:"Taking moments about B: A(8) = 20 × 5, so A = 12.5 kN. Then ΣFy gives B = 7.5 kN. The larger reaction is always at the support nearer the load — a quick sanity check on any beam answer." },
+
+    { t:4, q:"A coplanar structure has four unknown reaction components. It is described as:",
+      o:["Statically determinate","Partially constrained","In unstable equilibrium","Statically indeterminate"],
+      a:3, why:"Three equilibrium equations cannot solve four unknowns, so the structure is statically indeterminate to the first degree. The extra relationships must come from compatibility of deformation, which statics alone does not provide." },
+
+    { t:4, q:"Three non-parallel coplanar forces hold a rigid body in equilibrium. Their lines of action must be:",
+      o:["Concurrent — meeting at a single point",
+         "Mutually perpendicular",
+         "Equal in magnitude",
+         "Arranged to form a closed triangle in space"],
+      a:0, why:"If two of the forces meet at a point, their resultant passes through it; the third must be equal, opposite and collinear with that resultant, so it must pass through the same point. Otherwise an unbalanced moment remains." },
+
+    { t:4, q:"A body is acted on by a force system for which ΣF = 0 but ΣM ≠ 0. The body will:",
+      o:["Remain in complete equilibrium",
+         "Accelerate in a straight line without rotating",
+         "Rotate without translating",
+         "Be impossible — such a system cannot exist"],
+      a:2, why:"Zero resultant force means no translational acceleration, but the residual moment — in effect a couple — spins the body. Equilibrium requires both conditions, which is precisely why ΣM = 0 is written alongside the force equations." }
+  ];
+
+  /* ── quiz engine ─────────────────────────────────────────── */
+  var KEYS = ["A","B","C","D"];
+  var card = document.getElementById("card");
+  var fill = document.getElementById("trackfill");
+  var idx = 0, answers = new Array(Q.length).fill(null), locked = false;
+
+  function progress(){
+    var done = answers.filter(function(x){ return x !== null; }).length;
+    fill.style.width = (done / Q.length * 100) + "%";
+  }
+  function dots(){
+    var h = '<div class="dots" aria-hidden="true">';
+    for (var i = 0; i < Q.length; i++){
+      var c = answers[i] === null ? (i === idx ? "now" : "") : (answers[i] === Q[i].a ? "ok" : "no");
+      h += '<i class="' + c + '"></i>';
+    }
+    return h + "</div>";
+  }
+  function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  function renderQuestion(){
+    locked = answers[idx] !== null;
+    var q = Q[idx];
+    var h = dots();
+    h += '<div class="qmeta"><span>Question ' + (idx + 1) + ' of ' + Q.length + '</span><span class="tag">' + TOPICS[q.t] + '</span></div>';
+    h += '<p class="qtext">' + esc(q.q) + '</p><div class="opts" id="opts">';
+    for (var i = 0; i < q.o.length; i++){
+      h += '<button class="opt" type="button" data-i="' + i + '"><span class="key">' + KEYS[i] + '</span><span>' + esc(q.o[i]) + '</span></button>';
+    }
+    h += '</div><div id="after"></div>';
+    card.innerHTML = h;
+    if (locked) reveal(answers[idx], true);
+    else {
+      card.querySelector("#after").innerHTML =
+        '<p class="hint">Choose one answer — press A–D or 1–4 on a keyboard.</p>';
+    }
+    progress();
+  }
+
+  function reveal(choice, silent){
+    var q = Q[idx], right = choice === q.a;
+    var btns = card.querySelectorAll(".opt");
+    for (var i = 0; i < btns.length; i++){
+      btns[i].disabled = true;
+      if (i === q.a) btns[i].classList.add("right");
+      else if (i === choice) btns[i].classList.add("wrong");
+    }
+    var last = idx === Q.length - 1;
+    var after = card.querySelector("#after");
+    after.innerHTML =
+      '<div class="verdict ' + (right ? "right" : "wrong") + '">' +
+        '<b>' + (right ? "Correct" : "Not quite — the answer is " + KEYS[q.a]) + '</b>' +
+        esc(q.why) +
+      '</div>' +
+      '<div class="row">' +
+        '<button class="go" id="next" type="button">' + (last ? "See my score" : "Next question") + '</button>' +
+        (idx > 0 ? '<button class="go ghost" id="back" type="button">Previous</button>' : '') +
+        '<span class="hint">' + (last ? "20 of 20 answered" : "Press Enter to continue") + '</span>' +
+      '</div>';
+    var nx = card.querySelector("#next");
+    nx.addEventListener("click", function(){
+      if (idx === Q.length - 1 && answers.every(function(x){ return x !== null; })) results();
+      else { idx = Math.min(idx + 1, Q.length - 1); renderQuestion(); focusTop(); }
+    });
+    var bk = card.querySelector("#back");
+    if (bk) bk.addEventListener("click", function(){ idx = Math.max(idx - 1, 0); renderQuestion(); focusTop(); });
+    if (!silent) nx.focus();
+    progress();
+  }
+
+  function focusTop(){
+    var top = document.getElementById("quiz").getBoundingClientRect().top;
+    if (top < 0 || top > window.innerHeight * 0.6) document.getElementById("quiz").scrollIntoView({ behavior:"smooth", block:"start" });
+  }
+
+  function results(){
+    var score = 0, byTopic = TOPICS.map(function(){ return { ok:0, n:0 }; });
+    for (var i = 0; i < Q.length; i++){
+      byTopic[Q[i].t].n++;
+      if (answers[i] === Q[i].a){ score++; byTopic[Q[i].t].ok++; }
+    }
+    var pct = Math.round(score / Q.length * 100);
+    var band = score >= 17
+      ? "Strong command of the unit. You are ready for Lesson 2 (analysis of pin-jointed trusses and frames)."
+      : score >= 13
+        ? "A solid pass. Re-read the parts flagged below before the next lesson — the gaps are usually in the moment arm rather than in the method."
+        : "Below the working standard for this unit. Re-study parts 1.3 and 1.5, where most marks are lost, then retake the assessment.";
+
+    var used = TOTAL - left;
+    var mm = Math.floor(Math.abs(used) / 60), ss = Math.abs(used) % 60;
+
+    var h = '<div class="qmeta"><span>Result · Lesson 1</span><span class="tag">' + (used > TOTAL ? "over time" : "within time") + '</span></div>';
+    h += '<div class="score"><b>' + score + '/20</b><span>' + pct + '% · ' + mm + ' min ' + ss + ' sec elapsed</span></div>';
+    h += '<p class="band">' + band + '</p>';
+    h += '<p class="cap">Marks by topic</p><div class="bars">';
+    for (var t = 0; t < TOPICS.length; t++){
+      var b = byTopic[t], w = b.n ? (b.ok / b.n * 100) : 0;
+      h += '<div class="b"><span>' + TOPICS[t] + '</span><em>' + b.ok + '/' + b.n + '</em><i><u style="width:' + w + '%"></u></i></div>';
+    }
+    h += '</div>';
+
+    var missed = [];
+    for (var j = 0; j < Q.length; j++) if (answers[j] !== Q[j].a) missed.push(j);
+    if (missed.length){
+      h += '<p class="cap">Questions to review (' + missed.length + ')</p><div class="missed">';
+      missed.forEach(function(j){
+        h += '<article><h4>Q' + (j + 1) + '. ' + esc(Q[j].q) + '</h4>' +
+             '<p>You chose ' + KEYS[answers[j]] + ' — ' + esc(Q[j].o[answers[j]]) + '</p>' +
+             '<p class="fix"><strong>' + KEYS[Q[j].a] + ' — ' + esc(Q[j].o[Q[j].a]) + '</strong></p>' +
+             '<p>' + esc(Q[j].why) + '</p></article>';
+      });
+      h += '</div>';
+    } else {
+      h += '<p class="cap">Questions to review</p><p class="band">Nothing missed — all twenty correct.</p>';
+    }
+    h += '<div class="row"><button class="go" id="again" type="button">Retake the 20 questions</button>' +
+         '<button class="go ghost" id="reread" type="button">Back to the study notes</button></div>';
+    card.innerHTML = h;
+    card.querySelector("#again").addEventListener("click", function(){
+      answers = new Array(Q.length).fill(null); idx = 0; renderQuestion(); focusTop();
+    });
+    card.querySelector("#reread").addEventListener("click", function(){
+      document.querySelector("header.top").scrollIntoView({ behavior:"smooth", block:"start" });
+    });
+    fill.style.width = "100%";
+  }
+
+  card.addEventListener("click", function(e){
+    var btn = e.target.closest ? e.target.closest(".opt") : null;
+    if (!btn || btn.disabled) return;
+    var choice = parseInt(btn.getAttribute("data-i"), 10);
+    answers[idx] = choice;
+    reveal(choice, false);
+  });
+
+  document.addEventListener("keydown", function(e){
+    if (e.target && /^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+    var map = { a:0, b:1, c:2, d:3, 1:0, 2:1, 3:2, 4:3 };
+    var k = e.key.toLowerCase();
+    if (k in map && answers[idx] === null && card.querySelector(".opt")){
+      var b = card.querySelector('.opt[data-i="' + map[k] + '"]');
+      if (b){ b.click(); e.preventDefault(); }
+    }
+  });
+
+  renderQuestion();
+})();
+</script>
+</html>
