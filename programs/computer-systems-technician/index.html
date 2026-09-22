@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Computer Systems Technician</title>
+<meta name="description" content="Computer Systems Technician certificate (CST) — program outline, courses, admission requirements and online application.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+  :root{
+    --bg:#E9EDF0; --surface:#FFFFFF; --surface-sunk:#F1F4F6;
+    --ink:#18242E; --ink-soft:#4C5E6C; --muted:#6B7C89;
+    --line:#D2DAE0; --line-strong:#A9B8C3;
+    --accent:#1F5A7A; --accent-soft:#DCE9F0; --on-accent:#FFFFFF;
+    --good:#1F6B4A; --good-soft:#DBEEE3; --bad:#9E3524; --bad-soft:#F6E1DC;
+    --shadow:0 1px 2px rgba(24,36,46,.06), 0 8px 24px rgba(24,36,46,.07);
+    --measure:68ch;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0E161C; --surface:#16212A; --surface-sunk:#121C24;
+      --ink:#E4EBF0; --ink-soft:#B6C4CE; --muted:#8C9DA9;
+      --line:#25333E; --line-strong:#3C4D5A;
+      --accent:#7FB5D3; --accent-soft:#1A2E3B; --on-accent:#0E161C;
+      --good:#6CC095; --good-soft:#152C22; --bad:#E3907E; --bad-soft:#2E1B18;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E161C; --surface:#16212A; --surface-sunk:#121C24;
+    --ink:#E4EBF0; --ink-soft:#B6C4CE; --muted:#8C9DA9;
+    --line:#25333E; --line-strong:#3C4D5A;
+    --accent:#7FB5D3; --accent-soft:#1A2E3B; --on-accent:#0E161C;
+    --good:#6CC095; --good-soft:#152C22; --bad:#E3907E; --bad-soft:#2E1B18;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:64px}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:900px;margin:0 auto;padding-inline:20px;padding-block:0 72px}
+  @media (max-width:480px){ .wrap,.bar-in{padding-inline:16px} }
+  .mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+  .sans{font-family:"Archivo",system-ui,sans-serif}
+
+  /* top bar */
+  .bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .bar-in{max-width:900px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px}
+  .bar-id{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+  .bar-id b{color:var(--ink);font-weight:600}
+  nav.links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1}
+  nav.links::-webkit-scrollbar{display:none}
+  nav.links a{font-family:"Archivo",sans-serif;font-size:13px;font-weight:600;color:var(--ink-soft);text-decoration:none;padding:6px 10px;border-radius:999px;white-space:nowrap}
+  nav.links a:hover{color:var(--accent);background:var(--accent-soft)}
+  .cta{font-family:"Archivo",sans-serif;font-size:13px;font-weight:700;background:var(--accent);color:var(--on-accent);text-decoration:none;padding:7px 14px;border-radius:999px;white-space:nowrap}
+  @media (max-width:640px){ .bar-id{display:none} }
+
+  /* masthead */
+  header.top{padding-block:48px 8px}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+  h1{font-family:"Archivo",sans-serif;font-size:clamp(32px,6.5vw,50px);line-height:1.06;font-weight:700;letter-spacing:-.02em;margin:0 0 16px;text-wrap:balance}
+  .standfirst{font-size:19px;color:var(--ink-soft);margin:0;max-width:var(--measure)}
+  .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:28px 0 0;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden}
+  .facts div{padding:12px 16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);margin-right:-1px;margin-bottom:-1px}
+  .facts dt{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 3px}
+  .facts dd{margin:0;font-family:"Archivo",sans-serif;font-size:15.5px;font-weight:600}
+  @media (max-width:560px){ .facts{grid-template-columns:repeat(2,minmax(0,1fr))} }
+  .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+
+  /* buttons */
+  .btn{font-family:"Archivo",sans-serif;font-size:14.5px;font-weight:700;border-radius:6px;padding:11px 18px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:var(--on-accent);text-decoration:none;display:inline-block}
+  .btn.ghost{background:transparent;color:var(--accent);border-color:var(--line-strong)}
+  .btn.ghost:hover{border-color:var(--accent)}
+  .btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  /* sections */
+  section.unit{margin-top:56px}
+  .unit-head{display:flex;align-items:baseline;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:20px}
+  .unit-no{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;color:var(--accent)}
+  h2{font-family:"Archivo",sans-serif;font-size:23px;font-weight:700;letter-spacing:-.01em;margin:0}
+  h3{font-family:"Archivo",sans-serif;font-size:17px;font-weight:600;margin:26px 0 8px}
+  .unit p{max-width:var(--measure);margin:0 0 14px}
+  .term{font-family:"Archivo",sans-serif;font-weight:600;color:var(--accent)}
+  ul.plain{margin:0 0 14px;padding-left:20px;max-width:var(--measure)}
+  ul.plain li{margin-bottom:6px}
+  .note{border-left:3px solid var(--accent);background:var(--surface-sunk);padding:12px 16px;margin:18px 0;max-width:var(--measure);font-size:16px}
+  .note span{display:block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+
+  .principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:18px 0}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px}
+  .card h4{font-family:"Archivo",sans-serif;font-size:15.5px;font-weight:700;margin:0 0 4px;color:var(--accent)}
+  .card p{font-size:15.5px;margin:0;color:var(--ink-soft)}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0;padding:0;list-style:none}
+  .chips li{font-family:"Archivo",sans-serif;font-size:13.5px;font-weight:600;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--ink-soft)}
+
+  ol.outcomes{counter-reset:o;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+  ol.outcomes li{counter-increment:o;position:relative;padding:12px 14px 12px 46px;background:var(--surface);border:1px solid var(--line);border-radius:5px;font-size:15.5px;line-height:1.5}
+  ol.outcomes li::before{content:counter(o,decimal-leading-zero);position:absolute;left:14px;top:12px;font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--muted)}
+
+  /* program structure */
+  .timeline{display:grid;grid-template-columns:270fr 285fr 195fr;gap:4px;margin:6px 0 4px}
+  .timeline div{height:10px;border-radius:2px;background:var(--accent)}
+  .timeline div:nth-child(2){opacity:.7}
+  .timeline div:nth-child(3){opacity:.45}
+  .tl-labels{display:grid;grid-template-columns:270fr 285fr 195fr;gap:4px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);margin-bottom:22px}
+  .sem{margin-top:22px}
+  .sem-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+  .sem-head h3{margin:0}
+  .sem-head span{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted)}
+  details.course{background:var(--surface);border:1px solid var(--line);border-radius:6px;margin-bottom:8px}
+  details.course summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:78px 1fr auto;gap:12px;align-items:baseline;padding:12px 16px}
+  details.course summary::-webkit-details-marker{display:none}
+  details.course summary .code{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;color:var(--accent)}
+  details.course summary .name{font-family:"Archivo",sans-serif;font-weight:600;font-size:15.5px}
+  details.course summary .meta{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);white-space:nowrap}
+  details.course[open] summary{border-bottom:1px solid var(--line)}
+  details.course p{margin:0;padding:12px 16px 14px;font-size:15.5px;color:var(--ink-soft);max-width:none}
+  @media (max-width:560px){
+    details.course summary{grid-template-columns:1fr auto}
+    details.course summary .name{grid-column:1 / -1;order:3}
+  }
+  .totals{display:flex;gap:24px;flex-wrap:wrap;margin-top:18px;font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ink-soft)}
+  .totals b{font-family:"Archivo",sans-serif;font-size:20px;color:var(--ink);display:block}
+
+  .req{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+  .req ul{margin:0;padding-left:20px;font-size:16px}
+  .req li{margin-bottom:6px}
+
+  /* application form */
+  .formbox{background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);overflow:hidden}
+  .steps{display:flex;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+  .steps button{flex:1 0 auto;font-family:"Archivo",sans-serif;font-size:12.5px;font-weight:600;background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);padding:12px 14px;cursor:pointer;white-space:nowrap}
+  .steps button .n{font-family:"IBM Plex Mono",monospace;margin-right:6px}
+  .steps button[aria-current="step"]{color:var(--ink);border-bottom-color:var(--accent)}
+  .steps button.done{color:var(--good)}
+  .pane{padding:22px 22px 8px}
+  @media (max-width:480px){ .pane{padding:18px 16px 4px} }
+  .pane[hidden]{display:none}
+  .pane h3{margin-top:0}
+  .pane .hint{font-size:15px;color:var(--ink-soft);margin:0 0 18px;max-width:var(--measure)}
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 16px}
+  .grid .full{grid-column:1 / -1}
+  @media (max-width:600px){ .grid{grid-template-columns:1fr} }
+  label.f{display:block;font-family:"Archivo",sans-serif;font-size:13.5px;font-weight:600;margin-bottom:5px}
+  label.f .opt{font-weight:500;color:var(--muted)}
+  input[type=text],input[type=email],input[type=tel],input[type=date],select,textarea{
+    width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--surface-sunk);
+    border:1px solid var(--line-strong);border-radius:5px;padding:10px 12px;
+  }
+  textarea{min-height:200px;resize:vertical;line-height:1.55}
+  input[type=file]{font-family:"Archivo",sans-serif;font-size:14px;color:var(--ink-soft);max-width:100%}
+  .field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--bad);background:var(--bad-soft)}
+  .err{display:none;font-family:"Archivo",sans-serif;font-size:12.5px;color:var(--bad);margin-top:4px}
+  .field.invalid .err{display:block}
+  fieldset{border:0;padding:0;margin:0}
+  legend{font-family:"Archivo",sans-serif;font-size:13.5px;font-weight:600;margin-bottom:6px;padding:0}
+  .checks{display:grid;gap:8px}
+  .check{display:flex;gap:10px;align-items:flex-start;font-size:15.5px;line-height:1.45;background:var(--surface-sunk);border:1px solid var(--line);border-radius:5px;padding:10px 12px;cursor:pointer}
+  .check input{margin-top:3px;accent-color:var(--accent);width:16px;height:16px;flex:none}
+  .inline{display:flex;gap:10px;flex-wrap:wrap}
+  .inline .check{flex:1 1 160px}
+  .ref-card{border:1px solid var(--line);border-radius:6px;padding:16px;margin-bottom:14px}
+  .ref-card h4{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+  .counter{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);margin-top:4px;text-align:right}
+  .counter.ok{color:var(--good)}
+  .pla[hidden]{display:none}
+  .banner{border-radius:5px;padding:10px 14px;font-size:15px;margin-bottom:16px}
+  .banner.bad{background:var(--bad-soft);color:var(--bad)}
+  .banner.good{background:var(--good-soft);color:var(--good)}
+  .nav-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 22px 20px;border-top:1px solid var(--line);margin-top:18px}
+  @media (max-width:480px){ .nav-row{padding:14px 16px 18px} }
+  .saved{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted)}
+
+  /* review */
+  .review dl{margin:0 0 18px;display:grid;grid-template-columns:200px 1fr;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .review dt,.review dd{margin:0;padding:8px 12px;border-bottom:1px solid var(--line);font-size:15px}
+  .review dt{font-family:"Archivo",sans-serif;font-weight:600;background:var(--surface-sunk)}
+  .review dd{white-space:pre-wrap;overflow-wrap:anywhere}
+  .review dl > :nth-last-child(-n+2){border-bottom:0}
+  @media (max-width:560px){ .review dl{grid-template-columns:1fr} .review dt{border-bottom:0} }
+  .review h4{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+  .ref-no{font-family:"IBM Plex Mono",monospace;font-size:20px;font-weight:600;color:var(--good)}
+
+  footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--line);font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted);line-height:1.6}
+
+  @media print{
+    .bar,.hero-actions,.steps,.nav-row,footer,section.unit:not(#apply),header.top{display:none !important}
+    body{background:#fff;color:#000}
+    .formbox{box-shadow:none;border:0}
+    .pane:not(#pane-review){display:none !important}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="bar-id"><b>CST</b> · Certificate</div>
+    <nav class="links" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#outcomes">Outcomes</a>
+      <a href="#courses">Courses</a>
+      <a href="#placement">Placement</a>
+      <a href="#admission">Admission</a>
+    </nav>
+    <a class="cta" href="#apply">Apply</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="top">
+  <p class="eyebrow">Business and Leadership Division · Iqaluit</p>
+  <h1>Computer Systems Technician</h1>
+  <p class="standfirst">A one-year, three-semester certificate that prepares you for an entry-level career in IT: repairing computers, supporting users, running networks and keeping systems secure. It ends with a six-week field placement and prepares you to write the CompTIA A+ certification exams.</p>
+  <dl class="facts">
+    <div><dt>Program code</dt><dd>CST</dd></div>
+    <div><dt>Credential</dt><dd>Certificate</dd></div>
+    <div><dt>Length</dt><dd>3 semesters · 1 year</dd></div>
+    <div><dt>Delivery</dt><dd>Blended</dd></div>
+    <div><dt>Location</dt><dd>Iqaluit</dd></div>
+    <div><dt>Total</dt><dd>43 credits · 750 h</dd></div>
+  </dl>
+  <div class="hero-actions">
+    <a class="btn" href="#apply">Start your application</a>
+    <a class="btn ghost" href="#courses">See the courses</a>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section class="unit" id="about">
+  <div class="unit-head"><span class="unit-no">01</span><h2>About the program</h2></div>
+  <p>Graduates can work on their own or as part of a team to set up and maintain IT solutions for the day-to-day needs of individuals and organizations. The work ranges from repairing desktop computers to monitoring network operations, in large and small organizations across many sectors.</p>
+  <p>The program covers the technical side of common components and troubleshooting techniques for <strong>computer hardware, operating systems, networking, system administration</strong> and related support and application software. It also builds communication and administration skills, including teamwork, project management and customer service.</p>
+
+  <h3>Inuit Qaujimajatuqangit</h3>
+  <p>The program integrates the Guiding Principles of Inuit Qaujimajatuqangit and values the collaborative learning environments unique to Nunavut. Instructors balance learning labs and project-based assignments with conventional lectures.</p>
+  <div class="principles">
+    <div class="card"><h4>Inuuqatigiitsiarniq</h4><p>Respecting others' work and developing healthy work relationships with fellow workers.</p></div>
+    <div class="card"><h4>Pilimmaksarniq</h4><p>Developing skills through practice, effort, action and patience.</p></div>
+    <div class="card"><h4>Tunnganarniq</h4><p>Inclusive participation through open dialogue and continuous feedback, solving problems together.</p></div>
+  </div>
+
+  <h3>Career opportunities</h3>
+  <p>Graduates may work as technical support specialists for computers, mobile devices and networks in industrial, government and service sectors.</p>
+  <ul class="chips">
+    <li>Technical support specialist</li>
+    <li>System administration</li>
+    <li>Network administration (LAN/WAN)</li>
+    <li>Internet / intranet maintenance</li>
+    <li>Hardware &amp; software sales</li>
+    <li>Customer service support</li>
+    <li>Computer repair</li>
+  </ul>
+
+  <h3>How it's delivered</h3>
+  <p><span class="term">Blended delivery</span>: applied learning, laboratory work, practicums, classroom teaching, seminars and workshops, guest speakers and Elders, and field trips and project work that connect you with the community. Some digital learning is used in courses throughout the program.</p>
+</section>
+
+<!-- OUTCOMES -->
+<section class="unit" id="outcomes">
+  <div class="unit-head"><span class="unit-no">02</span><h2>What you'll be able to do</h2></div>
+  <p>When you finish the program, you will be able to:</p>
+  <ol class="outcomes">
+    <li>Identify, analyze, develop, implement, verify and document the requirements for a computing environment.</li>
+    <li>Diagnose, troubleshoot, document and monitor technical problems with appropriate methods and tools.</li>
+    <li>Implement and maintain secure computing environments.</li>
+    <li>Communicate and collaborate with team members and stakeholders to build effective working relationships.</li>
+    <li>Select and apply strategies for personal and professional development.</li>
+    <li>Apply project management principles and tools to projects in a computing environment.</li>
+    <li>Follow ethical, legal and regulatory requirements when developing and managing computing solutions.</li>
+    <li>Provide end-to-end customer support, from identifying problems to troubleshooting and debugging.</li>
+    <li>Design, install, configure, maintain, upgrade and decommission computing infrastructure.</li>
+    <li>Perform day-to-day IT support: computer assembly, wireless networking, installing programs, mobile device troubleshooting.</li>
+    <li>Provide technical support for computing infrastructure in line with industry best practice.</li>
+    <li>Compare cloud computing solutions: SaaS, PaaS and IaaS.</li>
+  </ol>
+</section>
+
+<!-- COURSES -->
+<section class="unit" id="courses">
+  <div class="unit-head"><span class="unit-no">03</span><h2>Program structure</h2></div>
+  <p>One year over three semesters, including a six-week field placement. There are no electives. Select a course to read its description.</p>
+  <div class="timeline" aria-hidden="true"><div></div><div></div><div></div></div>
+  <div class="tl-labels" aria-hidden="true"><span>Sem 1 · Sep–Dec</span><span>Sem 2 · Jan–Apr</span><span>Sem 3 · 6 wks</span></div>
+
+  <div class="sem">
+    <div class="sem-head"><h3>Semester 1 · September – December</h3><span>270 h · 18 credits</span></div>
+    <details class="course"><summary><span class="code">CST 101</span><span class="name">Technical Communications</span><span class="meta">45 h · 3 cr</span></summary>
+      <p>Clear, concise and detailed communication is essential in technical workplaces. You will plan and carry out a range of formal and informal visual, oral and written communication tasks, with exercises designed to build confidence and competence in workplace communication.</p></details>
+    <details class="course"><summary><span class="code">CST 102</span><span class="name">Math for IT: Numeracy and Logic</span><span class="meta">45 h · 3 cr</span></summary>
+      <p>A review of mathematical fundamentals, percentages and markups, cash flow calculations, one-time and recurring costs and benefits, present value of cash flows, return on investment (ROI) and net present value (NPV).</p></details>
+    <details class="course"><summary><span class="code">CST 103</span><span class="name">Computer Fundamentals</span><span class="meta">60 h · 4 cr</span></summary>
+      <p>The first of a series preparing you for a role as an entry-level IT support specialist. It introduces the facets of IT (computer hardware, the Internet, software, troubleshooting and customer service) and gives an overview of the rest of the program.</p></details>
+    <details class="course"><summary><span class="code">CST 104</span><span class="name">Introduction to Networking</span><span class="meta">60 h · 4 cr</span></summary>
+      <p>A full overview of computer networking, from the fundamentals of modern networking technologies and protocols to the cloud, practical applications and network troubleshooting.</p></details>
+    <details class="course"><summary><span class="code">CST 105</span><span class="name">Operating Systems</span><span class="meta">60 h · 4 cr</span></summary>
+      <p>Through video lectures, demonstrations and hands-on practice, you will learn the main components of an operating system and how to perform critical tasks such as managing software and users and configuring hardware.</p></details>
+  </div>
+
+  <div class="sem">
+    <div class="sem-head"><h3>Semester 2 · January – April</h3><span>285 h · 19 credits</span></div>
+    <details class="course"><summary><span class="code">CST 106</span><span class="name">System Administration and IT Infrastructure Services</span><span class="meta">60 h · 4 cr</span></summary>
+      <p>Moves you from working on a single computer to managing an entire fleet in a multi-user environment. It covers the infrastructure services that keep organizations running, a deep dive on cloud computing and managing cloud resources, server configuration, and industry tools for managing computers, user information and productivity.</p></details>
+    <details class="course"><summary><span class="code">CST 107</span><span class="name">IT Security Fundamentals</span><span class="meta">60 h · 4 cr</span></summary>
+      <p>IT security concepts, tools and best practices: threats and attacks, encryption algorithms, the three As (authentication, authorization and accounting), and network security from firewalls to Wi-Fi encryption. It ends by combining these into a multi-layered security architecture and building a culture of security in a team.</p></details>
+    <details class="course"><summary><span class="code">CST 108</span><span class="name">Foundations of IT Service Management</span><span class="meta">45 h · 3 cr</span></summary>
+      <p>IT Service Management as described in the IT Infrastructure Library (ITIL): common structures and best practices for working on a service team, plus soft skills such as effective listening and communication with customers who have IT issues and requests.</p></details>
+    <details class="course"><summary><span class="code">CST 109</span><span class="name">PC Troubleshooting</span><span class="meta">60 h · 4 cr</span></summary>
+      <p>Protecting the integrity of data: safe practices online, malicious threats such as phishing and hacking, managing software and hardware patches and updates, and firewall and anti-malware software, so you can protect personal and corporate data and block unauthorized access.</p></details>
+    <details class="course"><summary><span class="code">CST 110</span><span class="name">A+ Certification Preparation</span><span class="meta">60 h · 4 cr</span></summary>
+      <p>The skills required for CompTIA A+, the industry standard certification for IT professionals. Lab activities cover installing, maintaining and troubleshooting PC and mobile hardware, networking and connectivity, and supporting a variety of operating systems. At the end you will be ready to write the qualifying exams.</p></details>
+  </div>
+
+  <div class="sem">
+    <div class="sem-head"><h3>Semester 3 · April – June (6-week block)</h3><span>195 h · 6 credits</span></div>
+    <details class="course"><summary><span class="code">CST 111</span><span class="name">Field Placement</span><span class="meta">195 h · 6 cr</span></summary>
+      <p>You take part in the full range of tasks of an IT support position while receiving mentoring and coaching. It is a culminating, performance-based assessment focused on applying your knowledge, critical thinking, problem-solving, teamwork, oral communication and literacy. At the end you submit a written report documenting your tasks and reflecting on your growth and learning goals.</p></details>
+  </div>
+
+  <div class="totals">
+    <div><b>11</b>courses</div>
+    <div><b>43</b>credits</div>
+    <div><b>750</b>hours</div>
+  </div>
+</section>
+
+<!-- PLACEMENT -->
+<section class="unit" id="placement">
+  <div class="unit-head"><span class="unit-no">04</span><h2>Field placement</h2></div>
+  <p>The work-integrated Field Placement is a key part of the program. It lets you observe and build the practical and professional skills needed for a career as an IT professional, and apply what you learned in class in real IT workplaces.</p>
+  <ul class="plain">
+    <li>Complete detailed learning contracts and a reflective self-evaluation.</li>
+    <li>Achieve an acceptable overall placement evaluation.</li>
+    <li>Attend a preparation seminar and meet industry representatives before you start.</li>
+    <li>Deliver a presentation at the end of the placement.</li>
+  </ul>
+  <div class="note"><span>Credits and eligibility</span>1 credit is given for every 30 hours of field time, for a total of 6 credits over the six-week block. You must complete all courses in the earlier semesters to qualify for placement.</div>
+</section>
+
+<!-- ADMISSION -->
+<section class="unit" id="admission">
+  <div class="unit-head"><span class="unit-no">05</span><h2>Admission &amp; graduation</h2></div>
+  <div class="req">
+    <div class="card">
+      <h4>Applicants must</h4>
+      <ul>
+        <li>Have a Nunavut High School diploma (general or advanced), ABE Math 140 and ABE English 140, or equivalent. Math and English assessments may be required.</li>
+        <li>Be 17 years of age or older.</li>
+        <li>Submit a letter explaining their interest in the program and reasons for applying.</li>
+        <li>Provide 2 references (not family members).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Applying through prior learning assessment</h4>
+      <ul>
+        <li>Submit a recent resume detailing your work history.</li>
+        <li>Include a letter of reference from an employer or community organization.</li>
+        <li>Eligibility is determined by academic achievement testing in English and Math.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Selection process</h4>
+      <ul>
+        <li>Application documents are reviewed.</li>
+        <li>Math and English assessment results are reviewed.</li>
+        <li>You may be contacted for an interview in person or by telephone.</li>
+        <li>Admission depends on space and meeting entrance requirements; some students may need to meet special conditions first. Preference is given to Nunavut Inuit.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>To graduate</h4>
+      <ul>
+        <li>Earn at least 50% in every course (Field Placement is pass/fail).</li>
+        <li>Maintain a weighted average of 60% to be promoted through each semester and to graduate.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY -->
+<section class="unit" id="apply">
+  <div class="unit-head"><span class="unit-no">06</span><h2>Application form</h2></div>
+  <p>Work through the five steps below. Your progress is saved in this browser so you can come back later. At the end you can print the application or save it as a PDF to submit with your documents.</p>
+
+  <form class="formbox" id="app" novalidate>
+    <div class="steps" role="tablist" id="steps"></div>
+
+    <!-- Step 1 -->
+    <div class="pane" data-step="0" id="pane-0">
+      <h3>Personal information</h3>
+      <p class="hint">Tell us who you are and how to reach you.</p>
+      <div class="grid">
+        <div class="field"><label class="f" for="firstName">First name</label><input type="text" id="firstName" name="firstName" autocomplete="given-name" required><div class="err">Enter your first name.</div></div>
+        <div class="field"><label class="f" for="lastName">Last name</label><input type="text" id="lastName" name="lastName" autocomplete="family-name" required><div class="err">Enter your last name.</div></div>
+        <div class="field"><label class="f" for="dob">Date of birth</label><input type="date" id="dob" name="dob" autocomplete="bday" required><div class="err" id="dob-err">Applicants must be 17 or older.</div></div>
+        <div class="field"><label class="f" for="phone">Phone</label><input type="tel" id="phone" name="phone" autocomplete="tel" required><div class="err">Enter a phone number.</div></div>
+        <div class="field full"><label class="f" for="email">Email</label><input type="email" id="email" name="email" autocomplete="email" required><div class="err">Enter a valid email address.</div></div>
+        <div class="field full"><label class="f" for="address">Mailing address</label><input type="text" id="address" name="address" autocomplete="street-address" required><div class="err">Enter your mailing address.</div></div>
+        <div class="field"><label class="f" for="community">Community</label><input type="text" id="community" name="community" autocomplete="address-level2" required><div class="err">Enter your community.</div></div>
+        <div class="field"><label class="f" for="nti">Nunavut Inuit beneficiary <span class="opt">(optional)</span></label>
+          <select id="nti" name="nti"><option value="">Prefer not to say</option><option>Yes</option><option>No</option></select></div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="pane" data-step="1" id="pane-1" hidden>
+      <h3>Education &amp; eligibility</h3>
+      <p class="hint">Show how you meet the academic requirements. Math and English assessments may still be required.</p>
+      <div class="grid">
+        <fieldset class="field full" id="route-field">
+          <legend>How are you applying?</legend>
+          <div class="checks">
+            <label class="check"><input type="radio" name="route" value="Standard admission" required> Standard admission: high school diploma, ABE 140 courses or equivalent</label>
+            <label class="check"><input type="radio" name="route" value="Prior Learning Assessment"> Prior Learning Assessment: work experience with a resume and employer or community reference</label>
+          </div>
+          <div class="err">Choose an admission route.</div>
+        </fieldset>
+        <fieldset class="field full">
+          <legend>Academic credentials you hold <span class="opt sans" style="font-weight:500;color:var(--muted)">(check all that apply)</span></legend>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="cred" value="Nunavut High School diploma (general)"> Nunavut High School diploma, general</label>
+            <label class="check"><input type="checkbox" name="cred" value="Nunavut High School diploma (advanced)"> Nunavut High School diploma, advanced</label>
+            <label class="check"><input type="checkbox" name="cred" value="ABE Math 140"> ABE Math 140</label>
+            <label class="check"><input type="checkbox" name="cred" value="ABE English 140"> ABE English 140</label>
+            <label class="check"><input type="checkbox" name="cred" value="Equivalent (see details)"> Equivalent from another province, territory or country</label>
+          </div>
+        </fieldset>
+        <div class="field"><label class="f" for="school">Last school attended</label><input type="text" id="school" name="school" required><div class="err">Enter the last school you attended.</div></div>
+        <div class="field"><label class="f" for="gradYear">Year completed <span class="opt">(optional)</span></label><input type="text" id="gradYear" name="gradYear" inputmode="numeric" maxlength="4"></div>
+        <div class="field full"><label class="f" for="eduNotes">Other training or certifications <span class="opt">(optional)</span></label><input type="text" id="eduNotes" name="eduNotes" placeholder="e.g. IT courses, workplace training, equivalency details"></div>
+        <div class="field full"><label class="f" for="transcript">Transcript or diploma <span class="opt">(optional, attach when you submit)</span></label><input type="file" id="transcript" name="transcript" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"></div>
+      </div>
+      <div class="pla" id="pla" hidden>
+        <div class="note"><span>Prior Learning Assessment</span>You need a recent resume and a letter of reference from an employer or community organization. Eligibility is decided by English and Math achievement testing.</div>
+        <div class="grid">
+          <div class="field"><label class="f" for="resume">Resume</label><input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx"><div class="err">Attach your resume.</div></div>
+          <div class="field"><label class="f" for="plaLetter">Employer or community reference letter</label><input type="file" id="plaLetter" name="plaLetter" accept=".pdf,.doc,.docx,.jpg,.png"><div class="err">Attach your reference letter.</div></div>
+          <div class="field full"><label class="f" for="workHistory">Summary of work history</label><textarea id="workHistory" name="workHistory" style="min-height:110px" placeholder="Employer, role, dates and main duties"></textarea><div class="err">Summarize your work history.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="pane" data-step="2" id="pane-2" hidden>
+      <h3>Letter of interest</h3>
+      <p class="hint">Tell us why you are interested in the Computer Systems Technician program and why you are applying. You might mention your experience with computers, your career goals and how you work with others.</p>
+      <div class="field"><label class="f" for="letter">Your letter</label><textarea id="letter" name="letter" required></textarea>
+        <div class="counter" id="letter-count">0 words · aim for at least 150</div>
+        <div class="err">Write at least 150 words.</div></div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="pane" data-step="3" id="pane-3" hidden>
+      <h3>References</h3>
+      <p class="hint">Give two references who are <strong>not family members</strong>, such as a teacher, employer, coach or community member.</p>
+      <div id="refs"></div>
+      <fieldset class="field">
+        <legend>If we invite you to an interview, how would you prefer to do it?</legend>
+        <div class="inline">
+          <label class="check"><input type="radio" name="interview" value="In person" checked> In person</label>
+          <label class="check"><input type="radio" name="interview" value="By telephone"> By telephone</label>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="pane review" data-step="4" id="pane-review" hidden>
+      <div id="review-body"></div>
+      <fieldset class="field" id="declare-field">
+        <label class="check"><input type="checkbox" id="declare" name="declare"> I confirm the information in this application is true and complete. I understand I may need to complete Math and English assessments and an interview.</label>
+        <div class="err">Please confirm the declaration.</div>
+      </fieldset>
+    </div>
+
+    <div class="nav-row">
+      <button type="button" class="btn ghost" id="back">Back</button>
+      <span class="saved" id="saved" aria-live="polite"></span>
+      <button type="button" class="btn" id="next">Continue</button>
+    </div>
+  </form>
+</section>
+
+<footer>
+  Computer Systems Technician Certificate (CST) · Business and Leadership Division · Iqaluit.<br>
+  Program information is taken from the official program outline. This page prepares your application; it does not send it anywhere. Print or save it as a PDF and submit it with your documents to the admissions office.
+</footer>
+</div>
+
+<script>
+(function(){
+  const STEPS = ["Personal", "Education", "Letter", "References", "Review"];
+  const KEY = "cst-application-draft-v1";
+  const form = document.getElementById("app");
+  const panes = [...form.querySelectorAll(".pane")];
+  const stepsEl = document.getElementById("steps");
+  const backBtn = document.getElementById("back");
+  const nextBtn = document.getElementById("next");
+  const savedEl = document.getElementById("saved");
+  let cur = 0, maxReached = 0, submitted = null;
+
+  // Build reference cards
+  const refs = document.getElementById("refs");
+  [1,2].forEach(n => {
+    refs.insertAdjacentHTML("beforeend", `
+      <div class="ref-card"><h4>Reference ${n}</h4><div class="grid">
+        <div class="field"><label class="f" for="r${n}name">Full name</label><input type="text" id="r${n}name" name="r${n}name" required><div class="err">Enter a name.</div></div>
+        <div class="field"><label class="f" for="r${n}rel">Relationship to you</label><input type="text" id="r${n}rel" name="r${n}rel" placeholder="e.g. former employer" required><div class="err">Enter a non-family relationship.</div></div>
+        <div class="field"><label class="f" for="r${n}phone">Phone</label><input type="tel" id="r${n}phone" name="r${n}phone" required><div class="err">Enter a phone number.</div></div>
+        <div class="field"><label class="f" for="r${n}email">Email <span class="opt">(optional)</span></label><input type="email" id="r${n}email" name="r${n}email"><div class="err">Enter a valid email or leave blank.</div></div>
+      </div></div>`);
+  });
+
+  // Step tabs
+  STEPS.forEach((s,i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.innerHTML = `<span class="n">${i+1}</span>${s}`;
+    b.addEventListener("click", () => { if (i <= maxReached) go(i); });
+    stepsEl.appendChild(b);
+  });
+
+  const $ = id => document.getElementById(id);
+  const val = n => { const el = form.elements[n]; return el ? (el.value || "").trim() : ""; };
+  const checkedVals = n => [...form.querySelectorAll(`input[name="${n}"]:checked`)].map(i => i.value);
+  const fileName = id => { const f = $(id).files[0]; return f ? f.name : ""; };
+  const words = s => (s.trim().match(/\S+/g) || []).length;
+  const FAMILY = /\b(mother|father|mom|mum|dad|parent|sister|brother|sibling|aunt|uncle|cousin|grand\w*|son|daughter|wife|husband|spouse|niece|nephew|in-law|stepmother|stepfather|anaana|ataata)\b/i;
+
+  function age(d){
+    const b = new Date(d + "T00:00:00"); if (isNaN(b)) return -1;
+    const t = new Date(); let a = t.getFullYear() - b.getFullYear();
+    const m = t.getMonth() - b.getMonth();
+    if (m < 0 || (m === 0 && t.getDate() < b.getDate())) a--;
+    return a;
+  }
+  function mark(el, bad){ const f = el.closest(".field"); if (f) f.classList.toggle("invalid", bad); return !bad; }
+
+  function validate(i){
+    let ok = true;
+    const req = (id, test) => { const el = $(id); const v = el.value.trim(); ok = mark(el, !(test ? test(v) : v)) && ok; };
+    const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    if (i === 0){
+      ["firstName","lastName","phone","address","community"].forEach(id => req(id));
+      req("email", emailOk);
+      const a = age($("dob").value);
+      $("dob-err").textContent = $("dob").value ? "Applicants must be 17 years of age or older." : "Enter your date of birth.";
+      ok = mark($("dob"), a < 17) && ok;
+    }
+    if (i === 1){
+      ok = mark($("route-field").querySelector("input"), !checkedVals("route").length) && ok;
+      req("school");
+      if (isPLA()){
+        ["resume","plaLetter"].forEach(id => { ok = mark($(id), !$(id).files.length) && ok; });
+        req("workHistory");
+      }
+    }
+    if (i === 2){ ok = mark($("letter"), words($("letter").value) < 150) && ok; }
+    if (i === 3){
+      [1,2].forEach(n => {
+        req(`r${n}name`); req(`r${n}phone`);
+        req(`r${n}rel`, v => v && !FAMILY.test(v));
+        req(`r${n}email`, v => !v || emailOk(v));
+      });
+    }
+    if (i === 4){ ok = mark($("declare"), !$("declare").checked) && ok; }
+    if (!ok){ const first = panes[i].querySelector(".invalid input, .invalid textarea, .invalid select"); if (first) first.focus(); }
+    return ok;
+  }
+
+  const isPLA = () => checkedVals("route")[0] === "Prior Learning Assessment";
+
+  function go(i, quiet){
+    cur = i; maxReached = Math.max(maxReached, i);
+    panes.forEach((p,k) => p.hidden = k !== i);
+    [...stepsEl.children].forEach((b,k) => {
+      b.toggleAttribute("aria-current", false);
+      if (k === i) b.setAttribute("aria-current","step");
+      b.classList.toggle("done", k < maxReached && k !== i);
+    });
+    backBtn.style.visibility = i === 0 || submitted ? "hidden" : "visible";
+    if (i === 4) renderReview();
+    nextBtn.textContent = submitted ? "Print / save as PDF" : i === 4 ? "Submit application" : i === 3 ? "Review" : "Continue";
+    if (quiet) return;
+    const top = $("apply").getBoundingClientRect().top;
+    if (top < 0 || top > innerHeight) $("apply").scrollIntoView({behavior:"smooth"});
+  }
+
+  function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+  function dl(rows){ return "<dl>" + rows.map(([k,v]) => `<dt>${esc(k)}</dt><dd>${esc(v || "—")}</dd>`).join("") + "</dl>"; }
+
+  function renderReview(){
+    const pla = isPLA();
+    let h = "";
+    if (submitted){
+      h += `<div class="banner good">Application prepared on ${esc(submitted.date)}. Reference <span class="ref-no">${esc(submitted.id)}</span>. Print it or save it as a PDF and submit it with your documents. <button type="button" class="btn ghost" id="restart" style="margin-top:10px">Start a new application</button></div>`;
+    } else {
+      h += `<h3>Review your application</h3><p class="hint">Check everything below. Use the step tabs to go back and make changes.</p>`;
+    }
+    h += `<h4>Program</h4>` + dl([["Program","Computer Systems Technician (CST) · Certificate"],["Location","Iqaluit"]]);
+    h += `<h4>Personal information</h4>` + dl([
+      ["Name", `${val("firstName")} ${val("lastName")}`],["Date of birth", val("dob")],["Phone", val("phone")],
+      ["Email", val("email")],["Mailing address", val("address")],["Community", val("community")],
+      ["Nunavut Inuit beneficiary", val("nti") || "Prefer not to say"]]);
+    const edu = [["Admission route", checkedVals("route")[0]],["Credentials", checkedVals("cred").join("\n")],
+      ["Last school attended", val("school")],["Year completed", val("gradYear")],["Other training", val("eduNotes")],
+      ["Transcript attached", fileName("transcript")]];
+    if (pla) edu.push(["Resume", fileName("resume")],["Reference letter", fileName("plaLetter")],["Work history", val("workHistory")]);
+    h += `<h4>Education &amp; eligibility</h4>` + dl(edu);
+    h += `<h4>Letter of interest · ${words(val("letter"))} words</h4>` + dl([["Letter", val("letter")]]);
+    h += `<h4>References</h4>` + dl([1,2].flatMap(n => [[`Reference ${n}`, `${val(`r${n}name`)} (${val(`r${n}rel`)})\n${val(`r${n}phone`)}${val(`r${n}email`) ? "\n"+val(`r${n}email`) : ""}`]]).concat([["Interview preference", checkedVals("interview")[0]]]));
+    $("review-body").innerHTML = h;
+    $("declare-field").hidden = !!submitted;
+    const r = $("restart");
+    if (r) r.addEventListener("click", () => {
+      if (!confirm("Clear this application and start again?")) return;
+      try { localStorage.removeItem(KEY); } catch(e){}
+      location.reload();
+    });
+  }
+
+  // Draft persistence (per-browser convenience only)
+  function save(){
+    const data = {};
+    [...form.elements].forEach(el => {
+      if (!el.name || el.type === "file") return;
+      if (el.type === "checkbox" || el.type === "radio"){ if (el.checked) (data[el.name] = data[el.name] || []).push(el.value); }
+      else data[el.name] = el.value;
+    });
+    try { localStorage.setItem(KEY, JSON.stringify({data, submitted})); savedEl.textContent = "Draft saved"; } catch(e){}
+  }
+  function load(){
+    let s; try { s = JSON.parse(localStorage.getItem(KEY) || "null"); } catch(e){}
+    if (!s) return;
+    const d = s.data || {};
+    [...form.elements].forEach(el => {
+      if (!el.name || el.type === "file" || !(el.name in d)) return;
+      if (el.type === "checkbox" || el.type === "radio") el.checked = [].concat(d[el.name]).includes(el.value);
+      else el.value = d[el.name];
+    });
+    submitted = s.submitted || null;
+    savedEl.textContent = "Draft restored";
+  }
+
+  function updatePLA(){ $("pla").hidden = !isPLA(); }
+  function updateCount(){
+    const n = words($("letter").value), c = $("letter-count");
+    c.textContent = `${n} word${n === 1 ? "" : "s"} · ${n >= 150 ? "looks good" : "aim for at least 150"}`;
+    c.classList.toggle("ok", n >= 150);
+  }
+
+  let t;
+  form.addEventListener("input", e => {
+    const f = e.target.closest(".field"); if (f) f.classList.remove("invalid");
+    if (e.target.name === "route") updatePLA();
+    if (e.target.id === "letter") updateCount();
+    clearTimeout(t); t = setTimeout(save, 400);
+  });
+  form.addEventListener("change", e => { if (e.target.name === "route") updatePLA(); });
+
+  backBtn.addEventListener("click", () => go(Math.max(0, cur - 1)));
+  nextBtn.addEventListener("click", () => {
+    if (submitted){ window.print(); return; }
+    if (!validate(cur)) return;
+    if (cur < 4){ go(cur + 1); return; }
+    for (let i = 0; i < 4; i++) if (!validate(i)) { go(i); validate(i); return; }
+    const d = new Date();
+    submitted = { id: "CST-" + d.getFullYear() + "-" + Math.random().toString(36).slice(2,8).toUpperCase(),
+                  date: d.toLocaleDateString(undefined, {year:"numeric", month:"long", day:"numeric"}) };
+    save(); maxReached = 4;
+    [...stepsEl.children].forEach(b => b.disabled = true);
+    go(4);
+  });
+
+  form.addEventListener("submit", e => e.preventDefault());
+
+  load(); updatePLA(); updateCount();
+  if (submitted){ maxReached = 4; [...stepsEl.children].forEach(b => b.disabled = true); go(4, true); } else go(0, true);
+})();
+</script>
+</body>
+</html>
