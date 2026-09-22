@@ -1,0 +1,2257 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Business Administration — Lesson 5: Principles of Management</title>
+<meta name="description" content="Independent study resource for Business Administration / Management Studies. Lesson 5 covers planning, organizing, leading and controlling with Nunavut workplace examples, practice activities, a quiz and an assignment.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+  :root{
+    --bg:#E9EDF0;
+    --surface:#FFFFFF;
+    --surface-sunk:#F1F4F6;
+    --ink:#18242E;
+    --ink-soft:#4C5E6C;
+    --muted:#6B7C89;
+    --line:#D2DAE0;
+    --line-strong:#A9B8C3;
+    --accent:#1F5A7A;
+    --accent-soft:#DCE9F0;
+    --good:#1F6B4A;
+    --good-soft:#DBEEE3;
+    --bad:#9E3524;
+    --bad-soft:#F6E1DC;
+    --warn:#8A6410;
+    --warn-soft:#F6EBD3;
+    --shadow:0 1px 2px rgba(24,36,46,.06), 0 8px 24px rgba(24,36,46,.07);
+    --measure:68ch;
+    --nav:268px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0E161C; --surface:#16212A; --surface-sunk:#121C24;
+      --ink:#E4EBF0; --ink-soft:#B6C4CE; --muted:#8C9DA9;
+      --line:#25333E; --line-strong:#3C4D5A;
+      --accent:#7FB5D3; --accent-soft:#1A2E3B;
+      --good:#6CC095; --good-soft:#152C22;
+      --bad:#E3907E; --bad-soft:#2E1B18;
+      --warn:#D2A650; --warn-soft:#2A2113;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E161C; --surface:#16212A; --surface-sunk:#121C24;
+    --ink:#E4EBF0; --ink-soft:#B6C4CE; --muted:#8C9DA9;
+    --line:#25333E; --line-strong:#3C4D5A;
+    --accent:#7FB5D3; --accent-soft:#1A2E3B;
+    --good:#6CC095; --good-soft:#152C22;
+    --bad:#E3907E; --bad-soft:#2E1B18;
+    --warn:#D2A650; --warn-soft:#2A2113;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size:17px; line-height:1.62; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4,.ui{font-family:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+  a{color:var(--accent)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+  /* ── top bar ─────────────────────────────── */
+  .topbar{
+    position:sticky;top:0;z-index:60;
+    background:color-mix(in srgb, var(--bg) 94%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    padding-top:env(safe-area-inset-top, 0px);
+  }
+  .topbar-in{display:flex;align-items:center;gap:12px;padding:10px 18px}
+  .brand{display:flex;align-items:center;gap:10px;min-width:0}
+  .crest{
+    width:34px;height:34px;flex:0 0 34px;border-radius:5px;
+    background:var(--accent);color:var(--surface);
+    display:grid;place-items:center;font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;letter-spacing:.02em;
+  }
+  :root[data-theme="dark"] .crest{color:#0E161C}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .crest{color:#0E161C}
+  }
+  .brand-txt{min-width:0}
+  .brand-txt b{display:block;font-family:"Archivo",sans-serif;font-size:14.5px;font-weight:700;line-height:1.2;letter-spacing:-.01em}
+  .brand-txt span{display:block;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+  .topbar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+  .iconbtn{
+    font-family:"Archivo",sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    background:var(--surface);color:var(--ink-soft);border:1px solid var(--line-strong);
+    border-radius:999px;padding:7px 13px;cursor:pointer;white-space:nowrap;
+  }
+  .iconbtn:hover{border-color:var(--accent);color:var(--accent)}
+  .menubtn{display:none}
+  .toptrack{height:3px;background:var(--line)}
+  .toptrack > i{display:block;height:100%;width:0;background:var(--accent);transition:width .4s ease}
+
+  /* ── shell ───────────────────────────────── */
+  .shell{display:flex;align-items:flex-start;gap:0;max-width:1280px;margin:0 auto}
+  nav.side{
+    position:sticky;top:78px;flex:0 0 var(--nav);width:var(--nav);
+    padding:26px 14px 60px 18px;max-height:calc(100vh - 78px);overflow-y:auto;
+  }
+  .navlabel{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 8px 10px}
+  .navlist{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:2px}
+  .navlist button{
+    width:100%;display:flex;align-items:center;gap:10px;text-align:left;
+    font-family:"Archivo",sans-serif;font-size:14.5px;font-weight:600;color:var(--ink-soft);
+    background:none;border:0;border-radius:6px;padding:9px 11px;cursor:pointer;
+  }
+  .navlist button:hover{background:var(--surface-sunk);color:var(--ink)}
+  .navlist button[aria-current="page"]{background:var(--accent-soft);color:var(--accent)}
+  .navlist .dot{width:7px;height:7px;border-radius:50%;background:var(--line-strong);flex:0 0 7px}
+  .navlist button[aria-current="page"] .dot{background:var(--accent)}
+  .navlist .done{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--good)}
+  .sidecard{
+    background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px;margin:0 0 14px;
+  }
+  .sidecard p{margin:0 0 8px;font-size:12.5px;line-height:1.5;color:var(--ink-soft);font-family:"Archivo",sans-serif}
+  .minibar{height:7px;background:var(--surface-sunk);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+  .minibar i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s ease}
+  .pctline{display:flex;justify-content:space-between;align-items:baseline;margin-top:7px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted)}
+  .pctline b{font-family:"Archivo",sans-serif;font-size:17px;color:var(--ink)}
+
+  main{flex:1 1 auto;min-width:0;padding:26px 22px 80px}
+  .view{display:none}
+  .view.on{display:block}
+
+  /* ── generic blocks ──────────────────────── */
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+  h1{font-size:clamp(27px,5.2vw,38px);line-height:1.1;font-weight:700;letter-spacing:-.02em;margin:0 0 12px;text-wrap:balance}
+  h2{font-size:22px;font-weight:700;letter-spacing:-.01em;margin:0}
+  h3{font-size:16.5px;font-weight:600;margin:26px 0 8px}
+  h4{font-size:15px;font-weight:600;margin:0 0 6px}
+  p{margin:0 0 14px;max-width:var(--measure)}
+  .lede{font-size:18.5px;color:var(--ink-soft);max-width:var(--measure)}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;margin:0 0 20px}
+  .card.flat{box-shadow:none}
+  section.unit{margin:0 0 34px;scroll-margin-top:96px}
+  .unit-head{display:flex;align-items:baseline;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:18px;flex-wrap:wrap}
+  .unit-no{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;color:var(--accent)}
+  .unit-head h2{flex:1;min-width:200px}
+  .mins{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);white-space:nowrap}
+  .term{font-family:"Archivo",sans-serif;font-weight:600;color:var(--accent)}
+  strong{font-weight:600}
+  ul.plain{margin:0 0 14px;padding-left:20px;max-width:var(--measure)}
+  ul.plain li{margin-bottom:6px}
+  ol.steps{margin:0 0 14px;padding-left:22px;max-width:var(--measure)}
+  ol.steps li{margin-bottom:7px}
+  .duo{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin:0 0 18px;max-width:var(--measure)}
+  .tiles{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin:0 0 18px}
+  .tile{background:var(--surface-sunk);border:1px solid var(--line);border-radius:6px;padding:13px 15px;font-size:15.5px;line-height:1.5}
+  .tile b{display:block;font-family:"Archivo",sans-serif;font-size:14px;font-weight:600;margin-bottom:4px}
+  .note{border-left:3px solid var(--accent);background:var(--surface-sunk);padding:13px 16px;margin:18px 0;max-width:var(--measure);font-size:16px}
+  .note > span{display:block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+  .note p:last-child{margin-bottom:0}
+  .note.warn{border-left-color:var(--warn);background:var(--warn-soft)}
+  .scenario{background:var(--accent-soft);border:1px solid var(--line);border-radius:7px;padding:16px 18px;margin:0 0 18px;max-width:var(--measure)}
+  .scenario > span{display:block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+  .scenario p:last-child{margin-bottom:0}
+  .tablewrap{overflow-x:auto;margin:16px 0;max-width:100%}
+  table{border-collapse:collapse;width:100%;min-width:460px;font-size:15.5px;background:var(--surface)}
+  th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{font-family:"Archivo",sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line-strong)}
+  tbody th{font-family:"Archivo",sans-serif;font-size:14.5px;font-weight:600}
+  .cap{font-family:"Archivo",sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:24px 0 8px}
+  .pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:var(--accent-soft);color:var(--accent);border-radius:3px;padding:3px 8px}
+  .pill.grey{background:var(--surface-sunk);color:var(--muted)}
+  .pill.ok{background:var(--good-soft);color:var(--good)}
+
+  /* ── buttons ─────────────────────────────── */
+  .btn{
+    font-family:"Archivo",sans-serif;font-size:14px;font-weight:600;letter-spacing:.02em;
+    background:var(--accent);color:var(--surface);border:1px solid var(--accent);
+    border-radius:6px;padding:10px 20px;cursor:pointer;
+  }
+  :root[data-theme="dark"] .btn:not(.ghost){color:#0E161C}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .btn:not(.ghost){color:#0E161C}
+  }
+  .btn:hover{filter:brightness(1.08)}
+  .btn.ghost{background:transparent;color:var(--accent)}
+  .btn.small{font-size:12.5px;padding:7px 14px}
+  .btn[disabled]{opacity:.45;cursor:not-allowed;filter:none}
+  .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .row.end{justify-content:space-between}
+  .hint{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted)}
+
+  /* ── options / feedback ──────────────────── */
+  .opts{display:grid;gap:8px;margin:0 0 14px;max-width:var(--measure)}
+  .opt{
+    display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;
+    font-family:inherit;font-size:16.5px;line-height:1.45;color:var(--ink);
+    background:var(--surface-sunk);border:1px solid var(--line);border-radius:6px;
+    padding:12px 14px;cursor:pointer;transition:border-color .15s, background .15s;
+  }
+  .opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+  .opt:disabled{cursor:default}
+  .opt .key{
+    font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--muted);
+    border:1px solid var(--line-strong);border-radius:3px;width:22px;height:22px;flex:0 0 22px;
+    display:grid;place-items:center;margin-top:1px;
+  }
+  .opt.right{border-color:var(--good);background:var(--good-soft)}
+  .opt.right .key{border-color:var(--good);color:var(--good)}
+  .opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+  .opt.wrong .key{border-color:var(--bad);color:var(--bad)}
+  .opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+  .opt.sel .key{border-color:var(--accent);color:var(--accent)}
+  .opt.mid{border-color:var(--warn);background:var(--warn-soft)}
+  .opt.mid .key{border-color:var(--warn);color:var(--warn)}
+  .verdict{border-radius:6px;padding:14px 16px;margin:0 0 14px;font-size:16px;max-width:var(--measure);border:1px solid var(--line);background:var(--surface-sunk)}
+  .verdict b{display:block;font-family:"Archivo",sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+  .verdict p{margin:0 0 8px}
+  .verdict p:last-child{margin:0}
+  .verdict.right{background:var(--good-soft);border-color:var(--good)}
+  .verdict.right b{color:var(--good)}
+  .verdict.wrong{background:var(--bad-soft);border-color:var(--bad)}
+  .verdict.wrong b{color:var(--bad)}
+  .verdict.mid{background:var(--warn-soft);border-color:var(--warn)}
+  .verdict.mid b{color:var(--warn)}
+  .verdict .fn{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+  /* ── forms ───────────────────────────────── */
+  label.fld{display:block;margin:0 0 14px;max-width:var(--measure)}
+  label.fld > span{display:block;font-family:"Archivo",sans-serif;font-size:13.5px;font-weight:600;margin-bottom:5px}
+  textarea, select, input[type=text]{
+    width:100%;font-family:inherit;font-size:16px;color:var(--ink);
+    background:var(--surface-sunk);border:1px solid var(--line-strong);border-radius:6px;padding:10px 12px;
+  }
+  select{font-family:"Archivo",sans-serif;font-size:14.5px;cursor:pointer}
+  textarea{min-height:120px;resize:vertical;line-height:1.55}
+  textarea:focus, select:focus, input:focus{border-color:var(--accent)}
+  .wordcount{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);margin-top:5px}
+  .wordcount.ok{color:var(--good)}
+
+  /* ── dashboard ───────────────────────────── */
+  .hero{
+    background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);
+    padding:26px;margin:0 0 22px;
+  }
+  .hero .course{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+  .hero h1{margin-bottom:6px}
+  .hero .of{font-family:"Archivo",sans-serif;font-size:14px;font-weight:600;color:var(--muted);margin:0 0 18px}
+  .bigbar{height:12px;background:var(--surface-sunk);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+  .bigbar i{display:block;height:100%;background:var(--accent);width:0;transition:width .5s ease}
+  .statgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:20px 0 0}
+  .stat{background:var(--surface-sunk);border:1px solid var(--line);border-radius:7px;padding:13px 15px}
+  .stat dt{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 4px}
+  .stat dd{margin:0;font-family:"Archivo",sans-serif;font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+  .stat dd small{font-size:12px;font-weight:600;color:var(--muted)}
+  .checklist{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+  .checklist li{
+    display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);
+    border-radius:6px;padding:11px 14px;font-size:15.5px;
+  }
+  .checklist .box{
+    width:20px;height:20px;flex:0 0 20px;border-radius:4px;border:1px solid var(--line-strong);
+    display:grid;place-items:center;font-size:12px;color:var(--surface);background:var(--surface-sunk);
+  }
+  .checklist li.done .box{background:var(--good);border-color:var(--good);color:#fff}
+  .checklist li.done{border-color:var(--good)}
+  .checklist .go{margin-left:auto}
+  .obj{list-style:none;counter-reset:ob;margin:0;padding:0;display:grid;gap:9px;max-width:var(--measure)}
+  .obj li{counter-increment:ob;position:relative;padding-left:34px;font-size:15.8px;line-height:1.5}
+  .obj li::before{
+    content:counter(ob);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;
+    background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;
+    font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;
+  }
+
+  /* ── lesson list ─────────────────────────── */
+  .lesson-row{
+    display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);
+    border-radius:7px;padding:14px 16px;margin:0 0 9px;
+  }
+  .lesson-row .num{
+    font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--muted);
+    border:1px solid var(--line);border-radius:5px;width:34px;height:34px;flex:0 0 34px;display:grid;place-items:center;
+  }
+  .lesson-row.now{border-color:var(--accent);box-shadow:var(--shadow)}
+  .lesson-row.now .num{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+  .lesson-row b{display:block;font-family:"Archivo",sans-serif;font-size:15.5px;font-weight:600;margin-bottom:2px}
+  .lesson-row p{margin:0;font-size:14px;color:var(--muted);max-width:none}
+  .lesson-row .act{margin-left:auto;align-self:center;white-space:nowrap}
+
+  /* ── cycle diagram ───────────────────────── */
+  .cycle{display:grid;gap:10px;justify-items:center;margin:0 0 20px}
+  .cyc-btn{
+    width:100%;max-width:340px;font-family:"Archivo",sans-serif;font-weight:700;font-size:15px;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--ink);
+    background:var(--surface);border:2px solid var(--line-strong);border-radius:8px;
+    padding:15px 18px;cursor:pointer;transition:border-color .15s, background .15s, transform .15s;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+  }
+  .cyc-btn:hover{border-color:var(--accent);background:var(--accent-soft)}
+  .cyc-btn[aria-expanded="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+  .cyc-btn .seen{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--good);letter-spacing:.06em}
+  .cyc-arrow{color:var(--line-strong);font-size:19px;line-height:1}
+  .cyc-btn.last{border-style:dashed}
+  #cycleOut{max-width:var(--measure);margin:0 auto}
+
+  /* ── priority ordering ───────────────────── */
+  .plist{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:8px;max-width:var(--measure)}
+  .plist li{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:11px 13px;font-size:15.5px}
+  .plist .rank{
+    font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;color:var(--accent);
+    width:26px;height:26px;flex:0 0 26px;display:grid;place-items:center;background:var(--accent-soft);border-radius:5px;
+  }
+  .plist .txt{flex:1 1 auto;min-width:0}
+  .movers{display:flex;gap:4px;flex:0 0 auto}
+  .mv{
+    font-family:"Archivo",sans-serif;font-size:13px;font-weight:700;line-height:1;
+    width:30px;height:30px;border-radius:5px;border:1px solid var(--line-strong);
+    background:var(--surface-sunk);color:var(--ink-soft);cursor:pointer;
+  }
+  .mv:hover:not([disabled]){border-color:var(--accent);color:var(--accent)}
+  .mv[disabled]{opacity:.35;cursor:not-allowed}
+
+  /* ── quiz ────────────────────────────────── */
+  .dots{display:flex;gap:4px;flex-wrap:wrap;margin:0 0 18px}
+  .dots i{width:12px;height:12px;border-radius:3px;background:var(--line);display:block}
+  .dots i.now{background:var(--accent)}
+  .dots i.ok{background:var(--good)}
+  .dots i.no{background:var(--bad)}
+  .qmeta{display:flex;align-items:center;gap:10px;margin:0 0 10px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);flex-wrap:wrap}
+  .qtext{font-size:19px;line-height:1.5;margin:0 0 16px;max-width:var(--measure)}
+  .score{display:flex;align-items:flex-end;gap:16px;margin:0 0 4px}
+  .score b{font-family:"Archivo",sans-serif;font-size:54px;font-weight:700;line-height:.9;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+  .score span{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--muted);padding-bottom:6px}
+  .band{font-size:17px;color:var(--ink-soft);margin:0 0 20px;max-width:var(--measure)}
+  .missed{display:grid;gap:12px;margin:0 0 20px;max-width:var(--measure)}
+  .missed article{border-left:3px solid var(--bad);background:var(--surface-sunk);padding:12px 15px;font-size:15.5px}
+  .missed article.ok{border-left-color:var(--good)}
+  .missed h4{margin:0 0 6px}
+  .missed p{margin:0 0 4px;color:var(--ink-soft);max-width:none}
+  .missed p.fix{color:var(--ink)}
+  .histtable td.pc{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+
+  /* ── flashcards ──────────────────────────── */
+  .deck{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));margin:0 0 18px}
+  .fcard{
+    position:relative;min-height:148px;background:var(--surface);border:1px solid var(--line-strong);
+    border-radius:9px;padding:16px;cursor:pointer;text-align:left;font-family:inherit;color:var(--ink);
+    display:flex;flex-direction:column;justify-content:center;gap:7px;transition:border-color .15s, background .15s;
+  }
+  .fcard:hover{border-color:var(--accent)}
+  .fcard .front{font-family:"Archivo",sans-serif;font-size:18px;font-weight:700;letter-spacing:-.01em}
+  .fcard .back{font-size:15px;line-height:1.5;color:var(--ink-soft)}
+  .fcard .flip{position:absolute;top:10px;right:12px;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .fcard.open{background:var(--accent-soft);border-color:var(--accent)}
+  .fcard.known{border-color:var(--good)}
+  .fcard.known .flip{color:var(--good)}
+
+  /* ── print sheet ─────────────────────────── */
+  .sheet{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:26px;box-shadow:var(--shadow)}
+  .sheet h3{margin-top:28px}
+  .sheet h3:first-of-type{margin-top:8px}
+  .sheet dl.defs{margin:0 0 14px;display:grid;gap:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;max-width:var(--measure)}
+  .sheet dl.defs > div{display:flex;gap:14px;padding:9px 14px;border-bottom:1px solid var(--line);font-size:15px}
+  .sheet dl.defs > div:last-child{border-bottom:0}
+  .sheet dl.defs dt{flex:0 0 150px;font-family:"Archivo",sans-serif;font-weight:600;font-size:14px;margin:0}
+  .sheet dl.defs dd{margin:0;color:var(--ink-soft)}
+  @media (max-width:520px){
+    .sheet dl.defs > div{flex-direction:column;gap:2px}
+    .sheet dl.defs dt{flex:none}
+  }
+
+  footer.site{
+    border-top:1px solid var(--line);margin:40px 0 0;padding:18px 0 0;
+    font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted);line-height:1.8;max-width:var(--measure);
+  }
+  footer.site b{color:var(--ink-soft);font-weight:600}
+
+  /* ── responsive ──────────────────────────── */
+  .scrim{display:none}
+  @media (max-width:900px){
+    .menubtn{display:inline-block}
+    .shell{display:block}
+    nav.side{
+      position:fixed;top:0;left:0;bottom:0;width:82%;max-width:310px;z-index:80;
+      background:var(--surface);border-right:1px solid var(--line);max-height:none;
+      padding:22px 16px 40px;transform:translateX(-102%);transition:transform .25s ease;overflow-y:auto;
+    }
+    body.navopen nav.side{transform:none;box-shadow:0 0 40px rgba(0,0,0,.28)}
+    body.navopen .scrim{display:block;position:fixed;inset:0;background:rgba(10,18,24,.45);z-index:70}
+    main{padding:20px 16px 70px}
+    .brand-txt span{display:none}
+  }
+  @media (max-width:560px){
+    .brand-txt{display:none}
+    .topbar-in{gap:10px;padding:9px 14px}
+  }
+  @media (max-width:420px){
+    body{font-size:16.5px}
+    .card{padding:17px}
+    .hero{padding:19px}
+  }
+
+  .printonly{display:none}
+  @media print{
+    .topbar, nav.side, .scrim, .noprint{display:none!important}
+    .printonly{display:block!important;white-space:pre-wrap;font-size:11.5pt;line-height:1.5}
+    .printhide{display:none!important}
+    body{background:#fff;color:#000;font-size:11.5pt}
+    main{padding:0}
+    .view{display:none!important}
+    .view.on{display:block!important}
+    .sheet{border:0;box-shadow:none;padding:0}
+    .sheet dl.defs, .sheet p, .sheet ul.plain, .sheet ol.steps, .sheet table{max-width:none}
+    .sheet dl.defs dt{flex:0 0 130px}
+    .card{break-inside:avoid;box-shadow:none;border-color:#bbb}
+    a{color:#000;text-decoration:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <button class="iconbtn menubtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="sidenav">Menu</button>
+    <div class="brand">
+      <div class="crest" aria-hidden="true">BA</div>
+      <div class="brand-txt">
+        <b>Business Administration Study Portal</b>
+        <span>Independent study resource</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="iconbtn" id="themeBtn" type="button" aria-pressed="false">Dark mode</button>
+    </div>
+  </div>
+  <div class="toptrack"><i id="topFill"></i></div>
+</div>
+
+<div class="scrim" id="scrim"></div>
+
+<div class="shell">
+
+  <nav class="side" id="sidenav" aria-label="Portal sections">
+    <p class="navlabel">Navigation</p>
+    <ul class="navlist" id="navList">
+      <li><button type="button" data-go="dashboard"><span class="dot"></span>Dashboard</button></li>
+      <li><button type="button" data-go="lessons"><span class="dot"></span>Lessons</button></li>
+      <li><button type="button" data-go="lesson5"><span class="dot"></span>Lesson 5</button></li>
+      <li><button type="button" data-go="practice"><span class="dot"></span>Practice</button></li>
+      <li><button type="button" data-go="quiz"><span class="dot"></span>Quiz</button></li>
+      <li><button type="button" data-go="assignment"><span class="dot"></span>Assignment</button></li>
+      <li><button type="button" data-go="flashcards"><span class="dot"></span>Flashcards</button></li>
+      <li><button type="button" data-go="notes"><span class="dot"></span>Study Notes</button></li>
+      <li><button type="button" data-go="progress"><span class="dot"></span>My Progress</button></li>
+    </ul>
+
+    <div class="sidecard">
+      <p>Lesson 5 progress</p>
+      <div class="minibar"><i id="sideFill"></i></div>
+      <div class="pctline"><b id="sidePct">0%</b><span id="sideCount">0 of 12 steps</span></div>
+    </div>
+
+    <p class="navlabel">Saving</p>
+    <div class="sidecard">
+      <p id="saveNote">Your progress, quiz history and assignment draft are saved in this browser only.</p>
+      <button class="btn ghost small" id="resetBtn" type="button">Reset my progress</button>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- ══════════ DASHBOARD ══════════ -->
+  <div class="view" id="v-dashboard" role="region" aria-label="Dashboard">
+    <div class="hero">
+      <p class="course">Business Administration</p>
+      <h1>Principles of Management</h1>
+      <p class="of">Lesson 5 of 10 &middot; Planning, Organizing, Leading and Controlling</p>
+      <div class="bigbar"><i id="heroFill"></i></div>
+      <dl class="statgrid">
+        <div class="stat"><dt>Lesson complete</dt><dd id="statPct">0<small>%</small></dd></div>
+        <div class="stat"><dt>Steps finished</dt><dd id="statSteps">0<small> / 12</small></dd></div>
+        <div class="stat"><dt>Best quiz score</dt><dd id="statQuiz">&mdash;</dd></div>
+        <div class="stat"><dt>Quiz attempts</dt><dd id="statAttempts">0</dd></div>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h2>What you will be able to do after Lesson 5</h2>
+      <p class="hint" style="margin:6px 0 14px">Learning objectives</p>
+      <ol class="obj">
+        <li>Explain what management means in a business or government workplace.</li>
+        <li>Describe the four major management functions: planning, organizing, leading and controlling.</li>
+        <li>Identify the responsibilities of managers and supervisors.</li>
+        <li>Apply management principles to realistic Nunavut workplace situations.</li>
+        <li>Make basic management decisions using workplace scenarios.</li>
+        <li>Explain why communication, organization and accountability are important for managers.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>Your steps for this lesson</h2>
+      <p class="hint" style="margin:6px 0 14px">Each step you finish moves the progress bar. Work in any order.</p>
+      <ul class="checklist" id="stepList"></ul>
+      <div class="row" style="margin-top:18px">
+        <button class="btn" id="continueBtn" type="button">Continue where I left off</button>
+        <span class="hint" id="continueHint"></span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>How this lesson is set up</h2>
+      <div class="tiles">
+        <div class="tile"><b>Read</b>Seven short sections introduce management and each of the four functions, with Nunavut workplace examples.</div>
+        <div class="tile"><b>Practice</b>A decision game and a case study let you test your judgement before you are marked.</div>
+        <div class="tile"><b>Check</b>A ten-question quiz with unlimited attempts, plus a written assignment with a rubric out of 20.</div>
+        <div class="tile"><b>Review</b>Flashcards for the key terms and a print-friendly study sheet for exam review.</div>
+      </div>
+    </div>
+
+    <footer class="site">
+      <b>Independent study resource. This website is not an official Nunavut Arctic College course website.</b><br>
+      It is not affiliated with, endorsed by, or produced for any college, government department or employer. Nothing here describes any college's policies, admission requirements, grading or curriculum. Always follow the instructions of your own instructor and the written procedures of your own workplace.
+    </footer>
+  </div>
+
+  <!-- ══════════ LESSONS ══════════ -->
+  <div class="view" id="v-lessons" role="region" aria-label="Lessons">
+    <p class="eyebrow">Business Administration</p>
+    <h1>Lessons</h1>
+    <p class="lede">The ten topics below make up this independent study series. They are organized in the order that management topics are usually taught, from the basics of business organization through to the management functions and the skills that support them.</p>
+
+    <div class="note warn">
+      <span>Please read</span>
+      <p>This outline was written for this practice website. It is not a college course outline and it does not describe any real program's required topics, order, weighting or assessment.</p>
+    </div>
+
+    <div id="lessonRows"></div>
+
+    <footer class="site">
+      <b>Independent study resource. This website is not an official Nunavut Arctic College course website.</b>
+    </footer>
+  </div>
+
+  <!-- ══════════ LESSON 5 ══════════ -->
+  <div class="view" id="v-lesson5" role="region" aria-label="Lesson 5">
+    <p class="eyebrow">Lesson 5 of 10 &middot; Business Administration</p>
+    <h1>Principles of Management: Planning, Organizing, Leading and Controlling</h1>
+    <p class="lede">Every organization &mdash; a government office, a hamlet office, a small business, a non-profit &mdash; needs someone to decide what work has to be done, who will do it, how people will be guided, and whether the work was done properly. That is management, and it is the same four-part job whether you supervise two people or two hundred.</p>
+
+    <div class="row noprint" style="margin:20px 0 26px">
+      <button class="btn small" data-jump="s1" type="button">1 Introduction</button>
+      <button class="btn small ghost" data-jump="s2" type="button">2 Planning</button>
+      <button class="btn small ghost" data-jump="s3" type="button">3 Organizing</button>
+      <button class="btn small ghost" data-jump="s4" type="button">4 Leading</button>
+      <button class="btn small ghost" data-jump="s5" type="button">5 Controlling</button>
+      <button class="btn small ghost" data-jump="s6" type="button">6 All four</button>
+      <button class="btn small ghost" data-jump="s7" type="button">7 Case study</button>
+    </div>
+
+    <!-- SECTION 1 -->
+    <section class="unit" id="s1">
+      <div class="unit-head"><span class="unit-no">5.1</span><h2>Introduction: what management means</h2><span class="mins">6 min</span></div>
+
+      <p><span class="term">Management</span> is the work of getting an organization's goals accomplished through other people and with the resources the organization has. Those resources are usually people, money, time, equipment, supplies and information. A manager does not do all the work personally. A manager makes sure the right work gets done, by the right people, at the right time, at an acceptable cost and to an acceptable standard.</p>
+
+      <p>The word sounds formal, but the job is practical. Consider a very ordinary situation.</p>
+
+      <div class="scenario">
+        <span>Workplace example</span>
+        <p>A supervisor in an Iqaluit organization is responsible for five employees. The supervisor must determine what work needs to be completed, assign responsibilities, communicate expectations, solve problems, and check whether the work was completed correctly.</p>
+      </div>
+
+      <p>Notice that the supervisor's day contains four different kinds of thinking, and they always appear in that order:</p>
+
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>The supervisor is&hellip;</th><th>Management function</th><th>The question being answered</th></tr></thead>
+          <tbody>
+            <tr><th>Deciding what work needs to be completed</th><td>Planning</td><td>What are we trying to achieve, and by when?</td></tr>
+            <tr><th>Assigning responsibilities</th><td>Organizing</td><td>Who does what, with which resources?</td></tr>
+            <tr><th>Communicating expectations and solving problems</th><td>Leading</td><td>How do I guide and support the people doing the work?</td></tr>
+            <tr><th>Checking whether the work was done correctly</th><td>Controlling</td><td>Did we get the result we planned for?</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>These are the <span class="term">four functions of management</span>. They were first described in the early 1900s by Henri Fayol, a French mining executive, and they are still the standard way management is taught because they describe what managers actually do in almost any organization.</p>
+
+      <h3>Manager, supervisor, employee &mdash; what is the difference?</h3>
+      <p>The titles vary between workplaces, but the responsibilities are usually layered like this:</p>
+      <ul class="plain">
+        <li><strong>Manager or director.</strong> Responsible for a whole unit, department or organization. Sets goals, approves budgets and spending, decides on staffing, and answers to senior management, an owner or a board.</li>
+        <li><strong>Supervisor.</strong> Responsible for a small team and for the day-to-day work. Assigns tasks, answers questions, approves timesheets and leave, checks quality, and reports problems upward. Most people's first management job is a supervisor's job.</li>
+        <li><strong>Employee.</strong> Responsible for completing assigned work correctly, on time, and according to the organization's procedures, and for telling the supervisor when something cannot be done.</li>
+      </ul>
+
+      <h3>The responsibilities a supervisor carries</h3>
+      <div class="tiles">
+        <div class="tile"><b>Work</b>Deciding priorities, assigning tasks, setting deadlines and making sure the workload is realistic.</div>
+        <div class="tile"><b>People</b>Training, answering questions, giving feedback, handling conflict, approving leave and scheduling coverage.</div>
+        <div class="tile"><b>Money</b>Staying inside the approved budget, reviewing purchase orders and invoices, and explaining differences.</div>
+        <div class="tile"><b>Information</b>Keeping records, reporting to senior management, and passing information down to staff accurately.</div>
+        <div class="tile"><b>Standards</b>Applying the organization's policies and procedures consistently to everyone, including yourself.</div>
+        <div class="tile"><b>Accountability</b>Answering for the unit's results &mdash; the good ones and the poor ones &mdash; and correcting what went wrong.</div>
+      </div>
+
+      <div class="note">
+        <span>Key idea</span>
+        <p>A supervisor can delegate a <strong>task</strong>. A supervisor cannot delegate <strong>accountability</strong>. If you assign the month-end invoices to an employee and they are not entered, the employee is responsible for the task, but you still have to answer for the unit's month-end.</p>
+      </div>
+
+      <div class="row noprint"><button class="btn" data-done="s1" type="button">Mark Section 1 as read</button><span class="hint" data-donehint="s1"></span></div>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section class="unit" id="s2">
+      <div class="unit-head"><span class="unit-no">5.2</span><h2>Planning</h2><span class="mins">8 min</span></div>
+
+      <p><span class="term">Planning</span> means deciding in advance what has to be achieved and how it will be achieved. It is the first function because every other function depends on it: you cannot assign work, guide people or check results until you know what the work is supposed to produce.</p>
+
+      <p>Planning is made up of seven practical activities.</p>
+
+      <div class="tiles">
+        <div class="tile"><b>1. Setting goals</b>Deciding the result you want, in words specific enough that anyone can tell whether it happened. &ldquo;Improve filing&rdquo; is not a goal. &ldquo;All 2025 client files transferred to the new retention schedule by March 31&rdquo; is.</div>
+        <div class="tile"><b>2. Identifying tasks</b>Breaking the goal into the individual jobs that produce it, including the small ones people forget &mdash; approvals, signatures, shipping time.</div>
+        <div class="tile"><b>3. Creating deadlines</b>Giving every task a date. Work backwards from the final deadline so that each step has the time it needs.</div>
+        <div class="tile"><b>4. Preparing budgets</b>Estimating what the work will cost and confirming the money is available and approved before it is committed.</div>
+        <div class="tile"><b>5. Identifying resources</b>Naming the people, hours, equipment, software, supplies and approvals the plan needs. A plan that assumes a person who is on leave is not a plan.</div>
+        <div class="tile"><b>6. Anticipating problems</b>Asking in advance what is most likely to go wrong, and how much damage it would do.</div>
+        <div class="tile"><b>7. Developing backup plans</b>Deciding now what you will do if the likely problem happens, so the decision is not made in a panic later.</div>
+      </div>
+
+      <h3>Why northern planning is less forgiving</h3>
+      <p>In many southern workplaces, a forgotten order is a two-day problem &mdash; you re-order, you pay for faster shipping, the work continues. In Nunavut, the same mistake can be a one-year problem. Sealift runs on a short seasonal schedule, air freight costs far more per kilogram and is limited by weight and space, and weather can delay both. Planning ahead is not an administrative nicety in the North; it is the difference between having what you need and doing without it.</p>
+
+      <div class="scenario">
+        <span>Nunavut example &mdash; ordering before the final sealift</span>
+        <p>A Government of Nunavut office needs to order supplies before the final sealift of the season. Before anything is ordered, the manager has to work through six questions.</p>
+      </div>
+
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>The manager must determine&hellip;</th><th>Planning activity</th><th>What it looks like in practice</th></tr></thead>
+          <tbody>
+            <tr><th>What supplies are required</th><td>Identifying tasks and resources</td><td>Counting what is on hand, estimating a year of use, and asking each team what they will run out of.</td></tr>
+            <tr><th>How much they will cost</th><td>Preparing a budget</td><td>Pricing the order, adding freight and taxes, and comparing the total with the funds remaining in the supply budget.</td></tr>
+            <tr><th>When they must be ordered</th><td>Creating deadlines</td><td>Working backwards from the shipping cut-off date, allowing time for quotes, approval and the vendor to pack the order.</td></tr>
+            <tr><th>Who will prepare the purchase order</th><td>Identifying resources</td><td>Naming the employee who will do it, confirming they have the training and system access, and telling them the deadline.</td></tr>
+            <tr><th>Whether the expenditure is within the approved budget</th><td>Budgeting and approval</td><td>Checking the budget line before committing, and obtaining the spending approval the organization's policy requires.</td></tr>
+            <tr><th>What could happen if the shipment misses the sealift</th><td>Anticipating problems and backup plans</td><td>Air freight for essentials only, a reduced order, borrowing from another office, or changing how the supplies are used for the year.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <span>Common mistake</span>
+        <p>Treating the order date as the deadline. The real deadline is the vendor's shipping cut-off, and the office deadline has to be earlier than that &mdash; early enough to cover quotes, approval signatures and the time the vendor needs to assemble and deliver the order to the shipper.</p>
+      </div>
+
+      <h3 id="think1">Think like a manager</h3>
+      <div class="card flat" style="max-width:var(--measure)">
+        <p style="font-size:17.5px"><strong>The question.</strong> You are the manager of that office. The supply order is due to the vendor in three weeks, and the employee who normally prepares purchase orders has just been approved for four weeks of leave starting Monday. What do you do first, and which planning activity are you using?</p>
+        <label class="fld noprint"><span>Write your answer (this is saved on this device only):</span>
+          <textarea id="think1Box" placeholder="Two or three sentences is enough."></textarea>
+        </label>
+        <div class="row noprint">
+          <button class="btn" id="think1Btn" type="button">Show a model answer</button>
+          <span class="hint" id="think1Hint"></span>
+        </div>
+        <div id="think1Out"></div>
+      </div>
+
+      <div class="row noprint" style="margin-top:20px"><button class="btn" data-done="s2" type="button">Mark Section 2 as read</button><span class="hint" data-donehint="s2"></span></div>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section class="unit" id="s3">
+      <div class="unit-head"><span class="unit-no">5.3</span><h2>Organizing</h2><span class="mins">8 min</span></div>
+
+      <p><span class="term">Organizing</span> means arranging people, work and resources so the plan can actually be carried out. Planning decides <em>what</em>; organizing decides <em>who, with what, and in what order</em>.</p>
+
+      <ul class="plain">
+        <li><strong>Assigning work.</strong> Matching each task to the employee whose job, training and system access fit it &mdash; and saying clearly who owns it. Work that is assigned to &ldquo;the team&rdquo; is often done by nobody.</li>
+        <li><strong>Delegating responsibilities.</strong> Giving an employee a task <em>and the authority to complete it</em> &mdash; the approvals, the access, the ability to make the small decisions the task requires. Delegating a job without the authority to do it sets the employee up to fail.</li>
+        <li><strong>Organizing employees.</strong> Deciding who works on what, who covers the front counter, who backs up whom, and who answers to whom while you are away.</li>
+        <li><strong>Managing resources.</strong> Making sure the money, equipment, software licences, supplies and workspace the tasks need are available when they are needed.</li>
+        <li><strong>Establishing procedures.</strong> Writing down the routine steps &mdash; how an invoice is processed, how a complaint is logged &mdash; so the work is done the same way by anyone.</li>
+        <li><strong>Managing schedules.</strong> Building work schedules and leave coverage so that essential services stay covered, including during holidays, training and sick days.</li>
+        <li><strong>Maintaining records.</strong> Keeping files, approvals, timesheets and correspondence complete, accurate, findable and stored for as long as the organization's retention rules require.</li>
+      </ul>
+
+      <div class="note">
+        <span>Key idea &mdash; delegation</span>
+        <p>Delegation has three parts: the <strong>task</strong> (what must be done), the <strong>authority</strong> (the permission and access to do it), and the <strong>accountability</strong> (which stays with the supervisor). A supervisor who keeps every task also becomes the bottleneck for the whole unit &mdash; and the unit stops the moment that supervisor is away.</p>
+      </div>
+
+      <h3>Activity: assign the work</h3>
+      <p>You supervise a small administrative unit in a Nunavut organization. Five tasks came in this morning. Choose the employee you would assign to each one. You will get feedback on every choice &mdash; including the choices that are defensible but not the best fit.</p>
+
+      <div class="card flat" style="max-width:none">
+        <p class="cap" style="margin-top:0">Your team</p>
+        <div class="tiles" id="teamTiles"></div>
+        <p class="cap">The five tasks</p>
+        <div id="assignList"></div>
+        <div class="row noprint" style="margin-top:12px">
+          <span class="hint" id="assignHint">0 of 5 tasks assigned.</span>
+        </div>
+      </div>
+
+      <div class="row noprint" style="margin-top:20px"><button class="btn" data-done="s3" type="button">Mark Section 3 as read</button><span class="hint" data-donehint="s3"></span></div>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section class="unit" id="s4">
+      <div class="unit-head"><span class="unit-no">5.4</span><h2>Leading</h2><span class="mins">7 min</span></div>
+
+      <p><span class="term">Leading</span> means working with and through people so that the plan gets carried out well. Planning and organizing deal with work; leading deals with the people doing the work. It is the function that separates a supervisor who is merely organized from one people will actually work for.</p>
+
+      <ul class="plain">
+        <li><strong>Giving clear instructions.</strong> Saying what the result should look like, when it is due, and what &ldquo;done properly&rdquo; means. A useful test: ask the employee to tell you back what they are going to do.</li>
+        <li><strong>Communicating with employees.</strong> Passing on decisions, changes and reasons, and listening to what staff tell you about the work. Most workplace problems that reach a manager began as information that did not travel.</li>
+        <li><strong>Motivating employees.</strong> Recognizing good work specifically and publicly, explaining why a task matters, giving people work that builds their skills, and being consistent about fairness.</li>
+        <li><strong>Handling disagreements.</strong> Dealing with conflict early, privately and factually, before it becomes a formal complaint or a silent stand-off that slows the whole office.</li>
+        <li><strong>Giving feedback.</strong> Telling people how they are doing while it can still make a difference. Feedback works when it is specific, timely, about the work rather than the person, and followed by a clear expectation.</li>
+        <li><strong>Supporting teamwork.</strong> Making sure people help each other, share information, and understand how their work connects to everyone else's.</li>
+        <li><strong>Making decisions.</strong> Deciding &mdash; and saying so &mdash; when the staff cannot resolve something themselves. An unmade decision is itself a decision, usually a bad one.</li>
+      </ul>
+
+      <h3>Scenario: a disputed report</h3>
+      <div class="scenario">
+        <span>Scenario</span>
+        <p>Two employees disagree about who is responsible for completing an important report that is due tomorrow. Each says the other was assigned it. Both are frustrated, the disagreement is now audible in the office, and the report has not been started.</p>
+        <p><strong>What should the supervisor do first?</strong></p>
+      </div>
+      <div class="card flat" id="leadQ" style="max-width:var(--measure)"></div>
+
+      <div class="row noprint" style="margin-top:20px"><button class="btn" data-done="s4" type="button">Mark Section 4 as read</button><span class="hint" data-donehint="s4"></span></div>
+    </section>
+
+    <!-- SECTION 5 -->
+    <section class="unit" id="s5">
+      <div class="unit-head"><span class="unit-no">5.5</span><h2>Controlling</h2><span class="mins">8 min</span></div>
+
+      <p><span class="term">Controlling</span> means checking whether the actual results match the plan, and correcting the difference when they do not. It is not about controlling people. It is about comparing what happened with what was supposed to happen.</p>
+
+      <p>Controlling always follows the same three steps: <strong>measure</strong> what actually happened, <strong>compare</strong> it with the standard or the plan, and <strong>act</strong> on the difference &mdash; either correct the work, or change the plan because the plan was wrong.</p>
+
+      <ul class="plain">
+        <li><strong>Reviewing completed work.</strong> Looking at the finished product before it goes out, not after a client, resident or senior manager finds the error.</li>
+        <li><strong>Comparing results with goals.</strong> Asking whether what was produced is what the plan asked for &mdash; in quantity, quality and timing.</li>
+        <li><strong>Checking budgets.</strong> Comparing actual spending with the approved budget regularly, so that a problem appears as a small difference in month three rather than a deficit in month twelve.</li>
+        <li><strong>Reviewing deadlines.</strong> Checking progress <em>before</em> a due date, while there is still time to add help or renegotiate the date.</li>
+        <li><strong>Correcting errors.</strong> Fixing the specific mistake, then asking why it happened, so the cause is corrected rather than only the symptom.</li>
+        <li><strong>Monitoring performance.</strong> Following how individuals and the unit are doing over time, with notes kept as they happen rather than reconstructed at review time.</li>
+        <li><strong>Following policies and procedures.</strong> Applying the organization's rules consistently &mdash; including the ones about approvals, conflict of interest and record keeping.</li>
+      </ul>
+
+      <h3>Finance example: the invoice that does not match</h3>
+      <div class="scenario">
+        <span>Finance scenario</span>
+        <p>A department approved a purchase requisition for <strong>$1,105.00 before tax</strong>. The goods arrived and the invoice has now reached your desk. The invoice subtotal is <strong>$1,305.00 before tax</strong> &mdash; $200.00 more than the approved amount. Everything else on the invoice looks normal: correct vendor, correct department, correct address.</p>
+        <p><strong>Should the invoice be paid immediately?</strong></p>
+      </div>
+      <div class="card flat" id="ctrlQ" style="max-width:var(--measure)"></div>
+
+      <div class="note" style="margin-top:22px">
+        <span>Why this matters</span>
+        <p>A $200 difference is small enough to be tempting to ignore and large enough to matter. It is also a control point: the requisition is the approved amount, the invoice is the claimed amount, and the receiving record is the proof of what actually arrived. When all three agree, payment is routine. When they do not, the difference has to be explained <em>before</em> payment, because after payment the money is gone and the leverage with the vendor is gone with it.</p>
+      </div>
+
+      <div class="row noprint" style="margin-top:20px"><button class="btn" data-done="s5" type="button">Mark Section 5 as read</button><span class="hint" data-donehint="s5"></span></div>
+    </section>
+
+    <!-- SECTION 6 -->
+    <section class="unit" id="s6">
+      <div class="unit-head"><span class="unit-no">5.6</span><h2>The four functions working together</h2><span class="mins">5 min</span></div>
+
+      <p>The four functions are usually drawn as a list, but they work as a cycle. What you learn while controlling changes the next plan. A manager who never closes that loop keeps making the same mistake every year.</p>
+      <p class="hint noprint">Select each stage to see what it means and an example from the sealift supply order.</p>
+
+      <div class="cycle" id="cycle"></div>
+      <div id="cycleOut"></div>
+
+      <div class="note" style="margin-top:20px">
+        <span>Key idea</span>
+        <p>The functions overlap in real time. On any given morning a supervisor is planning next month, organizing today, leading a conversation and controlling last week's numbers &mdash; often within the same hour. The cycle describes the logic of the work, not a timetable.</p>
+      </div>
+
+      <div class="row noprint" style="margin-top:20px"><button class="btn" data-done="s6" type="button">Mark Section 6 as read</button><span class="hint" data-donehint="s6"></span></div>
+    </section>
+
+    <!-- SECTION 7 -->
+    <section class="unit" id="s7">
+      <div class="unit-head"><span class="unit-no">5.7</span><h2>Nunavut workplace case study</h2><span class="mins">15 min</span></div>
+
+      <div class="scenario">
+        <span>Case study</span>
+        <p><strong>You are an administrative supervisor for a small organization in Iqaluit.</strong> It is Monday morning, 8:30 a.m. You have four employees. You open your email and find all of the following waiting for you at once:</p>
+      </div>
+
+      <ul class="plain">
+        <li>Three invoices need approval before month-end, which is Wednesday.</li>
+        <li>An employee has called in sick and will be out today.</li>
+        <li>A resident has complained about a missed service and is expecting a response.</li>
+        <li>Office supplies must be ordered.</li>
+        <li>A report for senior management is due tomorrow.</li>
+        <li>Two employees are asking for your help with competing priorities &mdash; each has been told their work comes first.</li>
+      </ul>
+
+      <h3>Part A &mdash; Put the six items in priority order</h3>
+      <p>Use the arrows to move each item. Position 1 is what you deal with first. There is more than one defensible order, but some orders are clearly stronger than others.</p>
+      <ol class="plist" id="priorityList"></ol>
+
+      <h3>Part B &mdash; Apply the four functions</h3>
+      <label class="fld"><span>1. What would you plan?</span><textarea id="cs1" placeholder="What are the deadlines, what has to happen today, and what could go wrong?"></textarea></label>
+      <label class="fld"><span>2. What would you organize?</span><textarea id="cs2" placeholder="Who does what today, with one person absent? What gets reassigned, and what gets moved?"></textarea></label>
+      <label class="fld"><span>3. How would you lead your employees?</span><textarea id="cs3" placeholder="What will you say, to whom, and when? How do you settle the competing priorities?"></textarea></label>
+      <label class="fld"><span>4. What would you monitor or control?</span><textarea id="cs4" placeholder="What will you check, when will you check it, and what evidence will you keep?"></textarea></label>
+
+      <div class="row noprint">
+        <button class="btn" id="csSubmit" type="button">Submit and see the feedback</button>
+        <button class="btn ghost small" id="csClear" type="button">Clear my answers</button>
+        <span class="hint" id="csHint"></span>
+      </div>
+      <div id="csOut"></div>
+
+      <div class="row noprint" style="margin-top:26px">
+        <button class="btn" data-go="practice" type="button">Next: Practice &mdash; Management Decision Game</button>
+      </div>
+    </section>
+
+    <footer class="site">
+      <b>Independent study resource. This website is not an official Nunavut Arctic College course website.</b><br>
+      Workplace scenarios are written for teaching purposes. They do not describe any real office, employee, resident or organization, and they do not state the policies of any employer or government department.
+    </footer>
+  </div>
+
+  <!-- ══════════ PRACTICE ══════════ -->
+  <div class="view" id="v-practice" role="region" aria-label="Practice">
+    <p class="eyebrow">Lesson 5 &middot; Section 8</p>
+    <h1>Management Decision Game</h1>
+    <p class="lede">Five short workplace situations, three possible decisions each. None of them is a trick, but none is obvious either &mdash; in several of them more than one answer is reasonable and you are choosing the <em>better</em> one. After you choose you will see why the decision is strong or weak, which management function it belongs to, and what a manager should weigh before deciding.</p>
+
+    <div class="card">
+      <div class="dots" id="gameDots" aria-hidden="true"></div>
+      <div id="gameBody"></div>
+    </div>
+
+    <div class="card" id="gameSummary" style="display:none"></div>
+
+    <footer class="site">
+      <b>Independent study resource. This website is not an official Nunavut Arctic College course website.</b>
+    </footer>
+  </div>
+
+  <!-- ══════════ QUIZ ══════════ -->
+  <div class="view" id="v-quiz" role="region" aria-label="Quiz">
+    <p class="eyebrow">Lesson 5 &middot; Section 9</p>
+    <h1>Practice Quiz</h1>
+    <p class="lede">Ten questions: five multiple choice, two true or false, two scenario questions and one short-answer question. The questions and the answer choices are shuffled every attempt, and you may take the quiz as many times as you like. Your attempts are kept in your quiz history on this device.</p>
+
+    <div class="card">
+      <div class="dots" id="quizDots" aria-hidden="true"></div>
+      <div id="quizBody"></div>
+    </div>
+
+    <div class="card" id="quizHistoryCard">
+      <h2>Quiz history</h2>
+      <div id="quizHistory"></div>
+    </div>
+
+    <footer class="site">
+      <b>Independent study resource. This website is not an official Nunavut Arctic College course website.</b><br>
+      Scores on this practice quiz are for your own study only. They are not a grade and they are not reported to anyone.
+    </footer>
+  </div>
+
+  <!-- ══════════ ASSIGNMENT ══════════ -->
+  <div class="view" id="v-assignment" role="region" aria-label="Assignment">
+    <p class="eyebrow">Lesson 5 &middot; Section 10</p>
+    <h1>Written Assignment</h1>
+    <p class="lede">A short written assignment in the style of a college management course. Write it here, check it against the rubric, then print it or copy it into whatever format your own instructor asks for.</p>
+
+    <div class="card">
+      <h2>The assignment</h2>
+      <div class="scenario" style="max-width:none">
+        <span>Scenario</span>
+        <p><strong>You are the supervisor of an administrative office with four employees.</strong> Your department has several assignments that must be completed this week: month-end financial paperwork, a supply order, a report for senior management, and the regular front-counter service that residents depend on every day. One employee is new and still learning the procedures. Another has more work assigned than the week will hold.</p>
+      </div>
+      <p><strong>Your task.</strong> In approximately <strong>300 to 500 words</strong>, explain how you would use each of the four management functions to get the week's work done. Deal with all four, and use the scenario &mdash; a general description of the functions without the office in it will not earn full marks.</p>
+      <ol class="steps">
+        <li><strong>Planning</strong> &mdash; what has to be achieved this week, in what order, by when, and what could go wrong.</li>
+        <li><strong>Organizing</strong> &mdash; who does what, what you delegate, and how you handle the new employee and the overloaded one.</li>
+        <li><strong>Leading</strong> &mdash; what you communicate, how you motivate and support the team, and how you handle any disagreement.</li>
+        <li><strong>Controlling</strong> &mdash; what you check during the week, how you know the work met the standard, and what you do if it did not.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>Marking rubric &mdash; 20 marks</h2>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Criterion</th><th style="width:70px">Marks</th><th>What full marks look like</th></tr></thead>
+          <tbody>
+            <tr><th>Understanding of management functions</th><td>8</td><td>All four functions are named and explained correctly, in your own words, with the right activities under each one. Delegation and accountability are used accurately.</td></tr>
+            <tr><th>Application to the scenario</th><td>6</td><td>Every function is applied to this specific office &mdash; the four employees, the month-end paperwork, the supply order, the report, the counter, the new employee, the overload.</td></tr>
+            <tr><th>Reasoning and problem solving</th><td>4</td><td>Priorities are justified, trade-offs are acknowledged, and the decisions about the new and overloaded employees are defended with reasons.</td></tr>
+            <tr><th>Writing and organization</th><td>2</td><td>Clear structure, complete sentences, correct business terminology, within the word range.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint">Total: 20 marks. This rubric was written for this practice website; it is not any college's marking scheme.</p>
+    </div>
+
+    <div class="card">
+      <h2>Write your answer</h2>
+      <div class="printonly" id="assignPrintOut"></div>
+      <label class="fld printhide" style="max-width:none"><span>Your assignment</span>
+        <textarea id="assignBox" style="min-height:340px" placeholder="Begin here. Your draft saves automatically in this browser as you type."></textarea>
+      </label>
+      <div class="wordcount printhide" id="assignCount">0 words</div>
+      <div class="row noprint" style="margin-top:14px">
+        <button class="btn" id="assignSave" type="button">Save draft</button>
+        <button class="btn ghost small" id="assignPrint" type="button">Print / save as PDF</button>
+        <button class="btn ghost small" id="assignCopy" type="button">Copy to clipboard</button>
+        <span class="hint" id="workHint"></span>
+      </div>
+
+      <h3 class="noprint">Self-check before you submit</h3>
+      <p class="hint noprint" style="margin-bottom:10px">Tick each item you are confident about. This is a study aid, not a mark.</p>
+      <ul class="checklist noprint" id="selfCheck"></ul>
+    </div>
+
+    <footer class="site">
+      <b>Independent study resource. This website is not an official Nunavut Arctic College course website.</b><br>
+      Submit work to your own instructor in the format they require. Nothing written here is submitted anywhere.
+    </footer>
+  </div>
+
+  <!-- ══════════ FLASHCARDS ══════════ -->
+  <div class="view" id="v-flashcards" role="region" aria-label="Flashcards">
+    <p class="eyebrow">Lesson 5 &middot; Section 11</p>
+    <h1>Flashcards</h1>
+    <p class="lede">Fifteen key terms from Lesson 5. Click or tap a card to turn it over. Mark a card as known once you can give the definition before you flip it.</p>
+
+    <div class="row noprint" style="margin-bottom:18px">
+      <button class="btn small" id="cardShuffle" type="button">Shuffle</button>
+      <button class="btn ghost small" id="cardFlipAll" type="button">Show all definitions</button>
+      <button class="btn ghost small" id="cardReset" type="button">Clear &ldquo;known&rdquo; marks</button>
+      <span class="hint" id="cardHint"></span>
+    </div>
+
+    <div class="deck" id="deck"></div>
+
+    <footer class="site">
+      <b>Independent study resource. This website is not an official Nunavut Arctic College course website.</b>
+    </footer>
+  </div>
+
+  <!-- ══════════ STUDY NOTES ══════════ -->
+  <div class="view" id="v-notes" role="region" aria-label="Study notes">
+    <p class="eyebrow noprint">Lesson 5 &middot; Section 12</p>
+    <h1 class="noprint">Study Notes</h1>
+    <p class="lede noprint">A one-page summary of Lesson 5, formatted for printing. Use the button below to print it or save it as a PDF.</p>
+    <div class="row noprint" style="margin-bottom:20px">
+      <button class="btn" id="notesPrint" type="button">Print this study sheet</button>
+      <span class="hint">Printing hides the navigation and buttons automatically.</span>
+    </div>
+
+    <div class="sheet">
+      <p class="eyebrow" style="margin-bottom:6px">Business Administration &middot; Lesson 5</p>
+      <h2 style="font-size:25px;margin-bottom:6px">Principles of Management &mdash; Study Sheet</h2>
+      <p class="hint" style="margin-bottom:22px">Planning &middot; Organizing &middot; Leading &middot; Controlling</p>
+
+      <h3>1. Key definitions</h3>
+      <dl class="defs">
+        <div><dt>Management</dt><dd>Getting an organization's goals accomplished through people and resources.</dd></div>
+        <div><dt>Planning</dt><dd>Deciding in advance what must be achieved and how: goals, tasks, deadlines, budgets, resources, risks, backup plans.</dd></div>
+        <div><dt>Organizing</dt><dd>Arranging people, work and resources so the plan can be carried out: assigning, delegating, scheduling, procedures, records.</dd></div>
+        <div><dt>Leading</dt><dd>Guiding people so the work gets done well: instructions, communication, motivation, feedback, conflict, decisions.</dd></div>
+        <div><dt>Controlling</dt><dd>Measuring actual results, comparing them with the plan, and correcting the difference.</dd></div>
+        <div><dt>Delegation</dt><dd>Assigning a task and the authority to complete it. Accountability stays with the supervisor.</dd></div>
+        <div><dt>Accountability</dt><dd>Answering for results, including work you assigned to someone else.</dd></div>
+        <div><dt>Policy</dt><dd>A rule that states what the organization requires or permits.</dd></div>
+        <div><dt>Procedure</dt><dd>The step-by-step method for carrying a policy out.</dd></div>
+        <div><dt>Budget</dt><dd>A plan for money: what may be spent, on what, over what period.</dd></div>
+      </dl>
+
+      <h3>2. The four functions at a glance</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Function</th><th>Question it answers</th><th>Typical activities</th></tr></thead>
+          <tbody>
+            <tr><th>Planning</th><td>What are we trying to achieve, and by when?</td><td>Goals, task lists, deadlines, budgets, resources, risks, backup plans</td></tr>
+            <tr><th>Organizing</th><td>Who does what, with what?</td><td>Assigning, delegating, schedules, coverage, procedures, records</td></tr>
+            <tr><th>Leading</th><td>How do I guide the people doing the work?</td><td>Instructions, communication, motivation, feedback, conflict, decisions</td></tr>
+            <tr><th>Controlling</th><td>Did we get the result we planned for?</td><td>Reviews, budget checks, deadline checks, corrections, monitoring</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>3. Workplace examples</h3>
+      <ul class="plain">
+        <li><strong>Planning &mdash; sealift supply order.</strong> Determine what supplies are required, what they cost, when they must be ordered, who prepares the purchase order, whether the cost is within budget, and what happens if the shipment misses the sealift.</li>
+        <li><strong>Organizing &mdash; an absence.</strong> One employee is sick; front-counter coverage and the month-end invoices are both due. Reassign the counter, move the lowest-deadline task, tell everyone what changed.</li>
+        <li><strong>Leading &mdash; a disputed task.</strong> Two employees each believe the other owns tomorrow's report. Speak to them together, establish the facts, assign the work clearly in writing, address the assignment breakdown afterwards.</li>
+        <li><strong>Controlling &mdash; an invoice difference.</strong> Requisition approved at $1,105 before tax; invoice subtotal arrives at $1,305. Hold payment, investigate the $200 difference against the purchase order and receiving record, then approve, amend or return the invoice.</li>
+      </ul>
+
+      <h3>4. Important points to remember</h3>
+      <ul class="plain">
+        <li>The functions run in a cycle: plan &rarr; organize &rarr; lead &rarr; control &rarr; improve the plan.</li>
+        <li>You can delegate a task. You cannot delegate accountability.</li>
+        <li>Delegation without authority is not delegation; it is a trap.</li>
+        <li>A goal that cannot be measured cannot be controlled.</li>
+        <li>Controlling means comparing results with the plan &mdash; not controlling people.</li>
+        <li>Check progress <em>before</em> the deadline, while there is still time to act.</li>
+        <li>Northern logistics shorten the margin for error: sealift cut-offs and air freight costs make late planning expensive.</li>
+        <li>Document decisions, approvals and conversations as they happen.</li>
+      </ul>
+
+      <h3>5. Common mistakes</h3>
+      <ul class="plain">
+        <li>Assigning work to &ldquo;the team&rdquo; instead of to a named person with a date.</li>
+        <li>Treating the internal order date, rather than the shipping cut-off, as the real deadline.</li>
+        <li>Approving an invoice that does not match the approved requisition because the difference looks small.</li>
+        <li>Taking sides in a staff disagreement before establishing the facts.</li>
+        <li>Giving feedback only at performance review time, when it is too late to change the result.</li>
+        <li>Doing the work yourself because it is faster than explaining it &mdash; which guarantees it will be faster next time too.</li>
+        <li>Confusing being busy with managing. Answering email all day is not planning, organizing, leading or controlling.</li>
+      </ul>
+
+      <h3>6. Exam review questions</h3>
+      <ol class="steps">
+        <li>Define management in one sentence and name the four functions in order.</li>
+        <li>List five activities that belong to planning.</li>
+        <li>Explain the difference between a policy and a procedure, with an example of each.</li>
+        <li>What three things must a supervisor hand over for delegation to work?</li>
+        <li>Why does accountability stay with the supervisor after a task is delegated?</li>
+        <li>Describe the three steps of the controlling process.</li>
+        <li>An invoice subtotal is $200 higher than the approved requisition. State what you would do and why.</li>
+        <li>Two employees disagree about who owns a task due tomorrow. What do you do first, and which function is it?</li>
+        <li>Give one Nunavut workplace example for each of the four functions.</li>
+        <li>Explain why communication, organization and accountability matter for a supervisor. Use an example.</li>
+      </ol>
+
+      <p class="hint" style="margin-top:26px;border-top:1px solid var(--line);padding-top:12px">Independent study resource. This website is not an official Nunavut Arctic College course website.</p>
+    </div>
+
+    <footer class="site noprint">
+      <b>Independent study resource. This website is not an official Nunavut Arctic College course website.</b>
+    </footer>
+  </div>
+
+  <!-- ══════════ PROGRESS ══════════ -->
+  <div class="view" id="v-progress" role="region" aria-label="My progress">
+    <p class="eyebrow">Business Administration</p>
+    <h1>My Progress</h1>
+    <p class="lede">Everything below is stored in this browser on this device. Nothing is sent anywhere, and clearing your browser data will clear it.</p>
+
+    <div class="card">
+      <h2>Lesson 5 completion</h2>
+      <div class="bigbar" style="margin:14px 0 8px"><i id="progFill"></i></div>
+      <div class="pctline"><b id="progPct">0%</b><span id="progCount">0 of 12 steps</span></div>
+      <ul class="checklist" id="progList" style="margin-top:18px"></ul>
+    </div>
+
+    <div class="card">
+      <h2>Quiz history</h2>
+      <div id="progQuiz"></div>
+    </div>
+
+    <div class="card">
+      <h2>Activity record</h2>
+      <div id="progActivity"></div>
+    </div>
+
+    <div class="card noprint">
+      <h2>Manage saved data</h2>
+      <p>Resetting clears your section progress, activity answers, quiz history and assignment draft on this device. It cannot be undone.</p>
+      <button class="btn ghost" id="resetBtn2" type="button">Reset all my progress</button>
+    </div>
+
+    <footer class="site">
+      <b>Independent study resource. This website is not an official Nunavut Arctic College course website.</b>
+    </footer>
+  </div>
+
+  </main>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ════════ helpers ════════ */
+function $(id){ return document.getElementById(id); }
+function esc(s){
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+function words(s){ var t = String(s || "").trim(); return t ? t.split(/\s+/).length : 0; }
+function shuffle(a){
+  for (var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var x = a[i]; a[i] = a[j]; a[j] = x; }
+  return a;
+}
+var KEYS = ["A","B","C","D","E"];
+
+/* ════════ saved state ════════ */
+var STORE = "ba-lesson5-v1";
+var S = {
+  theme:"auto", steps:{}, think1:"", think1Shown:false,
+  assign:{}, lead:null, ctrl:null, cycle:{},
+  cs:{ order:null, a1:"", a2:"", a3:"", a4:"", submitted:false },
+  game:{}, quiz:{ history:[] },
+  work:"", checks:{}, cards:{ seen:{}, known:{} },
+  lastView:"dashboard"
+};
+function load(){
+  try {
+    var raw = localStorage.getItem(STORE);
+    if (!raw) return;
+    var d = JSON.parse(raw);
+    if (d && typeof d === "object"){
+      for (var k in S) if (Object.prototype.hasOwnProperty.call(d, k) && d[k] !== null && d[k] !== undefined){
+        if (typeof S[k] === "object" && !Array.isArray(S[k]) && typeof d[k] === "object" && !Array.isArray(d[k])){
+          for (var j in d[k]) S[k][j] = d[k][j];
+        } else S[k] = d[k];
+      }
+    }
+  } catch(e){}
+}
+var saveTimer = null, wiped = false;
+function writeNow(){
+  if (saveTimer){ clearTimeout(saveTimer); saveTimer = null; }
+  if (wiped) return;
+  try { localStorage.setItem(STORE, JSON.stringify(S)); }
+  catch(e){ var n = $("saveNote"); if (n) n.textContent = "This browser is not saving progress (private mode or storage is full)."; }
+}
+function save(){
+  if (saveTimer) clearTimeout(saveTimer);
+  saveTimer = setTimeout(writeNow, 160);
+}
+window.addEventListener("pagehide", writeNow);
+window.addEventListener("beforeunload", writeNow);
+document.addEventListener("visibilitychange", function(){ if (document.visibilityState === "hidden") writeNow(); });
+load();
+
+/* ════════ theme ════════ */
+var root = document.documentElement, themeBtn = $("themeBtn");
+function applyTheme(){
+  var t = S.theme;
+  if (t === "auto"){ root.removeAttribute("data-theme"); }
+  else root.setAttribute("data-theme", t);
+  var dark = t === "dark" || (t === "auto" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  themeBtn.textContent = dark ? "Light mode" : "Dark mode";
+  themeBtn.setAttribute("aria-pressed", dark ? "true" : "false");
+}
+themeBtn.addEventListener("click", function(){
+  var dark = root.getAttribute("data-theme") === "dark" ||
+    (!root.getAttribute("data-theme") && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  S.theme = dark ? "light" : "dark";
+  applyTheme(); writeNow();
+});
+if (window.matchMedia){
+  var mq = window.matchMedia("(prefers-color-scheme: dark)");
+  if (mq.addEventListener) mq.addEventListener("change", function(){ if (S.theme === "auto") applyTheme(); });
+}
+applyTheme();
+
+/* ════════ progress steps ════════ */
+var STEPS = [
+  { id:"s1",       label:"Read Section 1 — Introduction",                  go:"lesson5",     jump:"s1" },
+  { id:"s2",       label:"Read Section 2 — Planning",                      go:"lesson5",     jump:"s2" },
+  { id:"think1",   label:"Answer the Think Like a Manager question",       go:"lesson5",     jump:"think1" },
+  { id:"s3",       label:"Read Section 3 — Organizing",                    go:"lesson5",     jump:"s3" },
+  { id:"assign",   label:"Complete the assign-the-work activity",          go:"lesson5",     jump:"s3" },
+  { id:"s4",       label:"Read Section 4 — Leading",                       go:"lesson5",     jump:"s4" },
+  { id:"lead",     label:"Answer the leading scenario",                    go:"lesson5",     jump:"s4" },
+  { id:"s5",       label:"Read Section 5 — Controlling",                   go:"lesson5",     jump:"s5" },
+  { id:"ctrl",     label:"Answer the invoice question",                    go:"lesson5",     jump:"s5" },
+  { id:"s6",       label:"Explore all five stages of the cycle",           go:"lesson5",     jump:"s6" },
+  { id:"cs",       label:"Complete the Nunavut case study",                go:"lesson5",     jump:"s7" },
+  { id:"game",     label:"Finish the management decision game",            go:"practice",    jump:null },
+  { id:"quiz",     label:"Complete the practice quiz at least once",       go:"quiz",        jump:null },
+  { id:"work",     label:"Save an assignment draft of 300 words or more",  go:"assignment",  jump:null },
+  { id:"cards",    label:"Review all fifteen flashcards",                  go:"flashcards",  jump:null },
+  { id:"notes",    label:"Open the printable study sheet",                 go:"notes",       jump:null }
+];
+function done(id){
+  if (S.steps[id]) return;
+  S.steps[id] = true; save(); refreshProgress();
+}
+function stepCount(){
+  var n = 0;
+  for (var i = 0; i < STEPS.length; i++) if (S.steps[STEPS[i].id]) n++;
+  return n;
+}
+function refreshProgress(){
+  var n = stepCount(), total = STEPS.length, pct = Math.round(n / total * 100);
+  ["topFill","sideFill","heroFill","progFill"].forEach(function(id){ var el = $(id); if (el) el.style.width = pct + "%"; });
+  $("sidePct").textContent = pct + "%";
+  $("sideCount").textContent = n + " of " + total + " steps";
+  $("statPct").innerHTML = pct + "<small>%</small>";
+  $("statSteps").innerHTML = n + "<small> / " + total + "</small>";
+  $("progPct").textContent = pct + "%";
+  $("progCount").textContent = n + " of " + total + " steps";
+
+  var best = null, attempts = S.quiz.history.length;
+  for (var i = 0; i < attempts; i++) if (best === null || S.quiz.history[i].score > best) best = S.quiz.history[i].score;
+  $("statQuiz").innerHTML = best === null ? "&mdash;" : best + "<small> / 10</small>";
+  $("statAttempts").textContent = attempts;
+
+  var html = "";
+  STEPS.forEach(function(st){
+    html += '<li class="' + (S.steps[st.id] ? "done" : "") + '">' +
+            '<span class="box" aria-hidden="true">' + (S.steps[st.id] ? "✓" : "") + "</span>" +
+            "<span>" + esc(st.label) + "</span>" +
+            '<button class="btn ghost small go noprint" type="button" data-step="' + st.id + '">' +
+            (S.steps[st.id] ? "Revisit" : "Open") + "</button></li>";
+  });
+  ["stepList","progList"].forEach(function(id){ var el = $(id); if (el) el.innerHTML = html; });
+
+  document.querySelectorAll("[data-donehint]").forEach(function(el){
+    el.textContent = S.steps[el.getAttribute("data-donehint")] ? "✓ Marked as read" : "";
+  });
+  document.querySelectorAll("[data-done]").forEach(function(b){
+    var d = S.steps[b.getAttribute("data-done")];
+    b.textContent = d ? "Section read ✓" : b.getAttribute("data-label") || b.textContent;
+    b.classList.toggle("ghost", !!d);
+  });
+
+  var nx = STEPS.filter(function(st){ return !S.steps[st.id]; })[0];
+  $("continueHint").textContent = nx ? "Next: " + nx.label : "Every step is finished. Well done.";
+  $("continueBtn").textContent = nx ? "Continue where I left off" : "Review the study sheet";
+}
+document.addEventListener("click", function(e){
+  var b = e.target.closest ? e.target.closest("[data-step]") : null;
+  if (!b) return;
+  var st = STEPS.filter(function(x){ return x.id === b.getAttribute("data-step"); })[0];
+  if (st) go(st.go, st.jump);
+});
+$("continueBtn").addEventListener("click", function(){
+  var nx = STEPS.filter(function(st){ return !S.steps[st.id]; })[0];
+  if (nx) go(nx.go, nx.jump); else go("notes", null);
+});
+
+/* ════════ navigation ════════ */
+var VIEWS = ["dashboard","lessons","lesson5","practice","quiz","assignment","flashcards","notes","progress"];
+function go(view, jump){
+  if (VIEWS.indexOf(view) < 0) view = "dashboard";
+  VIEWS.forEach(function(v){ $("v-" + v).classList.toggle("on", v === view); });
+  document.querySelectorAll("#navList button").forEach(function(b){
+    if (b.getAttribute("data-go") === view) b.setAttribute("aria-current", "page");
+    else b.removeAttribute("aria-current");
+  });
+  S.lastView = view; save();
+  document.body.classList.remove("navopen");
+  $("menuBtn").setAttribute("aria-expanded", "false");
+  if (location.hash.slice(1) !== view) history.replaceState(null, "", "#" + view);
+  if (view === "notes") done("notes");
+  if (jump){
+    var t = $(jump);
+    if (t){ setTimeout(function(){ t.scrollIntoView({ behavior:"smooth", block:"start" }); }, 30); return; }
+  }
+  window.scrollTo({ top:0, behavior:"auto" });
+}
+document.addEventListener("click", function(e){
+  var b = e.target.closest ? e.target.closest("[data-go]") : null;
+  if (!b) return;
+  go(b.getAttribute("data-go"), null);
+});
+document.addEventListener("click", function(e){
+  var b = e.target.closest ? e.target.closest("[data-jump]") : null;
+  if (!b) return;
+  var t = $(b.getAttribute("data-jump"));
+  if (t) t.scrollIntoView({ behavior:"smooth", block:"start" });
+});
+$("menuBtn").addEventListener("click", function(){
+  var open = document.body.classList.toggle("navopen");
+  this.setAttribute("aria-expanded", open ? "true" : "false");
+});
+$("scrim").addEventListener("click", function(){
+  document.body.classList.remove("navopen");
+  $("menuBtn").setAttribute("aria-expanded", "false");
+});
+window.addEventListener("hashchange", function(){ go(location.hash.slice(1), null); });
+
+/* ════════ section read buttons ════════ */
+document.querySelectorAll("[data-done]").forEach(function(b){
+  b.setAttribute("data-label", b.textContent);
+  b.addEventListener("click", function(){
+    var id = b.getAttribute("data-done");
+    S.steps[id] = !S.steps[id]; save(); refreshProgress();
+  });
+});
+
+/* ════════ lessons list ════════ */
+var LESSONS = [
+  { n:1,  t:"Introduction to business and organizations", d:"What organizations do, types of ownership, the role of administration." },
+  { n:2,  t:"The business environment", d:"Customers, suppliers, regulation, community and the northern operating context." },
+  { n:3,  t:"Planning and decision making", d:"Goals, objectives, plans and the steps of a decision." },
+  { n:4,  t:"Organizing and organizational structure", d:"Structure, departments, chain of command, span of control, delegation.", file:"lesson-04-organizing.html" },
+  { n:5,  t:"Principles of management", d:"Planning, organizing, leading and controlling, with Nunavut workplace practice.", now:true },
+  { n:6,  t:"Leadership and motivation", d:"Leadership styles, motivation theory, teams and workplace communication." },
+  { n:7,  t:"Human resources and supervision", d:"Hiring, training, scheduling, performance and workplace fairness." },
+  { n:8,  t:"Business finance and budgets", d:"Budgets, purchase orders, invoices, approvals and basic financial control." },
+  { n:9,  t:"Office administration and records", d:"Procedures, records management, correspondence and information handling." },
+  { n:10, t:"Business ethics and accountability", d:"Ethics, conflict of interest, transparency and accountability at work." }
+];
+(function(){
+  var h = "";
+  LESSONS.forEach(function(L){
+    var status = L.now ? '<span class="pill">You are here</span>'
+      : L.file ? '<span class="pill ok">Available</span>'
+      : '<span class="pill grey">Planned</span>';
+    h += '<div class="lesson-row' + (L.now ? " now" : "") + '">' +
+         '<span class="num">' + L.n + "</span>" +
+         "<div><b>" + esc(L.t) + "</b><p>" + esc(L.d) + "</p></div>" +
+         '<div class="act">' + status + " ";
+    if (L.now) h += '<button class="btn small" data-go="lesson5" type="button">Open</button>';
+    else if (L.file) h += '<a class="btn ghost small" style="text-decoration:none" href="' + L.file + '">Open</a>';
+    h += "</div></div>";
+  });
+  $("lessonRows").innerHTML = h;
+})();
+
+/* ════════ generic question renderer ════════ */
+function renderQ(host, spec, saved, onPick){
+  var h = '<div class="opts">';
+  spec.opts.forEach(function(o, i){
+    h += '<button class="opt" type="button" data-i="' + i + '"><span class="key">' + KEYS[i] + "</span><span>" + esc(o.t) + "</span></button>";
+  });
+  h += "</div><div class=\"out\"></div>";
+  host.innerHTML = h;
+  var out = host.querySelector(".out");
+  function reveal(pick){
+    host.querySelectorAll(".opt").forEach(function(b, i){
+      b.disabled = true;
+      if (spec.opts[i].r === "right") b.classList.add("right");
+      else if (i === pick) b.classList.add(spec.opts[i].r === "mid" ? "mid" : "wrong");
+    });
+    var o = spec.opts[pick];
+    var head = o.r === "right" ? "Strong choice" : o.r === "mid" ? "Defensible, but not the best first move" : "Weak choice";
+    var html = '<div class="verdict ' + o.r + '"><b>' + head + "</b><p>" + (o.w || o.why) + "</p>";
+    if (spec.fn) html += '<p class="fn">Management function: ' + esc(spec.fn) + "</p>";
+    html += "</div>";
+    if (spec.after) html += '<div class="note"><span>' + esc(spec.afterLabel || "Why") + "</span><p>" + spec.after + "</p></div>";
+    html += '<div class="row noprint"><button class="btn ghost small" type="button" data-retry="1">Try a different answer</button></div>';
+    out.innerHTML = html;
+    out.querySelector("[data-retry]").addEventListener("click", function(){
+      host.querySelectorAll(".opt").forEach(function(b){ b.disabled = false; b.classList.remove("right","wrong","mid"); });
+      out.innerHTML = "";
+    });
+  }
+  host.querySelectorAll(".opt").forEach(function(b){
+    b.addEventListener("click", function(){
+      var pick = parseInt(b.getAttribute("data-i"), 10);
+      onPick(pick); reveal(pick);
+    });
+  });
+  if (saved !== null && saved !== undefined && spec.opts[saved]) reveal(saved);
+}
+
+/* ════════ 5.2 think like a manager ════════ */
+(function(){
+  var box = $("think1Box");
+  box.value = S.think1 || "";
+  box.addEventListener("input", function(){ S.think1 = box.value; save(); });
+  function show(){
+    $("think1Out").innerHTML =
+      '<div class="verdict right" style="margin-top:14px"><b>Model answer</b>' +
+      "<p>The first move is to re-plan the resource, not to hope it works out. Confirm the real deadline (the vendor's shipping cut-off, not the order date), then decide who else can prepare the purchase order: another trained employee, yourself, or the employee before their leave starts if the work can be pulled forward into this week.</p>" +
+      "<p>If nobody else is trained, that is the finding that matters, and the answer is to have the employee write the procedure down and walk a second person through it before Monday. The office then has a backup for every future order, not just this one.</p>" +
+      '<p class="fn">Planning activities used: identifying resources, creating deadlines, anticipating problems, developing backup plans.</p></div>';
+    S.think1Shown = true; done("think1"); save();
+    $("think1Hint").textContent = words(box.value) > 0 ? "" : "Try writing your own answer first — you learn more from comparing.";
+  }
+  $("think1Btn").addEventListener("click", show);
+  if (S.think1Shown) show();
+})();
+
+/* ════════ 5.3 assign the work ════════ */
+var TEAM = [
+  { k:"fin", n:"Finance clerk",                      d:"Three years in the job. Processes invoices and purchase orders, codes expenses, reconciles budget lines." },
+  { k:"new", n:"Administrative assistant (new)",     d:"Started three weeks ago. Reception, filing and mail. Still learning the office procedures." },
+  { k:"sen", n:"Senior administrative officer",      d:"Most experienced staff member. Reporting, analysis and correspondence. Acts as backup supervisor." },
+  { k:"rec", n:"Records clerk",                      d:"Filing systems, retention schedules, information requests and archive transfers." },
+  { k:"cli", n:"Client services officer",            d:"Front counter and telephone. Resident inquiries, service requests and complaints." }
+];
+var TASKS = [
+  { id:"t1", t:"Enter and code this month's invoices in the financial system before month-end on Wednesday.", best:"fin",
+    f:{
+      fin:{ r:"right", w:"The right fit. This is the finance clerk's regular work, they already have the system access and the coding knowledge, and month-end is a deadline they have met before. Your job now is to confirm they have the hours free this week." },
+      new:{ r:"wrong", w:"Too risky. Three weeks in, the new assistant almost certainly has no financial system access and no training in expense coding, and month-end Wednesday is not the week to learn. Have them sit with the finance clerk and watch instead — that is training, not delegation." },
+      sen:{ r:"mid",   w:"It would get done, but you have put your most experienced person on routine data entry while the senior management report goes unwritten. Keep the senior officer as the backup for finance work, not the first choice." },
+      rec:{ r:"wrong", w:"Wrong skill set. Records work and financial processing use different systems, different training and different approval authorities. Assigning across them creates errors and access problems." },
+      cli:{ r:"wrong", w:"This closes the front counter for residents and puts an untrained person on financial coding at the same time. Two problems created to solve one." }
+    } },
+  { id:"t2", t:"Draft the quarterly activity report for senior management, due tomorrow.", best:"sen",
+    f:{
+      sen:{ r:"right", w:"The right fit. The report needs someone who knows the unit's work, can pull figures together from several people, and can write for a senior audience. That is exactly what the senior administrative officer does." },
+      fin:{ r:"mid",   w:"The finance clerk should supply the financial figures, but making them draft the whole report pulls them off invoices that close this week. Use them as a contributor, not the author." },
+      new:{ r:"wrong", w:"A new employee cannot yet know enough about the unit's work to describe a quarter of it. Give them a supporting role — gathering source documents — and the report will still get written on time." },
+      rec:{ r:"mid",   w:"Reasonable for the records portion only. They can supply file and request statistics, but the drafting and the senior-audience judgement still belong with the senior officer." },
+      cli:{ r:"wrong", w:"They can supply inquiry and complaint numbers, but drafting the report means the counter is unstaffed for a day — and residents are the reason the unit exists." }
+    } },
+  { id:"t3", t:"Log this week's incoming mail, file the correspondence, and prepare folders for Thursday's staff meeting.", best:"new",
+    f:{
+      new:{ r:"right", w:"The right fit. Routine, procedure-based work with a supervisor nearby is exactly how a new employee learns the office while doing something useful. Make sure the procedure is written down so they are not guessing." },
+      rec:{ r:"mid",   w:"Defensible — filing is their area. But day-to-day correspondence filing is a good training task for the new assistant, and the records clerk's retention work is harder to hand to anyone else." },
+      cli:{ r:"wrong", w:"This takes the client services officer off resident inquiries to do routine work that a new employee could do. Match the task to the lowest level that can do it properly." },
+      fin:{ r:"wrong", w:"Poor use of scarce time. Month-end is Wednesday and you have moved your only trained finance person onto photocopying." },
+      sen:{ r:"wrong", w:"Your most senior person on mail and photocopying while a report to senior management is due tomorrow. Cost is the issue: every hour has to earn what it costs." }
+    } },
+  { id:"t4", t:"Respond to a resident who has complained that a scheduled service was missed.", best:"cli",
+    f:{
+      cli:{ r:"right", w:"The right fit. Complaint handling is their role, they can look up the service history, and they know the logging procedure. Ask to see the response, and follow up to confirm the resident actually received an answer." },
+      sen:{ r:"mid",   w:"Appropriate if the complaint is serious, repeated, or involves the client services officer personally. For a routine missed service, it is one level too high — and it takes the report's author away from the report." },
+      new:{ r:"wrong", w:"A complaint is the worst possible first solo task. It needs service history, judgement about what can be promised, and the authority to commit the organization to a fix. None of those arrive in three weeks." },
+      fin:{ r:"wrong", w:"Wrong role. The finance clerk has no access to the service history and no authority to promise a remedy to the resident." },
+      rec:{ r:"wrong", w:"Wrong role. They can retrieve the file, but the response to the resident needs someone who knows the service and can commit to the fix." }
+    } },
+  { id:"t5", t:"Prepare the year's closed files for transfer under the records retention schedule.", best:"rec",
+    f:{
+      rec:{ r:"right", w:"The right fit. Retention decisions require someone who knows the schedule and the rules about what may be transferred, kept or destroyed. Getting this wrong has consequences long after the files leave the office." },
+      new:{ r:"mid",   w:"Good learning, but only alongside the records clerk. Retention involves judgement calls a three-week employee cannot make alone, and a wrongly destroyed file cannot be recovered." },
+      sen:{ r:"wrong", w:"Over-qualified for the work, and they are needed for tomorrow's report. This is the classic mistake of giving work to whoever seems most capable rather than to whoever is right for it." },
+      fin:{ r:"wrong", w:"Different training and different systems, during their busiest week of the month." },
+      cli:{ r:"wrong", w:"Takes the counter out of service for work with no deadline pressure attached to it." }
+    } }
+];
+(function(){
+  $("teamTiles").innerHTML = TEAM.map(function(e){
+    return '<div class="tile"><b>' + esc(e.n) + "</b>" + esc(e.d) + "</div>";
+  }).join("");
+
+  var h = "";
+  TASKS.forEach(function(t, i){
+    h += '<div class="card flat" style="max-width:none;margin-bottom:12px;padding:16px">' +
+         '<p style="margin:0 0 10px;font-size:16.5px"><strong>Task ' + (i + 1) + ".</strong> " + esc(t.t) + "</p>" +
+         '<label class="fld" style="margin:0"><span>Assign to</span><select data-task="' + t.id + '"><option value="">Choose an employee&hellip;</option>' +
+         TEAM.map(function(e){ return '<option value="' + e.k + '">' + esc(e.n) + "</option>"; }).join("") +
+         '</select></label><div class="out" data-out="' + t.id + '" style="margin-top:12px"></div></div>';
+  });
+  $("assignList").innerHTML = h;
+
+  function feedback(t, k){
+    var out = $("assignList").querySelector('[data-out="' + t.id + '"]');
+    if (!k){ out.innerHTML = ""; return; }
+    var f = t.f[k], emp = TEAM.filter(function(e){ return e.k === k; })[0];
+    var head = f.r === "right" ? "Good fit" : f.r === "mid" ? "Defensible, but not the best fit" : "Not a good fit";
+    var extra = f.r === "right" ? "" :
+      '<p class="fn">The stronger choice here is the ' + esc(TEAM.filter(function(e){ return e.k === t.best; })[0].n.toLowerCase()) + ".</p>";
+    out.innerHTML = '<div class="verdict ' + f.r + '"><b>' + head + " &mdash; " + esc(emp.n) + "</b><p>" + esc(f.w) + "</p>" + extra + "</div>";
+  }
+  function tally(){
+    var n = 0;
+    TASKS.forEach(function(t){ if (S.assign[t.id]) n++; });
+    $("assignHint").textContent = n + " of 5 tasks assigned." + (n === 5 ? "  Every task now has a named owner — that is organizing." : "");
+    if (n === 5) done("assign");
+  }
+  $("assignList").addEventListener("change", function(e){
+    var sel = e.target.closest ? e.target.closest("[data-task]") : null;
+    if (!sel) return;
+    var id = sel.getAttribute("data-task"), t = TASKS.filter(function(x){ return x.id === id; })[0];
+    S.assign[id] = sel.value; save();
+    feedback(t, sel.value); tally();
+  });
+  TASKS.forEach(function(t){
+    var k = S.assign[t.id];
+    if (k){
+      var sel = $("assignList").querySelector('[data-task="' + t.id + '"]');
+      if (sel) sel.value = k;
+      feedback(t, k);
+    }
+  });
+  tally();
+})();
+
+/* ════════ 5.4 leading scenario ════════ */
+renderQ($("leadQ"), {
+  fn:"Leading",
+  opts:[
+    { t:"Decide on the spot who should have done it, tell them both to stop arguing, and move on.", r:"wrong",
+      w:"This ends the noise without establishing the facts. You may assign the report to the employee who is actually right, you teach the team that the loudest version wins, and you still do not know how the assignment broke down in the first place." },
+    { t:"Speak with both employees together, establish what each of them was told, then assign the report clearly — in writing — with the deadline and what a finished report looks like.", r:"right",
+      w:"This is the best first move. It separates the two problems: the report has to be started today, and the assignment breakdown has to be fixed so it does not repeat. Facts first, then a clear written assignment, so nobody can be unsure again. You deal with how the mix-up happened afterwards, once the deadline is safe." },
+    { t:"Write the report yourself tonight so it is finished on time, and speak to them about it next week.", r:"wrong",
+      w:"The report gets done and everything else gets worse. You have taught the team that a disagreement makes work disappear upward, you have used a supervisor's evening on staff-level work, and you still have no clear owner for the next report." },
+    { t:"Send an email to the whole office reminding everyone to check their assigned tasks carefully.", r:"wrong",
+      w:"Indirect, public and ineffective. The two people involved are not named, the report is still not started, and the rest of the office is left wondering who is in trouble. Deal with conflict directly and privately with the people in it." }
+  ],
+  afterLabel:"What a supervisor should notice",
+  after:"Two things went wrong, and they need different answers. The <strong>immediate</strong> problem is an unstarted report due tomorrow &mdash; fix that with a clear, written assignment. The <strong>underlying</strong> problem is that work was assigned in a way that left two people with different understandings &mdash; fix that by assigning tasks to a named person, in writing, with a deadline. Notice also that it is worth asking whether the deadline is still realistic now that a day has been lost."
+}, S.lead, function(pick){ S.lead = pick; done("lead"); save(); });
+
+/* ════════ 5.5 controlling / invoice ════════ */
+renderQ($("ctrlQ"), {
+  fn:"Controlling",
+  opts:[
+    { t:"Yes — pay it. The vendor is reliable, prices change, and $200 is a small difference on a $1,305 invoice.", r:"wrong",
+      w:"This is the answer that costs organizations the most money over time. The approved amount was $1,105; paying $1,305 means approving $200 that nobody authorized. Once payment is made, the money is spent, the budget line is wrong, and your leverage with the vendor is gone. Small differences matter precisely because they are the ones nobody checks." },
+    { t:"No — hold the payment and investigate the $200 difference against the purchase order and the receiving record before approving anything.", r:"right",
+      w:"Correct. The manager or finance employee needs to find out what the $200 is before approving payment. Compare three documents: the approved requisition or purchase order ($1,105), the invoice ($1,305), and the record of what was actually received. The difference usually has an ordinary explanation — freight added, a price change since the quote, an extra item someone requested, a quantity difference, or a billing error. Once you know which one it is, you approve the corrected amount, request a credit or revised invoice, or get the additional $200 properly approved first." },
+    { t:"No — return the invoice to the vendor unpaid and stop ordering from them.", r:"wrong",
+      w:"An overreaction to something you have not investigated yet. Most invoice differences are explainable, and several are the buyer's own doing — an added item, a verbal change, freight that was always going to be charged. Find the cause first. Refusing to pay a legitimate invoice can also breach the contract and leave the organization owing interest." },
+    { t:"Yes — pay the approved $1,105 now and leave the remaining $200 unpaid until someone asks about it.", r:"wrong",
+      w:"This looks careful but creates a mess: a part-paid invoice sitting on the vendor's books, an unexplained balance on yours, and no record of a decision. Partial payment is sometimes the right outcome — but only after the difference has been investigated and documented, not as a way of avoiding the question." }
+  ],
+  afterLabel:"The controlling process in this example",
+  after:"<strong>Measure</strong> &mdash; the invoice says $1,305. <strong>Compare</strong> &mdash; the approved requisition says $1,105, and the receiving record says what actually arrived. <strong>Act</strong> &mdash; investigate the $200, then approve, amend or seek approval for the extra amount, and note what you found. That is the whole controlling function in one afternoon's work."
+}, S.ctrl, function(pick){ S.ctrl = pick; done("ctrl"); save(); });
+
+/* ════════ 5.6 the cycle ════════ */
+var CYCLE = [
+  { k:"plan", n:"Plan",
+    m:"Decide what has to be achieved and how: goals, tasks, deadlines, budget, resources, likely problems and backup plans.",
+    ex:"The office decides it needs a year of supplies, prices the order at $18,000, sets an internal order deadline two weeks before the vendor's shipping cut-off, and agrees that if the shipment is missed only essential items will be air-freighted." },
+  { k:"org", n:"Organize",
+    m:"Arrange the people, money and materials so the plan can be carried out. Assign named owners, delegate authority, set the schedule and write down the procedure.",
+    ex:"The finance clerk is assigned to prepare the purchase order and is given the vendor quotes and the budget code. The senior officer confirms the spending approval. A date is put in the calendar for the order to be sent." },
+  { k:"lead", n:"Lead",
+    m:"Work with the people doing the work: explain why it matters, give clear instructions, answer questions, resolve disagreements and make the decisions that are yours to make.",
+    ex:"The supervisor explains why the cut-off date cannot move, asks the clerk to confirm the deadline back to them, and decides between two competing supply requests when the teams cannot agree." },
+  { k:"ctrl", n:"Control",
+    m:"Measure what actually happened, compare it with the plan, and correct the difference — in the work, in the spending, or in the schedule.",
+    ex:"Three days before the cut-off the supervisor checks that the purchase order was actually sent and acknowledged. When the invoice arrives at $1,305 against an approved $1,105, payment is held until the $200 is explained." },
+  { k:"imp", n:"Improve the plan", last:true,
+    m:"Feed what you learned back into the next plan. This is what turns four separate functions into a cycle instead of a list.",
+    ex:"Two items ran out in March. Next year's order quantity is raised for those two, the internal deadline moves a week earlier because approvals took longer than expected, and the procedure is written down so anyone can prepare the order." }
+];
+(function(){
+  var host = $("cycle"), out = $("cycleOut");
+  var h = "";
+  CYCLE.forEach(function(c, i){
+    h += '<button class="cyc-btn' + (c.last ? " last" : "") + '" type="button" data-cyc="' + c.k + '" aria-expanded="false">' +
+         "<span>" + esc(c.n.toUpperCase()) + '</span><span class="seen" data-seen="' + c.k + '"></span></button>';
+    if (i < CYCLE.length - 1) h += '<span class="cyc-arrow" aria-hidden="true">&darr;</span>';
+  });
+  h += '<span class="cyc-arrow" aria-hidden="true">&#8630;</span>';
+  h += '<p class="hint" style="margin:0;text-align:center">and the improved plan starts the cycle again</p>';
+  host.innerHTML = h;
+
+  function marks(){
+    var n = 0;
+    CYCLE.forEach(function(c){
+      var el = host.querySelector('[data-seen="' + c.k + '"]');
+      if (S.cycle[c.k]){ el.textContent = "✓"; n++; } else el.textContent = "";
+    });
+    if (n === CYCLE.length) done("s6");
+  }
+  host.addEventListener("click", function(e){
+    var b = e.target.closest ? e.target.closest("[data-cyc]") : null;
+    if (!b) return;
+    var k = b.getAttribute("data-cyc"), c = CYCLE.filter(function(x){ return x.k === k; })[0];
+    var already = b.getAttribute("aria-expanded") === "true";
+    host.querySelectorAll("[data-cyc]").forEach(function(x){ x.setAttribute("aria-expanded", "false"); });
+    if (already){ out.innerHTML = ""; return; }
+    b.setAttribute("aria-expanded", "true");
+    S.cycle[k] = true; save(); marks();
+    out.innerHTML = '<div class="card flat" style="margin-top:4px">' +
+      '<p class="eyebrow" style="margin-bottom:8px">' + esc(c.n) + "</p>" +
+      "<p><strong>What it means.</strong> " + esc(c.m) + "</p>" +
+      "<p style=\"margin-bottom:0\"><strong>Example &mdash; the sealift supply order.</strong> " + esc(c.ex) + "</p></div>";
+    out.scrollIntoView({ behavior:"smooth", block:"nearest" });
+  });
+  marks();
+})();
+
+/* ════════ 5.7 case study ════════ */
+var CASE = [
+  { id:"invoices",  t:"Three invoices need approval before month-end (Wednesday).", best:5,
+    why:"A real deadline, but it is two days away and approving three invoices is short work. Put it in the calendar for today or tomorrow and move on — do not let a two-day deadline push aside a one-day one." },
+  { id:"sick",      t:"An employee called in sick.", best:1,
+    why:"First, because it changes every other decision you are about to make. Until you know who is available, you cannot assign the report, cover the counter or promise anything to the resident. It also takes about ten minutes: confirm the absence, check what that person was scheduled to do, and arrange coverage for anything time-critical." },
+  { id:"complaint", t:"A resident has complained about a missed service.", best:4,
+    why:"Split this one. The acknowledgement is a five-minute task that should happen this morning — a resident who has heard nothing complains twice. The investigation and the fix can follow later today or tomorrow, once you know who is available to do it." },
+  { id:"supplies",  t:"Office supplies must be ordered.", best:6,
+    why:"Last today, unless there is a shipping cut-off attached to it — and that is the question to ask before you rank it. A supply order with a sealift deadline this week is not a low priority at all; it is the one item on this list that cannot be done late. Priority comes from deadlines and consequences, not from the type of task." },
+  { id:"report",    t:"A report for senior management is due tomorrow.", best:3,
+    why:"The hardest deadline on the list and the longest piece of work, so it has to be started today no matter what else happens. Decide immediately who is writing it, confirm they have the information they need, and set a checkpoint for this afternoon rather than waiting until tomorrow morning to find out it is not finished." },
+  { id:"prio",      t:"Two employees are asking for help with competing priorities.", best:2,
+    why:"Second, because it is a short decision that unblocks two people's entire day. Two staff who have each been told their work comes first are currently either stalled or duplicating effort. Deciding the order takes five minutes and buys back hours." }
+];
+(function(){
+  var host = $("priorityList");
+  if (!S.cs.order || S.cs.order.length !== CASE.length){
+    S.cs.order = CASE.map(function(c){ return c.id; });
+  }
+  function draw(){
+    var h = "";
+    S.cs.order.forEach(function(id, i){
+      var c = CASE.filter(function(x){ return x.id === id; })[0];
+      h += '<li><span class="rank">' + (i + 1) + "</span>" +
+           '<span class="txt">' + esc(c.t) + "</span>" +
+           '<span class="movers noprint">' +
+           '<button class="mv" type="button" data-mv="up" data-id="' + id + '" aria-label="Move up"' + (i === 0 ? " disabled" : "") + ">&uarr;</button>" +
+           '<button class="mv" type="button" data-mv="down" data-id="' + id + '" aria-label="Move down"' + (i === CASE.length - 1 ? " disabled" : "") + ">&darr;</button>" +
+           "</span></li>";
+    });
+    host.innerHTML = h;
+  }
+  host.addEventListener("click", function(e){
+    var b = e.target.closest ? e.target.closest("[data-mv]") : null;
+    if (!b || b.disabled) return;
+    var id = b.getAttribute("data-id"), i = S.cs.order.indexOf(id);
+    var j = b.getAttribute("data-mv") === "up" ? i - 1 : i + 1;
+    if (j < 0 || j >= S.cs.order.length) return;
+    S.cs.order[i] = S.cs.order[j]; S.cs.order[j] = id;
+    save(); draw();
+  });
+  draw();
+
+  var boxes = [["cs1","a1"],["cs2","a2"],["cs3","a3"],["cs4","a4"]];
+  boxes.forEach(function(p){
+    var el = $(p[0]);
+    el.value = S.cs[p[1]] || "";
+    el.addEventListener("input", function(){ S.cs[p[1]] = el.value; save(); });
+  });
+
+  var MODEL = [
+    { h:"1. What would you plan?",
+      p:"List every item with its real deadline and its consequence, then decide today's order. The report is due tomorrow and is the longest job, so it has to start today. The invoices are due Wednesday and take an hour. The resident needs an acknowledgement today, whatever the fix takes. Then ask the question the list does not answer: does the supply order have a shipping cut-off? Finally, plan for the obvious risk — that the sick employee is also away tomorrow — and decide now what you would move if that happens." },
+    { h:"2. What would you organize?",
+      p:"Start from who is actually here. Cover anything the absent employee owned that cannot wait, especially front-counter service. Name one person for the report and give them the information and the time to write it — which probably means taking something else off them. Assign the invoices to whoever has the financial system access, and the resident's acknowledgement to whoever handles service inquiries. Every item on the list should end this morning with a named owner and a time, including the ones you keep yourself." },
+    { h:"3. How would you lead your employees?",
+      p:"Deal with the competing priorities first and directly: bring both employees together, decide the order yourself, say it plainly, and explain the reason so the decision holds after you leave the room. Tell the whole team what changed because of the absence, so nobody is working from yesterday's plan. Be specific about what finished work looks like for the report. Acknowledge that today is heavier than usual, because people accept pressure far better when someone says out loud that it is there." },
+    { h:"4. What would you monitor or control?",
+      p:"Set checkpoints before the deadlines, not on them: a look at the report draft mid-afternoon, confirmation this afternoon that the resident was actually contacted, and a check that all three invoices match their purchase orders before you approve them. Confirm the supply order was sent and acknowledged rather than assuming it. Write down what you decided and what you promised the resident. Then, at the end of the week, ask the controlling question that improves the next plan: why did two employees both believe their work came first?" }
+  ];
+
+  function submit(){
+    var diff = 0, rows = "";
+    S.cs.order.forEach(function(id, i){
+      var c = CASE.filter(function(x){ return x.id === id; })[0];
+      var d = Math.abs((i + 1) - c.best);
+      diff += d;
+      var tag = d === 0 ? '<span class="pill ok">Matches</span>'
+        : d === 1 ? '<span class="pill">Within one place</span>'
+        : '<span class="pill grey">Suggested position ' + c.best + "</span>";
+      rows += "<tr><th>" + (i + 1) + ". " + esc(c.t) + "</th><td>" + tag + "</td><td>" + esc(c.why) + "</td></tr>";
+    });
+    var verdict = diff === 0
+      ? "Your order matches the suggested one exactly. More importantly, the reasoning below should match yours — if you got the order right for different reasons, read the notes carefully."
+      : diff <= 4
+        ? "Close to the suggested order. The differences are the kind a reasonable supervisor could defend, but check the notes for anything you placed two or more positions away."
+        : diff <= 8
+          ? "A workable order with some real differences. Look especially at anything you ranked late that has a same-day consequence, and anything you ranked early that has a two-day deadline."
+          : "Quite different from the suggested order. The usual cause is ranking by how big a task feels rather than by its deadline and its consequence. Read every note below, then try the ordering again.";
+
+    var counts = boxes.map(function(p){ return words(S.cs[p[1]]); });
+    var written = counts.filter(function(n){ return n >= 12; }).length;
+
+    var h = '<div class="card" style="margin-top:22px"><h2>Feedback on your case study</h2>';
+    h += '<p class="cap" style="margin-top:14px">Part A &mdash; your priority order</p>';
+    h += "<p>" + esc(verdict) + "</p>";
+    h += '<div class="tablewrap"><table><thead><tr><th>Your order</th><th>Suggested</th><th>Why</th></tr></thead><tbody>' + rows + "</tbody></table></div>";
+    h += '<div class="note"><span>The principle</span><p>Priority comes from three things: the <strong>deadline</strong>, the <strong>consequence</strong> of missing it, and whether the item <strong>blocks other people</strong>. Short decisions that unblock several people come first, even when they feel minor. Long jobs with tomorrow deadlines start today, even when they are not urgent this minute.</p></div>';
+
+    h += '<p class="cap">Part B &mdash; the four functions</p>';
+    if (written === 0){
+      h += "<p>You have not written answers to the four questions yet. Read the model answers below, then go back and write your own &mdash; putting it in your own words is what makes it stick.</p>";
+    } else if (written < 4){
+      h += "<p>You answered " + written + " of the four questions in any detail. Compare what you wrote with the model answers below, then fill in the ones you left short.</p>";
+    } else {
+      h += "<p>All four questions answered. Compare yours with the model answers below and look for anything you missed &mdash; particularly whether you named <em>who</em> does each thing and <em>when</em> you would check it.</p>";
+    }
+    MODEL.forEach(function(m, i){
+      h += '<div class="card flat" style="margin-bottom:10px;padding:16px"><h4>' + esc(m.h) + "</h4>" +
+           '<p class="hint" style="margin:0 0 8px">Your answer: ' + counts[i] + " word" + (counts[i] === 1 ? "" : "s") + "</p>" +
+           "<p style=\"margin:0\">" + m.p + "</p></div>";
+    });
+    h += '<div class="note warn"><span>Marking your own work</span><p>There is no single correct answer to Part B. A strong answer names specific people and times, deals with the absence rather than ignoring it, settles the competing priorities instead of hoping they resolve themselves, and sets checkpoints <em>before</em> deadlines rather than after them.</p></div>';
+    h += "</div>";
+    $("csOut").innerHTML = h;
+    S.cs.submitted = true; done("cs"); save();
+    $("csHint").textContent = "Submitted. You can change your answers and submit again.";
+  }
+  $("csSubmit").addEventListener("click", function(){ submit(); $("csOut").scrollIntoView({ behavior:"smooth", block:"start" }); });
+  $("csClear").addEventListener("click", function(){
+    if (!confirm("Clear your case study order and written answers?")) return;
+    S.cs = { order:CASE.map(function(c){ return c.id; }), a1:"", a2:"", a3:"", a4:"", submitted:false };
+    boxes.forEach(function(p){ $(p[0]).value = ""; });
+    $("csOut").innerHTML = ""; $("csHint").textContent = "";
+    save(); draw();
+  });
+  if (S.cs.submitted) submit();
+})();
+
+/* ════════ Section 8 — decision game ════════ */
+var GAME = [
+  { s:"It is the third month of a twelve-month fiscal year. Reviewing your budget report, you notice your unit has already spent 40% of its annual travel budget.",
+    q:"What do you do?",
+    fn:"Controlling (with planning to follow)",
+    think:"A budget is a plan for money, and a budget report is a control document. The question is never just “how much is left” but “what is this rate of spending going to produce by year end, and why is it happening?” Three months of data is enough to forecast and still early enough to act.",
+    opts:[
+      { t:"Wait until the mid-year review. Spending is uneven and the next few months may be lighter.", r:"wrong",
+        w:"This is hoping rather than managing. It may well be true that spending evens out — but you do not know that yet, and by mid-year half the money and half the year are both gone. Controlling means catching a difference while you can still do something about it." },
+      { t:"Review what the money was spent on, forecast the rest of the year at the current rate, and raise it with your manager now if the forecast shows a shortfall.", r:"right",
+        w:"The strong choice. You measure (what was spent), compare (against the plan and the calendar), and then act on what you find. Just as important, you raise it early: a manager who reports a projected shortfall in month three has options, while one who reports it in month ten has an explanation." },
+      { t:"Cancel all remaining travel for the year immediately so the budget cannot be overspent.", r:"mid",
+        w:"Decisive, and occasionally necessary — but not yet. You have not established whether the spending was front-loaded for a legitimate reason, such as training that had to happen early or fares booked for the whole year at once. Correcting before diagnosing usually means stopping something the organization actually needed." }
+    ] },
+  { s:"An employee asks to take over the monthly statistics report, which you currently prepare yourself. They are capable and keen, but they have never done it, and the report goes to senior management.",
+    q:"What do you do?",
+    fn:"Organizing (delegation), supported by controlling",
+    think:"Delegation transfers the task and the authority, never the accountability. The question is not whether to delegate but how to delegate safely: give the procedure, the access and a checkpoint early enough that a problem can still be fixed.",
+    opts:[
+      { t:"Keep the report. It goes to senior management, and a mistake would reflect on you.", r:"wrong",
+        w:"The reasoning is half right and the conclusion is wrong. Yes, you remain accountable — but that is an argument for supervising the work, not for refusing to share it. A supervisor who keeps every important task becomes the bottleneck, develops nobody, and leaves the unit stuck the moment they are away." },
+      { t:"Hand it over with the procedure and the data access, set a checkpoint two days before the deadline, and review the draft before it goes out.", r:"right",
+        w:"The strong choice, because it delegates the task <em>and</em> the authority while keeping a control point. The employee gets real work and a chance to learn, the report still gets checked, and the checkpoint is early enough that a problem can be fixed rather than merely discovered." },
+      { t:"Hand it over completely and tell them to send it straight to senior management when it is finished.", r:"mid",
+        w:"Generous, and it does give the employee ownership — but you have delegated without any control point on a report that carries your unit's name. If it is late, wrong or incomplete, you will find out at the same time senior management does. Delegate the work; keep a checkpoint." }
+    ] },
+  { s:"A normally reliable employee has missed two deadlines in three weeks. Their work is still good when it arrives, but it arrives late. You have not discussed it with them.",
+    q:"What do you do first?",
+    fn:"Leading (feedback and communication)",
+    think:"A change in a reliable person's performance is information, not yet a discipline problem. The first job is to find out what changed — workload, a process, training, equipment, or something outside work. Formal steps exist for a reason, but they come after the conversation, not instead of it.",
+    opts:[
+      { t:"Put a written warning on file now, so there is a record if it continues.", r:"wrong",
+        w:"Too far, too early. You are documenting a problem you have not yet defined and have never raised with the person. Most workplace procedures also expect a conversation before formal steps, and skipping it damages both the relationship and the fairness of anything that follows." },
+      { t:"Meet privately, describe what you have observed, ask what is getting in the way, agree on what will change and by when, and note the conversation.", r:"right",
+        w:"The strong choice. It is specific, private, timely, about the work rather than the person, and it ends with a clear expectation. The short note you keep afterwards is not discipline — it is the record that lets you recognize improvement fairly, or escalate fairly if there is none." },
+      { t:"Quietly move their deadline-sensitive work to someone else and see whether things settle down.", r:"wrong",
+        w:"This hides the problem, silently penalizes the employee without telling them why, and adds work to a colleague who did nothing to earn it. The employee will notice — people always notice — and will learn that in this office problems are handled behind their back." }
+    ] },
+  { s:"It is late July. A program needs a piece of equipment for a project starting in October. The vendor can send it by sealift if the order is placed within two weeks, or by air freight later at roughly four times the shipping cost. The project has budget, but the equipment has not been formally approved yet.",
+    q:"What do you do?",
+    fn:"Planning (deadlines, budget, resources and risk)",
+    think:"Northern logistics turn an ordinary purchasing decision into a deadline. The cut-off is not set by your office and it will not move, so the real question is what can be decided inside the two weeks — and what it costs to decide late.",
+    opts:[
+      { t:"Order now for sealift, after confirming the budget covers it and getting the approval moved up, and build the project schedule around the arrival window.", r:"right",
+        w:"The strong choice — provided you do the two things attached to it: confirm the money and get the approval properly, rather than ordering first and papering it over afterwards. You are treating the shipping cut-off as the real deadline and working backwards from it, which is exactly what planning means in the North." },
+      { t:"Wait until the project is formally approved in September, then air-freight the equipment.", r:"wrong",
+        w:"Safe on paper, expensive in practice. You have chosen four times the shipping cost, accepted a weather and space risk on the air side, and left the October start date depending on a shipment nobody has booked yet. Waiting is a decision too, and this one has a price tag." },
+      { t:"Ask whether the project can be redesigned to use equipment the organization already has.", r:"mid",
+        w:"A good question that a manager should absolutely ask — but it is not an answer on its own. The two-week cut-off does not pause while the question is considered. Ask it now, set a date this week for the answer, and be ready to order if the answer is no." }
+    ] },
+  { s:"Your most experienced employee is the only person who knows how to run the year-end reconciliation. They have just had three weeks of leave approved, and the leave falls in the middle of year-end.",
+    q:"What do you do?",
+    fn:"Organizing (resources, procedures and coverage)",
+    think:"The leave is the visible problem. The real problem is that one person is a single point of failure for essential work — which was true before the leave request and will still be true after it. Approved leave is also a commitment the organization made; reopening it is a last resort, not a first move.",
+    opts:[
+      { t:"Ask them to postpone the leave until after year-end. The reconciliation cannot happen without them.", r:"mid",
+        w:"Understandable, and sometimes unavoidable — but it should be your last option, not your first. The leave was approved, people plan travel and family around it, and in the North a cancelled flight is rarely rebookable at short notice. It also leaves the underlying problem exactly where it was: next year you will be having this conversation again." },
+      { t:"Have them document the procedure and train a second employee before they leave, and schedule what can be scheduled around their availability.", r:"right",
+        w:"The strong choice, because it solves this year and every year after it. Written procedures and a trained backup are ordinary organizing — the same thinking that puts coverage on the counter when someone is sick. Start now, while the expert is still in the office and able to answer questions." },
+      { t:"Plan to run the reconciliation yourself while they are away.", r:"mid",
+        w:"It will probably work once, and there are worse answers. But it converts a staff task into supervisor work during your busiest period, it teaches the unit that gaps get absorbed rather than fixed, and the organization still has exactly one person who can do the job — it is just you now as well." }
+    ] }
+];
+(function(){
+  var dots = $("gameDots"), body = $("gameBody"), sum = $("gameSummary");
+  var idx = 0;
+  function drawDots(){
+    var h = "";
+    GAME.forEach(function(g, i){
+      var a = S.game[i];
+      var cls = i === idx ? "now" : (a === undefined ? "" : (GAME[i].opts[a].r === "right" ? "ok" : GAME[i].opts[a].r === "mid" ? "now" : "no"));
+      h += '<i class="' + cls + '"></i>';
+    });
+    dots.innerHTML = h;
+  }
+  function answered(){ var n = 0; GAME.forEach(function(g, i){ if (S.game[i] !== undefined) n++; }); return n; }
+  function summary(){
+    if (answered() < GAME.length){ sum.style.display = "none"; return; }
+    var strong = 0, mid = 0, weak = 0;
+    GAME.forEach(function(g, i){
+      var r = g.opts[S.game[i]].r;
+      if (r === "right") strong++; else if (r === "mid") mid++; else weak++;
+    });
+    sum.style.display = "";
+    sum.innerHTML = "<h2>How your decisions came out</h2>" +
+      '<div class="score"><b>' + strong + "/5</b><span>strongest choices &middot; " + mid + " defensible &middot; " + weak + " weak</span></div>" +
+      '<p class="band">' + (strong >= 4
+        ? "Good managerial judgement. You are consistently choosing the option that deals with the cause rather than the symptom, and that keeps a control point in place."
+        : strong >= 2
+          ? "A reasonable showing. Look back at the scenarios where you chose a defensible option: in most of them the stronger answer did the same thing but also fixed the underlying problem."
+          : "Worth working through again. The pattern to look for is this — the strongest option usually deals with the cause, keeps a checkpoint, and is direct with the people involved.") +
+      "</p>" +
+      '<div class="row noprint"><button class="btn" id="gameAgain" type="button">Play again</button>' +
+      '<button class="btn ghost" data-go="quiz" type="button">Go to the quiz</button></div>';
+    $("gameAgain").addEventListener("click", function(){
+      S.game = {}; idx = 0; save(); draw(); sum.style.display = "none";
+      body.scrollIntoView({ behavior:"smooth", block:"start" });
+    });
+    done("game");
+  }
+  function draw(){
+    var g = GAME[idx];
+    drawDots();
+    var h = '<div class="qmeta"><span>Scenario ' + (idx + 1) + " of " + GAME.length + "</span></div>" +
+            '<div class="scenario" style="max-width:none"><span>Situation</span><p>' + esc(g.s) + "</p>" +
+            "<p style=\"margin-bottom:0\"><strong>" + esc(g.q) + "</strong></p></div>" +
+            '<div class="qhost"></div>' +
+            '<div class="row noprint" style="margin-top:6px">' +
+            '<button class="btn ghost small" type="button" data-nav="prev"' + (idx === 0 ? " disabled" : "") + ">&larr; Previous</button>" +
+            '<button class="btn small" type="button" data-nav="next"' + (idx === GAME.length - 1 ? " disabled" : "") + ">Next scenario &rarr;</button>" +
+            '<span class="hint">' + answered() + " of " + GAME.length + " answered</span></div>";
+    body.innerHTML = h;
+    renderQ(body.querySelector(".qhost"), {
+      fn:g.fn, opts:g.opts, afterLabel:"What a manager should consider", after:esc(g.think)
+    }, S.game[idx], function(pick){
+      S.game[idx] = pick; save(); drawDots(); summary();
+      var hint = body.querySelector(".hint"); if (hint) hint.textContent = answered() + " of " + GAME.length + " answered";
+    });
+    body.querySelectorAll("[data-nav]").forEach(function(b){
+      b.addEventListener("click", function(){
+        if (b.disabled) return;
+        idx += b.getAttribute("data-nav") === "next" ? 1 : -1;
+        draw(); body.scrollIntoView({ behavior:"smooth", block:"start" });
+      });
+    });
+  }
+  draw(); summary();
+})();
+
+/* ════════ Section 9 — practice quiz ════════ */
+var BANK = [
+  { id:"q1", type:"mc", topic:"Controlling",
+    q:"Which management function involves comparing actual results with the plan and correcting the difference?",
+    opts:["Controlling","Planning","Organizing","Leading"], a:0,
+    why:"Controlling is the measure-compare-act function. Planning sets the standard, and controlling is where you check performance against that standard and act on the gap." },
+  { id:"q2", type:"mc", topic:"Planning",
+    q:"A manager lists the supplies the office will need, prices them, sets the order date, confirms the budget, and decides what to do if the shipment misses the sealift. Which function is this?",
+    opts:["Planning","Organizing","Controlling","Leading"], a:0,
+    why:"Every activity listed happens before the work starts: goals, costs, deadlines, budget approval and a backup plan. That is planning." },
+  { id:"q3", type:"mc", topic:"Delegation",
+    q:"Which statement best describes delegation?",
+    opts:[
+      "Assigning a task together with the authority needed to complete it, while the supervisor remains accountable for the result",
+      "Transferring a task and the accountability for it to an employee",
+      "Giving an employee extra work when the supervisor is too busy",
+      "Allowing employees to choose which tasks they prefer to do"
+    ], a:0,
+    why:"Delegation has three parts: the task, the authority to carry it out, and accountability that stays with the supervisor. Handing over a task without the authority to do it is not delegation, and accountability cannot be handed over at all." },
+  { id:"q4", type:"mc", topic:"Organizing",
+    q:"Which of these is the clearest example of organizing?",
+    opts:[
+      "Building a work schedule that keeps the front counter covered while one employee is on leave",
+      "Setting the department's goals for the coming year",
+      "Explaining to an employee why their work matters to the team",
+      "Comparing this month's spending with the approved budget"
+    ], a:0,
+    why:"Arranging people and coverage so the work can be carried out is organizing. Setting goals is planning, motivating is leading, and comparing spending with budget is controlling." },
+  { id:"q5", type:"mc", topic:"Accountability",
+    q:"A supervisor delegates the month-end invoices to an employee, and they are not entered on time. Who answers to senior management for the missed month-end?",
+    opts:[
+      "The supervisor, because accountability for the unit's results cannot be delegated",
+      "The employee, because the task was assigned to them",
+      "Nobody, because the task was properly delegated",
+      "The finance department, because they process the payments"
+    ], a:0,
+    why:"The employee is responsible for the task and should be dealt with directly, but the supervisor still answers for the unit's results. That is the difference between responsibility for a task and accountability for an outcome." },
+  { id:"q6", type:"tf", topic:"Delegation",
+    q:"True or false: once a supervisor delegates a task, the supervisor is no longer accountable for the result.",
+    opts:["True","False"], a:1,
+    why:"False. A task can be delegated; accountability cannot. The supervisor is still answerable for the unit's results, which is exactly why delegation needs a checkpoint." },
+  { id:"q7", type:"tf", topic:"Controlling",
+    q:"True or false: controlling only happens at the end of the year, after the budget has closed.",
+    opts:["True","False"], a:1,
+    why:"False. Controlling is continuous. Checking spending in month three, reviewing a draft two days before it is due, and verifying an invoice before payment are all controlling — and they are worth far more than a review after the money is gone." },
+  { id:"q8", type:"scenario", topic:"Problem solving",
+    q:"An invoice arrives with a subtotal $200 higher than the purchase requisition your department approved. What is the best action?",
+    opts:[
+      "Hold the payment and investigate the difference against the purchase order and the receiving record before approving",
+      "Pay it, because the difference is small and the vendor is reliable",
+      "Pay only the approved amount and leave the rest outstanding without explanation",
+      "Return the invoice unpaid and stop dealing with the vendor"
+    ], a:0,
+    why:"Investigate before paying. Compare the approved requisition, the invoice and the record of what was received. The difference usually has an ordinary explanation — freight, a price change, an added item — but it has to be explained and documented before the money leaves, not after." },
+  { id:"q9", type:"scenario", topic:"Leading",
+    q:"A normally reliable employee has missed two deadlines in three weeks. What should the supervisor do first?",
+    opts:[
+      "Meet privately, describe what has been observed, and ask what is getting in the way",
+      "Put a written warning on the employee's file",
+      "Reassign the employee's deadline-sensitive work without telling them why",
+      "Raise it at the next staff meeting so the whole team hears the expectation"
+    ], a:0,
+    why:"A change in a reliable employee's performance is information first. Find the cause privately and agree on what will change. Formal steps exist, but they come after the conversation, and correcting one person in front of the team is neither fair nor effective." },
+  { id:"q10", type:"short", topic:"Accountability",
+    q:"In two or three sentences, explain why communication and accountability matter for a supervisor. Use a workplace example if it helps.",
+    model:"A strong answer says that a supervisor works through other people, so the work only gets done correctly if expectations, deadlines and changes are communicated clearly — most workplace problems start as information that did not travel. It then says that accountability means the supervisor answers for the unit's results even when the task was assigned to someone else, which is why they follow up and check work before a deadline rather than after it. A good example: assigning the month-end invoices to an employee, confirming they understood the deadline, and checking on the Tuesday rather than discovering on the Thursday that nothing was entered.",
+    groups:[
+      /responsib|accountab|answer(s|able)? for|own(s|ership)/i,
+      /result|outcome|deadline|standard|quality|goal|target/i,
+      /check|follow.?up|monitor|verif|review|supervis|confirm/i,
+      /trust|credib|fair|confidence|respect|morale/i,
+      /record|document|report|evidence|note/i,
+      /clear|instruct|expectation|inform|communicat|explain|listen/i
+    ] }
+];
+(function(){
+  var dots = $("quizDots"), body = $("quizBody");
+  var order = null, optOrder = {}, answers = {}, idx = 0, finished = false;
+
+  function build(){
+    order = shuffle(BANK.map(function(q, i){ return i; }));
+    optOrder = {}; answers = {}; idx = 0; finished = false;
+    order.forEach(function(qi){
+      var q = BANK[qi];
+      if (q.type === "mc" || q.type === "scenario"){
+        optOrder[qi] = shuffle(q.opts.map(function(o, i){ return i; }));
+      } else if (q.type === "tf"){
+        optOrder[qi] = [0, 1];
+      }
+    });
+  }
+  function gradeShort(txt){
+    var hits = 0;
+    BANK[9].groups.forEach(function(re){ if (re.test(txt)) hits++; });
+    return { ok: hits >= 2 && words(txt) >= 15, hits:hits };
+  }
+  function correct(qi){
+    var q = BANK[qi], a = answers[qi];
+    if (a === undefined || a === null) return false;
+    if (q.type === "short") return gradeShort(a).ok;
+    return a === q.a;
+  }
+  function drawDots(){
+    var h = "";
+    order.forEach(function(qi, i){
+      var cls = finished ? (correct(qi) ? "ok" : "no") : (i === idx ? "now" : (answers[qi] !== undefined && answers[qi] !== "" ? "ok" : ""));
+      h += '<i class="' + cls + '"></i>';
+    });
+    dots.innerHTML = h;
+  }
+  function label(t){
+    return t === "mc" ? "Multiple choice" : t === "tf" ? "True or false" : t === "scenario" ? "Scenario" : "Short answer";
+  }
+  function draw(){
+    var qi = order[idx], q = BANK[qi];
+    drawDots();
+    var h = '<div class="qmeta"><span>Question ' + (idx + 1) + " of " + BANK.length + '</span><span class="pill">' + label(q.type) + '</span><span class="pill grey">' + esc(q.topic) + "</span></div>";
+    h += '<p class="qtext">' + esc(q.q) + "</p>";
+    if (q.type === "short"){
+      h += '<label class="fld"><span>Your answer</span><textarea id="shortBox" placeholder="Two or three sentences."></textarea></label>' +
+           '<div class="wordcount" id="shortCount">0 words</div>';
+    } else {
+      h += '<div class="opts">';
+      optOrder[qi].forEach(function(oi, pos){
+        var sel = answers[qi] === oi ? " sel" : "";
+        h += '<button class="opt' + sel + '" type="button" data-o="' + oi + '"><span class="key">' + KEYS[pos] + "</span><span>" + esc(q.opts[oi]) + "</span></button>";
+      });
+      h += "</div>";
+    }
+    var last = idx === BANK.length - 1;
+    h += '<div class="row noprint" style="margin-top:8px">' +
+         '<button class="btn ghost small" type="button" data-nav="prev"' + (idx === 0 ? " disabled" : "") + ">&larr; Previous</button>" +
+         '<button class="btn" type="button" data-nav="' + (last ? "finish" : "next") + '">' + (last ? "Finish and see my score" : "Next question &rarr;") + "</button>" +
+         '<span class="hint" id="quizHint"></span></div>';
+    body.innerHTML = h;
+
+    if (q.type === "short"){
+      var box = $("shortBox");
+      box.value = answers[qi] || "";
+      $("shortCount").textContent = words(box.value) + " words";
+      box.addEventListener("input", function(){
+        answers[qi] = box.value;
+        $("shortCount").textContent = words(box.value) + " words";
+        drawDots();
+      });
+    } else {
+      body.querySelectorAll(".opt").forEach(function(b){
+        b.addEventListener("click", function(){
+          answers[qi] = parseInt(b.getAttribute("data-o"), 10);
+          body.querySelectorAll(".opt").forEach(function(x){ x.classList.remove("sel"); });
+          b.classList.add("sel");
+          drawDots();
+        });
+      });
+    }
+    body.querySelectorAll("[data-nav]").forEach(function(b){
+      b.addEventListener("click", function(){
+        if (b.disabled) return;
+        var nav = b.getAttribute("data-nav");
+        if (nav === "finish"){
+          var missing = order.filter(function(x){ return answers[x] === undefined || answers[x] === ""; }).length;
+          if (missing && !confirm(missing + " question" + (missing === 1 ? " is" : "s are") + " unanswered. They will be marked as incorrect. Finish anyway?")) return;
+          results(); return;
+        }
+        idx += nav === "next" ? 1 : -1;
+        draw();
+      });
+    });
+  }
+  function bandFor(pct){
+    return pct >= 90 ? "Excellent" : pct >= 80 ? "Very Good" : pct >= 70 ? "Good" : pct >= 60 ? "Review a Few Areas" : "Review Lesson 5";
+  }
+  function bandNote(pct){
+    return pct >= 90 ? "You have a strong grasp of the four functions and can apply them to workplace situations. Move on to the assignment."
+      : pct >= 80 ? "A solid result. Read the review notes below for the questions you missed, then try the assignment."
+      : pct >= 70 ? "A pass with some gaps. Work through the notes below and retake the quiz — the questions are shuffled each time."
+      : pct >= 60 ? "You have the general idea but several details are not secure yet. Review the sections named below, then retake the quiz."
+      : "Go back through Lesson 5 before trying again. Pay particular attention to which activities belong to which function, and to the difference between responsibility and accountability.";
+  }
+  function results(){
+    finished = true;
+    var score = 0, byTopic = {};
+    order.forEach(function(qi){
+      var q = BANK[qi];
+      byTopic[q.topic] = byTopic[q.topic] || { ok:0, n:0 };
+      byTopic[q.topic].n++;
+      if (correct(qi)){ score++; byTopic[q.topic].ok++; }
+    });
+    var pct = Math.round(score / BANK.length * 100);
+    S.quiz.history.push({ when:Date.now(), score:score, pct:pct, band:bandFor(pct) });
+    if (S.quiz.history.length > 40) S.quiz.history = S.quiz.history.slice(-40);
+    done("quiz"); save();
+
+    drawDots();
+    var h = '<div class="qmeta"><span>Result &middot; Lesson 5 practice quiz</span><span class="pill">Attempt ' + S.quiz.history.length + "</span></div>";
+    h += '<div class="score"><b>' + score + "/10</b><span>Percentage: " + pct + "% &middot; " + bandFor(pct) + "</span></div>";
+    h += '<p class="band">' + esc(bandNote(pct)) + "</p>";
+    h += '<p class="cap">Marks by topic</p><div class="tablewrap"><table><thead><tr><th>Topic</th><th>Marks</th></tr></thead><tbody>';
+    Object.keys(byTopic).sort().forEach(function(t){
+      h += "<tr><th>" + esc(t) + "</th><td>" + byTopic[t].ok + " / " + byTopic[t].n + "</td></tr>";
+    });
+    h += "</tbody></table></div>";
+    h += '<p class="cap">Review every question</p><div class="missed">';
+    order.forEach(function(qi, i){
+      var q = BANK[qi], ok = correct(qi), a = answers[qi];
+      h += '<article class="' + (ok ? "ok" : "") + '"><h4>Q' + (i + 1) + ". " + esc(q.q) + "</h4>";
+      if (q.type === "short"){
+        var g = gradeShort(a || "");
+        h += "<p>Your answer (" + words(a || "") + " words): " + (a ? esc(a) : "<em>not answered</em>") + "</p>";
+        h += '<p class="fix"><strong>' + (ok ? "Marked correct" : "Not enough for the mark") + ".</strong> This question is marked by looking for the key ideas; your answer matched " + g.hits + " of them" + (ok ? "" : ", and a full answer needs at least two plus about fifteen words") + ". Read the model answer and mark yourself honestly.</p>";
+        h += "<p>" + esc(q.model) + "</p>";
+      } else {
+        h += "<p>You chose: " + (a === undefined ? "<em>not answered</em>" : esc(q.opts[a])) + "</p>";
+        h += '<p class="fix"><strong>Correct answer: ' + esc(q.opts[q.a]) + "</strong></p>";
+        h += "<p>" + esc(q.why) + "</p>";
+      }
+      h += "</article>";
+    });
+    h += "</div>";
+    h += '<div class="row noprint"><button class="btn" type="button" data-nav="again">Retake the quiz</button>' +
+         '<button class="btn ghost" data-go="assignment" type="button">Go to the assignment</button>' +
+         '<span class="hint">Questions and answer choices are shuffled on every attempt.</span></div>';
+    body.innerHTML = h;
+    body.querySelector("[data-nav]").addEventListener("click", function(){
+      build(); draw(); body.scrollIntoView({ behavior:"smooth", block:"start" });
+    });
+    drawHistory();
+  }
+  function drawHistory(){
+    var host = $("quizHistory"), host2 = $("progQuiz");
+    var h;
+    if (!S.quiz.history.length){
+      h = "<p>No attempts yet. Your scores will be listed here once you finish the quiz.</p>";
+    } else {
+      var best = 0, sum = 0;
+      S.quiz.history.forEach(function(a){ if (a.score > best) best = a.score; sum += a.pct; });
+      h = "<p>" + S.quiz.history.length + " attempt" + (S.quiz.history.length === 1 ? "" : "s") +
+          " &middot; best score " + best + "/10 &middot; average " + Math.round(sum / S.quiz.history.length) + "%</p>";
+      h += '<div class="tablewrap"><table class="histtable"><thead><tr><th>Attempt</th><th>When</th><th>Score</th><th>Percentage</th><th>Result</th></tr></thead><tbody>';
+      S.quiz.history.slice().reverse().forEach(function(a, i){
+        var n = S.quiz.history.length - i;
+        var d = new Date(a.when);
+        h += "<tr><th>" + n + "</th><td>" + d.toLocaleDateString() + " " +
+             d.toLocaleTimeString([], { hour:"2-digit", minute:"2-digit" }) + "</td>" +
+             '<td class="pc">' + a.score + " / 10</td><td class=\"pc\">" + a.pct + "%</td><td>" + esc(a.band) + "</td></tr>";
+      });
+      h += "</tbody></table></div>";
+      h += '<p class="hint">Grading scale: 90&ndash;100% Excellent &middot; 80&ndash;89% Very Good &middot; 70&ndash;79% Good &middot; 60&ndash;69% Review a Few Areas &middot; below 60% Review Lesson 5.</p>';
+    }
+    if (host) host.innerHTML = h;
+    if (host2) host2.innerHTML = h;
+  }
+  build(); draw(); drawHistory();
+})();
+
+/* ════════ Section 10 — assignment ════════ */
+var CHECKS = [
+  "I named and explained all four management functions in my own words.",
+  "I applied each function to this specific office, not to management in general.",
+  "I said who does what, including how I handle the new employee and the overloaded one.",
+  "I gave reasons for my priorities and acknowledged at least one trade-off.",
+  "I explained what I would check during the week, and when.",
+  "My answer is between 300 and 500 words and reads as organized paragraphs."
+];
+(function(){
+  var box = $("assignBox"), count = $("assignCount"), hint = $("workHint");
+  box.value = S.work || "";
+  function tally(){
+    var n = words(box.value);
+    count.textContent = n + " word" + (n === 1 ? "" : "s") +
+      (n === 0 ? "" : n < 300 ? " — " + (300 - n) + " short of the minimum" : n > 500 ? " — " + (n - 500) + " over the suggested maximum" : " — within the 300 to 500 word range");
+    count.classList.toggle("ok", n >= 300 && n <= 500);
+  }
+  box.addEventListener("input", function(){ S.work = box.value; save(); tally(); });
+  tally();
+  $("assignSave").addEventListener("click", function(){
+    S.work = box.value; save(); tally();
+    var n = words(box.value);
+    if (n >= 300){ done("work"); hint.textContent = "Draft saved on this device (" + n + " words)."; }
+    else hint.textContent = "Draft saved (" + n + " words). The assignment asks for at least 300.";
+  });
+  $("assignPrint").addEventListener("click", function(){
+    $("assignPrintOut").textContent = box.value || "(No answer written yet.)";
+    window.print();
+  });
+  $("assignCopy").addEventListener("click", function(){
+    var t = box.value;
+    function fallback(){
+      box.select(); box.setSelectionRange(0, 999999);
+      try { document.execCommand("copy"); hint.textContent = "Copied to the clipboard."; }
+      catch(e){ hint.textContent = "Copy did not work in this browser — select the text and copy it manually."; }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(function(){ hint.textContent = "Copied to the clipboard."; }, fallback);
+    } else fallback();
+  });
+
+  function drawChecks(){
+    $("selfCheck").innerHTML = CHECKS.map(function(c, i){
+      return '<li class="' + (S.checks[i] ? "done" : "") + '"><span class="box" aria-hidden="true">' + (S.checks[i] ? "✓" : "") + "</span>" +
+             "<span>" + esc(c) + '</span><button class="btn ghost small go" type="button" data-chk="' + i + '">' +
+             (S.checks[i] ? "Undo" : "Tick") + "</button></li>";
+    }).join("");
+  }
+  $("selfCheck").addEventListener("click", function(e){
+    var b = e.target.closest ? e.target.closest("[data-chk]") : null;
+    if (!b) return;
+    var i = b.getAttribute("data-chk");
+    S.checks[i] = !S.checks[i]; save(); drawChecks();
+  });
+  drawChecks();
+})();
+
+/* ════════ Section 11 — flashcards ════════ */
+var CARDS = [
+  { t:"Management",     d:"Getting an organization's goals accomplished through people and with the resources available — people, money, time, equipment and information." },
+  { t:"Planning",       d:"Deciding in advance what must be achieved and how: setting goals, identifying tasks and resources, creating deadlines, budgeting, anticipating problems and preparing backup plans." },
+  { t:"Organizing",     d:"Arranging people, work and resources so the plan can be carried out: assigning and delegating work, scheduling, establishing procedures and maintaining records." },
+  { t:"Leading",        d:"Guiding people so the work is done well: giving clear instructions, communicating, motivating, handling disagreements, giving feedback and making decisions." },
+  { t:"Controlling",    d:"Measuring actual results, comparing them with the plan or standard, and correcting the difference — in the work, the spending or the schedule." },
+  { t:"Delegation",     d:"Assigning a task to an employee together with the authority needed to complete it. The task moves; the supervisor's accountability does not." },
+  { t:"Goal",           d:"A specific result the organization intends to achieve, stated clearly enough and measurably enough that anyone can tell whether it was reached." },
+  { t:"Policy",         d:"A written rule stating what the organization requires, permits or forbids — for example, that purchases above a set amount need written approval." },
+  { t:"Procedure",      d:"The step-by-step method for carrying out a policy — who does what, in what order, with which form or system." },
+  { t:"Supervisor",     d:"The manager closest to the work: assigns daily tasks, answers questions, checks quality, approves timesheets and leave, and reports problems upward." },
+  { t:"Manager",        d:"A person responsible for a unit, department or organization — setting goals, approving budgets and staffing, and answering for the unit's results." },
+  { t:"Accountability", d:"Being answerable for results, including work assigned to someone else. It cannot be delegated, which is why supervisors follow up and keep records." },
+  { t:"Performance",    d:"How well work is actually carried out compared with the standard set for it — in quantity, quality, timeliness and cost." },
+  { t:"Deadline",       d:"The date and time by which work must be finished. The real deadline is often earlier than the final one, once approvals, shipping or review time are counted backwards." },
+  { t:"Budget",         d:"A plan for money: how much may be spent, on what, over what period. It is both a planning document and a control document." }
+];
+(function(){
+  var deck = $("deck"), showAll = false;
+  var order = CARDS.map(function(c, i){ return i; });
+  function tally(){
+    var seen = 0, known = 0;
+    CARDS.forEach(function(c, i){ if (S.cards.seen[i]) seen++; if (S.cards.known[i]) known++; });
+    $("cardHint").innerHTML = seen + " of " + CARDS.length + " cards viewed &middot; " + known + " marked as known";
+    if (seen === CARDS.length) done("cards");
+  }
+  function draw(){
+    deck.innerHTML = order.map(function(i){
+      var c = CARDS[i], open = showAll || S.cards.seen[i] === "open";
+      return '<div style="display:grid;gap:6px;align-content:start">' +
+        '<button class="fcard' + (open ? " open" : "") + (S.cards.known[i] ? " known" : "") + '" type="button" data-card="' + i + '" aria-expanded="' + (open ? "true" : "false") + '">' +
+        '<span class="flip">' + (open ? "Definition" : "Tap to flip") + "</span>" +
+        '<span class="front">' + esc(c.t) + "</span>" +
+        (open ? '<span class="back">' + esc(c.d) + "</span>" : "") +
+        "</button>" +
+        '<button class="btn ghost small noprint" type="button" data-known="' + i + '">' + (S.cards.known[i] ? "✓ Known" : "Mark as known") + "</button>" +
+        "</div>";
+    }).join("");
+    tally();
+  }
+  deck.addEventListener("click", function(e){
+    var c = e.target.closest ? e.target.closest("[data-card]") : null;
+    if (c){
+      var i = c.getAttribute("data-card");
+      S.cards.seen[i] = S.cards.seen[i] === "open" ? true : "open";
+      save(); showAll = false; draw(); return;
+    }
+    var k = e.target.closest ? e.target.closest("[data-known]") : null;
+    if (k){
+      var j = k.getAttribute("data-known");
+      S.cards.known[j] = !S.cards.known[j];
+      if (!S.cards.seen[j]) S.cards.seen[j] = true;
+      save(); draw();
+    }
+  });
+  $("cardShuffle").addEventListener("click", function(){ shuffle(order); showAll = false; draw(); });
+  $("cardFlipAll").addEventListener("click", function(){
+    showAll = !showAll;
+    this.textContent = showAll ? "Hide all definitions" : "Show all definitions";
+    if (showAll) CARDS.forEach(function(c, i){ S.cards.seen[i] = S.cards.seen[i] || true; });
+    save(); draw();
+  });
+  $("cardReset").addEventListener("click", function(){ S.cards.known = {}; save(); draw(); });
+  draw();
+})();
+
+/* ════════ notes + progress + reset ════════ */
+$("notesPrint").addEventListener("click", function(){ window.print(); });
+
+function drawActivity(){
+  var host = $("progActivity");
+  if (!host) return;
+  var assigned = 0;
+  TASKS.forEach(function(t){ if (S.assign[t.id]) assigned++; });
+  var cyc = 0; CYCLE.forEach(function(c){ if (S.cycle[c.k]) cyc++; });
+  var gameDone = 0; GAME.forEach(function(g, i){ if (S.game[i] !== undefined) gameDone++; });
+  var known = 0, seen = 0;
+  CARDS.forEach(function(c, i){ if (S.cards.known[i]) known++; if (S.cards.seen[i]) seen++; });
+  var rows = [
+    ["Sections marked as read", ["s1","s2","s3","s4","s5","s6"].filter(function(k){ return S.steps[k]; }).length + " of 6"],
+    ["Assign-the-work activity", assigned + " of 5 tasks assigned"],
+    ["Leading scenario", S.lead === null || S.lead === undefined ? "Not answered" : "Answered"],
+    ["Invoice question", S.ctrl === null || S.ctrl === undefined ? "Not answered" : "Answered"],
+    ["Four-function cycle", cyc + " of 5 stages opened"],
+    ["Case study", S.cs.submitted ? "Submitted" : "Not submitted"],
+    ["Decision game", gameDone + " of 5 scenarios answered"],
+    ["Quiz attempts", S.quiz.history.length],
+    ["Assignment draft", words(S.work) + " words"],
+    ["Flashcards", seen + " viewed, " + known + " marked known"]
+  ];
+  host.innerHTML = '<div class="tablewrap"><table><tbody>' + rows.map(function(r){
+    return "<tr><th>" + esc(r[0]) + "</th><td>" + esc(String(r[1])) + "</td></tr>";
+  }).join("") + "</tbody></table></div>";
+}
+
+function resetAll(){
+  if (!confirm("This clears your section progress, activity answers, quiz history and assignment draft on this device. It cannot be undone. Continue?")) return;
+  wiped = true;                       // stop the unload flush writing the old state back
+  if (saveTimer){ clearTimeout(saveTimer); saveTimer = null; }
+  try { localStorage.removeItem(STORE); } catch(e){}
+  location.reload();
+}
+$("resetBtn").addEventListener("click", resetAll);
+$("resetBtn2").addEventListener("click", resetAll);
+
+/* ════════ start ════════ */
+var wrapRefresh = refreshProgress;
+refreshProgress = function(){ wrapRefresh(); drawActivity(); };
+refreshProgress();
+
+var start = location.hash.slice(1);
+go(VIEWS.indexOf(start) >= 0 ? start : (S.lastView || "dashboard"), null);
+
+document.addEventListener("keydown", function(e){
+  if (e.key === "Escape" && document.body.classList.contains("navopen")){
+    document.body.classList.remove("navopen");
+    $("menuBtn").setAttribute("aria-expanded", "false");
+  }
+});
+})();
+</script>
+</body>
+</html>
