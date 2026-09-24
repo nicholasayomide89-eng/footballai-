@@ -1,0 +1,315 @@
+// Keel data model. Single-owner deployment: one person, one connected
+// Instagram professional account. See docs/ARCHITECTURE.md.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AccountStatus {
+  active
+  revoked
+  expired
+}
+
+enum Relationship {
+  friend
+  professional
+  networking
+  dating
+  casual
+  unknown
+}
+
+// How much the AI may do for a given contact. Only the owner can raise it.
+enum AiAccess {
+  none
+  suggest
+  approve
+  auto
+}
+
+enum Direction {
+  inbound
+  outbound
+}
+
+enum SentBy {
+  contact
+  owner_manual   // sent by you in the Instagram app (webhook echo)
+  keel_approved  // drafted by Keel, sent after you tapped Send
+  keel_auto      // sent under an automation rule you approved
+}
+
+enum MemoryKind {
+  fact
+  answered_question
+  plan
+  boundary
+  avoid_topic
+}
+
+enum SuggestionKind {
+  reply
+  no_reply
+  starter
+}
+
+enum SuggestionStatus {
+  open
+  sent
+  edited_and_sent
+  dismissed
+  blocked
+  expired
+}
+
+enum StoryStatus {
+  suggested
+  approved
+  published
+  handoff   // you finished it in the Instagram app
+  rejected
+  failed
+}
+
+enum LogActor {
+  ai
+  owner
+  system
+}
+
+enum LogOutcome {
+  ok
+  sent
+  published
+  blocked
+  skipped
+  failed
+}
+
+model IgAccount {
+  id           String        @id @default(uuid())
+  igUserId     String        @unique
+  username     String
+  accountType  String
+  status       AccountStatus @default(active)
+  connectedAt  DateTime      @default(now())
+  token        OAuthToken?
+  capabilities Capability[]
+  contacts     Contact[]
+}
+
+// The Instagram access token, encrypted with AES-256-GCM. Keel never sees or
+// stores your Instagram password.
+model OAuthToken {
+  igAccountId String    @id
+  igAccount   IgAccount @relation(fields: [igAccountId], references: [id], onDelete: Cascade)
+  ciphertext  Bytes
+  iv          Bytes
+  authTag     Bytes
+  keyVersion  Int       @default(1)
+  scopes      String[]
+  expiresAt   DateTime
+  refreshedAt DateTime  @default(now())
+}
+
+model Capability {
+  igAccountId String
+  igAccount   IgAccount @relation(fields: [igAccountId], references: [id], onDelete: Cascade)
+  key         String
+  status      String // live | missing | unsupported
+  detail      Json?
+  verifiedAt  DateTime  @default(now())
+
+  @@id([igAccountId, key])
+}
+
+model Contact {
+  id           String        @id @default(uuid())
+  igAccountId  String
+  igAccount    IgAccount     @relation(fields: [igAccountId], references: [id], onDelete: Cascade)
+  igsid        String // Instagram-scoped id of the other person
+  username     String?
+  displayName  String?
+  relationship Relationship  @default(unknown)
+  aiAccess     AiAccess      @default(suggest)
+  notes        String?
+  blocked      Boolean       @default(false)
+  createdAt    DateTime      @default(now())
+  conversation Conversation?
+
+  @@unique([igAccountId, igsid])
+}
+
+model Conversation {
+  id             String               @id @default(uuid())
+  contactId      String               @unique
+  contact        Contact              @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  igThreadId     String?              @unique
+  lastInboundAt  DateTime?
+  lastOutboundAt DateTime?
+  tone           String?
+  messages       Message[]
+  memory         ConversationMemory[]
+  suggestions    AiSuggestion[]
+}
+
+model Message {
+  id             String       @id @default(uuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  igMid          String       @unique
+  direction      Direction
+  sentBy         SentBy
+  text           String?
+  attachments    Json?
+  createdAt      DateTime
+
+  @@index([conversationId, createdAt])
+}
+
+// What Keel remembers about a conversation. Every item points at the message
+// it came from so the owner can see (and delete) the source.
+model ConversationMemory {
+  id              String       @id @default(uuid())
+  conversationId  String
+  conversation    Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  kind            MemoryKind
+  content         String
+  sourceMessageId String?
+  confirmed       Boolean      @default(false)
+  createdAt       DateTime     @default(now())
+}
+
+model AiSuggestion {
+  id             String           @id @default(uuid())
+  conversationId String
+  conversation   Conversation     @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  kind           SuggestionKind
+  draft          String?
+  rationale      String
+  critic         Json
+  policy         Json
+  status         SuggestionStatus @default(open)
+  createdAt      DateTime         @default(now())
+  decidedAt      DateTime?
+}
+
+model MediaAsset {
+  id           String       @id @default(uuid())
+  storageKey   String       @unique
+  mimeType     String
+  kind         String // image | video
+  originalName String?
+  createdAt    DateTime     @default(now())
+  stories      StoryDraft[]
+}
+
+model StoryDraft {
+  id             String      @id @default(uuid())
+  mediaAssetId   String
+  mediaAsset     MediaAsset  @relation(fields: [mediaAssetId], references: [id], onDelete: Cascade)
+  style          String
+  overlayText    String?
+  caption        String?
+  stickerIdea    Json?
+  musicIdea      String?
+  hashtags       String[]
+  quality        Json
+  recommended    Boolean
+  status         StoryStatus @default(suggested)
+  igMediaId      String?
+  failureReason  String?
+  createdAt      DateTime    @default(now())
+  decidedAt      DateTime?
+}
+
+model InsightSnapshot {
+  id         BigInt   @id @default(autoincrement())
+  igMediaId  String?
+  metric     String
+  value      Float
+  period     String
+  capturedAt DateTime @default(now())
+
+  @@index([igMediaId, metric])
+}
+
+// How you talk. Singleton row (id = 1). `factsAboutMe` holds only what you
+// typed in; the AI is never allowed to add to it.
+model PersonalityProfile {
+  id               Int      @id @default(1)
+  humor            Int      @default(2)
+  confidence       Int      @default(2)
+  formality        Int      @default(2)
+  flirting         Int      @default(0)
+  emojiRate        String   @default("rare")
+  sentenceLength   String   @default("short")
+  slang            String[]
+  signaturePhrases String[]
+  bannedPhrases    String[]
+  factsAboutMe     Json     @default("{}")
+  updatedAt        DateTime @updatedAt
+}
+
+// Only text you approved (or edited) becomes a style example.
+model StyleExample {
+  id         String   @id @default(uuid())
+  kind       String // dm | caption | story
+  text       String
+  approvedAt DateTime @default(now())
+}
+
+model AutomationRule {
+  id            String   @id @default(uuid())
+  name          String
+  scope         String // dm | story
+  // e.g. {"intents":["thanks"],"relationships":["friend"]}
+  conditions    Json
+  dailyCap      Int      @default(5)
+  activeFrom    Int      @default(9) // local hour, inclusive
+  activeTo      Int      @default(22) // local hour, exclusive
+  enabled       Boolean  @default(false)
+  approvedAt    DateTime?
+  createdAt     DateTime @default(now())
+}
+
+model SafetyRule {
+  key     String  @id
+  label   String
+  enabled Boolean @default(true)
+  locked  Boolean @default(false) // locked rules cannot be switched off
+}
+
+// Append-only, hash-chained record of everything Keel does. A database
+// trigger (migration append_only_log) rejects UPDATE, DELETE and TRUNCATE.
+model ActionLog {
+  seq         BigInt     @id @default(autoincrement())
+  actor       LogActor
+  action      String
+  target      String?
+  detail      Json?
+  outcome     LogOutcome
+  ruleKeys    String[]
+  payloadHash String
+  prevHash    String
+  hash        String     @unique
+  at          DateTime   @default(now())
+}
+
+// Singleton row (id = 1) holding the emergency pause switch.
+model SystemState {
+  id            Int       @id @default(1)
+  automationOn  Boolean   @default(true)
+  messagesMode  String    @default("approve") // suggest | approve | auto
+  storiesMode   String    @default("approve") // approve | auto
+  timezone      String    @default("UTC")
+  pausedAt      DateTime?
+  pausedReason  String?
+  updatedAt     DateTime  @updatedAt
+}
