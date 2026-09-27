@@ -1,0 +1,11 @@
+{
+  "name": "patrick-foley-site",
+  "private": true,
+  "type": "module",
+  "description": "Site bilingue de Patrick Foley – Révision linguistique et rédaction",
+  "scripts": {
+    "build": "node build/build.mjs",
+    "images": "node build/images.mjs",
+    "serve": "python3 -m http.server 4173"
+  }
+}
