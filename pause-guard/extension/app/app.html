@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pause Guard</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <a class="skip" href="#settings-form">Skip to settings</a>
+  <main>
+    <header class="top">
+      <h1>Pause Guard</h1>
+      <p class="sub">Your self-control settings for Facebook and Messenger. Stored only on this device.</p>
+    </header>
+
+    <!-- Status -->
+    <section id="status" class="card status" aria-labelledby="status-title" aria-live="polite">
+      <h2 id="status-title" class="status-title"><span class="status-dot" aria-hidden="true"></span><span id="status-text">Loading…</span></h2>
+      <p id="status-why" class="status-why"></p>
+      <dl class="facts">
+        <div><dt>Blocking</dt><dd id="status-actions"></dd></div>
+        <div><dt>For</dt><dd id="status-who"></dd></div>
+        <div><dt>Where</dt><dd id="status-where"></dd></div>
+      </dl>
+      <p class="not-covered"><strong>Not covered:</strong> the Facebook and Messenger apps, other browsers, other devices. See “Make it stick” below.</p>
+      <div id="lock-end-row" class="row" hidden>
+        <button type="button" id="end-lock" class="btn secondary">End timed lock early…</button>
+      </div>
+    </section>
+
+    <!-- Pending change -->
+    <section id="pending" class="card pending" aria-labelledby="pending-title" hidden>
+      <h2 id="pending-title">Pending change</h2>
+      <p id="pending-text"></p>
+      <ul id="pending-list" class="plain-list"></ul>
+      <p class="countdown" id="pending-countdown" role="timer" aria-live="off"></p>
+      <div class="row">
+        <button type="button" id="pending-apply" class="btn primary" disabled>Apply change</button>
+        <button type="button" id="pending-cancel" class="btn secondary">Cancel request</button>
+      </div>
+    </section>
+
+    <!-- Quick lock -->
+    <section class="card" aria-labelledby="lock-title">
+      <h2 id="lock-title">Start a timed lock</h2>
+      <p class="help">Turns on protection for a set time, even outside your schedule. Ending it early needs the waiting period.</p>
+      <div class="chips" role="group" aria-label="Lock for">
+        <button type="button" class="btn chip" data-lock="30">30 min</button>
+        <button type="button" class="btn chip" data-lock="60">1 hour</button>
+        <button type="button" class="btn chip" data-lock="180">3 hours</button>
+        <button type="button" class="btn chip" data-lock="480">8 hours</button>
+        <button type="button" class="btn chip" data-lock="1440">24 hours</button>
+        <button type="button" class="btn chip" data-lock="10080">7 days</button>
+      </div>
+      <div class="row inline-form">
+        <label for="lock-custom">Custom (minutes)</label>
+        <input id="lock-custom" type="number" min="1" max="43200" inputmode="numeric" placeholder="e.g. 90">
+        <button type="button" id="lock-custom-go" class="btn secondary">Lock</button>
+      </div>
+    </section>
+
+    <form id="settings-form" novalidate>
+      <!-- Actions -->
+      <section class="card" aria-labelledby="actions-title">
+        <h2 id="actions-title">What to block</h2>
+        <label class="switch-row">
+          <input type="checkbox" id="enabled" role="switch">
+          <span class="switch" aria-hidden="true"></span>
+          <span><strong>Protection</strong><span class="help block">Master switch for everything below.</span></span>
+        </label>
+        <fieldset>
+          <legend class="visually-hidden">Actions</legend>
+          <label class="switch-row">
+            <input type="checkbox" id="act-message" role="switch">
+            <span class="switch" aria-hidden="true"></span>
+            <span><strong>Sending messages</strong><span class="help block">Send buttons, Enter to send, quick likes, and the “Message” button on profiles. You can still open and read chats.</span></span>
+          </label>
+          <label class="switch-row">
+            <input type="checkbox" id="act-follow" role="switch">
+            <span class="switch" aria-hidden="true"></span>
+            <span><strong>Following people</strong><span class="help block">“Follow” and “Follow back” buttons.</span></span>
+          </label>
+          <label class="switch-row">
+            <input type="checkbox" id="act-friend" role="switch">
+            <span class="switch" aria-hidden="true"></span>
+            <span><strong>Sending friend requests</strong><span class="help block">“Add friend” buttons and links.</span></span>
+          </label>
+        </fieldset>
+      </section>
+
+      <!-- Who -->
+      <section class="card" aria-labelledby="who-title">
+        <h2 id="who-title">Who it applies to</h2>
+        <fieldset>
+          <legend class="visually-hidden">Apply to</legend>
+          <label class="radio-row"><input type="radio" name="scope" value="everyone" id="scope-everyone"> Everyone</label>
+          <label class="radio-row"><input type="radio" name="scope" value="selected" id="scope-selected"> Only people I select</label>
+        </fieldset>
+        <div id="people-area">
+          <ul id="people-list" class="item-list" aria-label="Selected people"></ul>
+          <p id="people-empty" class="help">No one selected yet.</p>
+          <div class="add-box">
+            <label for="person-link">Profile or chat link, username, or ID</label>
+            <input id="person-link" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="facebook.com/someone">
+            <label for="person-name">Name (optional, helps match chat windows)</label>
+            <input id="person-name" type="text" autocomplete="off" placeholder="Their name as shown on Facebook">
+            <p id="person-error" class="error" role="alert"></p>
+            <div class="row">
+              <button type="button" id="person-add" class="btn secondary">Add person</button>
+              <button type="button" id="person-from-tab" class="btn secondary" hidden>Add person on current page</button>
+            </div>
+            <p class="help">Tip: a person’s profile and their chat can use different IDs. Add both links, or open their profile and chat and use “Add person on current page” each time.</p>
+          </div>
+          <label for="unknown-target" class="field-label">If Pause Guard can’t tell who an action is for</label>
+          <select id="unknown-target">
+            <option value="block">Block it (safer)</option>
+            <option value="allow">Allow it</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- When -->
+      <section class="card" aria-labelledby="when-title">
+        <h2 id="when-title">When it’s on</h2>
+        <label class="switch-row">
+          <input type="checkbox" id="always-on" role="switch">
+          <span class="switch" aria-hidden="true"></span>
+          <span><strong>Always on</strong><span class="help block">Turn off to use only schedules and timed locks.</span></span>
+        </label>
+        <h3>Schedules</h3>
+        <ul id="schedule-list" class="item-list" aria-label="Schedules"></ul>
+        <p id="schedule-empty" class="help">No schedules yet.</p>
+        <fieldset class="add-box">
+          <legend>Add a schedule</legend>
+          <div class="days" role="group" aria-label="Days">
+            <label><input type="checkbox" value="1" checked> Mon</label>
+            <label><input type="checkbox" value="2" checked> Tue</label>
+            <label><input type="checkbox" value="3" checked> Wed</label>
+            <label><input type="checkbox" value="4" checked> Thu</label>
+            <label><input type="checkbox" value="5" checked> Fri</label>
+            <label><input type="checkbox" value="6"> Sat</label>
+            <label><input type="checkbox" value="0"> Sun</label>
+          </div>
+          <div class="times">
+            <label>From <input type="time" id="sched-start" value="21:00" required></label>
+            <label>To <input type="time" id="sched-end" value="07:00" required></label>
+          </div>
+          <p class="help">If “To” is earlier than “From”, the schedule runs overnight.</p>
+          <p id="sched-error" class="error" role="alert"></p>
+          <button type="button" id="sched-add" class="btn secondary">Add schedule</button>
+        </fieldset>
+      </section>
+
+      <!-- Waiting period -->
+      <section class="card" aria-labelledby="delay-title">
+        <h2 id="delay-title">Waiting period</h2>
+        <p class="help">Changes that loosen protection (turning things off, removing people or schedules, ending a lock) only take effect after this wait. Tightening applies straight away.</p>
+        <label for="delay" class="field-label">Wait before loosening</label>
+        <select id="delay">
+          <option value="0">No wait</option>
+          <option value="1">1 minute</option>
+          <option value="5">5 minutes</option>
+          <option value="15">15 minutes</option>
+          <option value="30">30 minutes</option>
+          <option value="60">1 hour</option>
+          <option value="180">3 hours</option>
+          <option value="720">12 hours</option>
+          <option value="1440">24 hours</option>
+          <option value="4320">3 days</option>
+        </select>
+      </section>
+
+      <section class="card" aria-labelledby="display-title">
+        <h2 id="display-title">On-page reminder</h2>
+        <label class="switch-row">
+          <input type="checkbox" id="show-badge" role="switch">
+          <span class="switch" aria-hidden="true"></span>
+          <span><strong>Show status badge on Facebook</strong><span class="help block">A small “Pause Guard on” label in the corner of Facebook pages.</span></span>
+        </label>
+      </section>
+
+      <div class="savebar" id="savebar" hidden>
+        <p id="save-summary" aria-live="polite"></p>
+        <div class="row">
+          <button type="submit" class="btn primary" id="save">Save changes</button>
+          <button type="button" class="btn secondary" id="discard">Discard</button>
+        </div>
+      </div>
+    </form>
+
+    <p id="toast" class="toast" role="status" aria-live="polite"></p>
+
+    <section class="card" aria-labelledby="stick-title">
+      <h2 id="stick-title">Make it stick on iPhone</h2>
+      <ol class="steps">
+        <li>Use Facebook in <strong>Safari</strong> with this extension allowed on facebook.com and messenger.com.</li>
+        <li>Delete the Facebook and Messenger apps, or limit them with <strong>Screen Time → App Limits</strong> (1 minute, “Block at End of Limit”).</li>
+        <li>In Screen Time, set <strong>Content &amp; Privacy Restrictions → App Store → Installing Apps: Don’t Allow</strong>.</li>
+        <li>Ask someone you trust to set the <strong>Screen Time passcode</strong> so you can’t undo it on impulse.</li>
+      </ol>
+      <p class="help">Pause Guard never asks for your Facebook password, never reads or stores your messages, and never sends anything for you.</p>
+    </section>
+  </main>
+  <script src="../shared/rules.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

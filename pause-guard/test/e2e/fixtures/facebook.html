@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alex Example | Facebook</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 16px; }
+    [role=button], button { display: inline-block; padding: 8px 12px; margin: 4px; background: #e4e6eb; border-radius: 6px; cursor: pointer; }
+    section { border: 1px solid #ccc; margin: 12px 0; padding: 12px; }
+    [contenteditable] { border: 1px solid #999; min-height: 24px; padding: 4px; }
+  </style>
+</head>
+<body>
+  <!--
+    Stand-in for facebook.com used by the automated tests. Like Facebook's
+    React app, it handles clicks and keys with listeners on the document,
+    and logs every action that gets through to window.__log.
+  -->
+  <section id="profile">
+    <h1>Alex Example</h1>
+    <div role="button" aria-label="Add friend" id="profile-add">Add friend</div>
+    <div role="button" aria-label="Follow" id="profile-follow">Follow</div>
+    <div role="button" aria-label="Message" id="profile-message">Message</div>
+  </section>
+
+  <section>
+    <h2>People you may know</h2>
+    <ul>
+      <li><a href="/jane.doe">Jane Doe</a> <div role="button" aria-label="Add friend" id="pymk-jane">Add friend</div></li>
+      <li><a href="/profile.php?id=4455667788">Sam Sample</a> <div role="button" aria-label="Add friend" id="pymk-sam">Add friend</div></li>
+    </ul>
+  </section>
+
+  <section role="article">
+    <a href="/jane.doe">Jane Doe</a> posted: hello
+    <div role="button" aria-label="Like" id="post-like">Like</div>
+    <div contenteditable="true" aria-label="Write a comment…" id="comment-box"></div>
+  </section>
+
+  <section aria-label="Chat with Jane Doe">
+    <a href="/messages/t/100099">Jane Doe</a>
+    <div contenteditable="true" aria-label="Message" id="chat-box"></div>
+    <div role="button" aria-label="Press Enter to send" id="chat-send">Send</div>
+    <div role="button" aria-label="Send a Like" id="chat-like">👍</div>
+  </section>
+
+  <form action="/messages/send/" method="post" id="basic-form">
+    <textarea name="body" id="basic-body"></textarea>
+    <input type="submit" name="send" value="Send" id="basic-send">
+  </form>
+
+  <div style="height: 2000px">Long feed to scroll…</div>
+
+  <script>
+    window.__log = [];
+    document.addEventListener('click', function (e) {
+      var el = e.target.closest('[id]');
+      if (el) window.__log.push('click:' + el.id);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') window.__log.push((e.shiftKey ? 'shift-enter:' : 'enter:') + e.target.id);
+    });
+    document.addEventListener('submit', function (e) {
+      e.preventDefault();
+      window.__log.push('submit:' + e.target.id);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Pause Guard",
+  "short_name": "Pause Guard",
+  "version": "0.1.0",
+  "description": "Blocks sending messages, following and friend requests on Facebook and Messenger, on your terms. Settings stay on your device.",
+  "permissions": ["storage"],
+  "action": {
+    "default_title": "Pause Guard",
+    "default_popup": "app/app.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "options_ui": {
+    "page": "app/app.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.facebook.com/*", "*://*.messenger.com/*"],
+      "js": ["shared/rules.js", "content/detect.js", "content/content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png",
+    "512": "icons/icon-512.png"
+  }
+}

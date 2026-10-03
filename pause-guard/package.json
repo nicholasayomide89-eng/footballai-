@@ -1,0 +1,16 @@
+{
+  "name": "pause-guard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Self-control web extension that blocks messaging, following and friend requests on Facebook and Messenger.",
+  "scripts": {
+    "test": "node --test test/unit/*.test.mjs",
+    "test:e2e": "node --test test/e2e/*.test.mjs",
+    "test:all": "node --test test/unit/*.test.mjs test/e2e/*.test.mjs",
+    "icons": "node tools/make-icons.mjs",
+    "zip": "cd extension && zip -r ../pause-guard-extension.zip . -x 'icons/icon.svg'"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.1"
+  }
+}
